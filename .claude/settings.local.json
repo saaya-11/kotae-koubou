@@ -58,7 +58,10 @@
       "Bash(sips -z 1686 2500 \"リッチメニュー画像.png\" --out richmenu_line_2500x1686.png)",
       "Bash(sips -s format jpeg -s formatOptions 90 richmenu_line_2500x1686.png --out richmenu_line_2500x1686.jpg)",
       "Bash(sips -g pixelWidth -g pixelHeight richmenu_line_2500x1686.jpg)",
-      "mcp__claude-in-chrome__javascript_tool"
+      "mcp__claude-in-chrome__javascript_tool",
+      "Bash(mkdir -p \"/private/tmp/claude-501/-Users-sayak--Desktop-0001------------------------/8f03f1e1-b969-4a9f-b9ed-7eadc2a86bcd/scratchpad\" && cp \"/Users/sayak./Desktop/0001_ココナ/ココナラ診断アプリ/診断アプリサンプル/LINE/richmenu_line_2500x1686.jpg\" \"/private/tmp/claude-501/-Users-sayak--Desktop-0001------------------------/8f03f1e1-b969-4a9f-b9ed-7eadc2a86bcd/scratchpad/richmenu_line_2500x1686.jpg\" && ls -la \"/private/tmp/claude-501/-Users-sayak--Desktop-0001------------------------/8f03f1e1-b969-4a9f-b9ed-7eadc2a86bcd/scratchpad/\")",
+      "Bash(python3 -c \"from PIL import Image; print\\('PIL available'\\)\")",
+      "Bash(python3)"
     ]
   }
 }
