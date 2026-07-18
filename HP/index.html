@@ -327,6 +327,22 @@
     font-size: 14px;
   }
 
+  /* Diagnosis tags */
+  .diagnosis-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .diagnosis-tag {
+    padding: 10px 18px;
+    border-radius: 999px;
+    background: var(--indigo-soft);
+    color: var(--indigo-deep);
+    font-size: 14px;
+    font-weight: 700;
+  }
+
   /* Works */
   .works-grid {
     display: grid;
@@ -579,6 +595,38 @@
     margin-top: 22px;
     color: var(--muted);
     font-size: 13px;
+  }
+
+  .option-list {
+    list-style: none;
+    display: grid;
+    gap: 10px;
+    padding: 0;
+  }
+
+  .option-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--panel);
+    font-size: 14px;
+  }
+
+  .option-list li b {
+    color: var(--indigo-deep);
+    font-weight: 800;
+  }
+
+  .notes-list {
+    display: grid;
+    gap: 10px;
+    padding-left: 20px;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.8;
   }
 
   /* Reasons */
@@ -863,30 +911,66 @@
     <div class="wrap">
       <div class="section-head">
         <span class="kicker">SERVICE</span>
-        <h2>診断アプリで、こんなことができます</h2>
-        <p>簡易的な質問形式のものから、結果ページまでこだわったオリジナル診断まで。目的に合わせて設計します。</p>
+        <h2>オリジナルAI診断アプリを制作します！</h2>
+        <p>
+          集客・SNS・LINE・ホームページで活用できる、オリジナルAI診断アプリを制作いたします。<br>
+          「診断コンテンツを作りたいけれど、何から始めればいいか分からない」<br>
+          そんな方も安心してご相談ください。アイデア整理から設計・制作までサポートいたします。
+        </p>
       </div>
       <div class="service-grid">
         <div class="service-card">
-          <span class="icon">SNS</span>
-          <h3>フォロワー増加</h3>
-          <p>シェアしたくなる診断結果で、SNS上の拡散・フォロワー増加のきっかけを作ります。</p>
+          <span class="icon">✓</span>
+          <h3>SNSで反応が取れる診断</h3>
+          <p>SNSで反応が取れる診断コンテンツを作りたい方へ。</p>
         </div>
         <div class="service-card">
-          <span class="icon">LP</span>
-          <h3>リード獲得</h3>
-          <p>LINE公式やメルマガ登録の入り口として、診断コンテンツを活用できます。</p>
+          <span class="icon">✓</span>
+          <h3>LINE登録・集客</h3>
+          <p>LINE登録や集客につながる診断を作りたい方へ。</p>
         </div>
         <div class="service-card">
-          <span class="icon">EC</span>
-          <h3>商品・サービス訴求</h3>
-          <p>「あなたに合う商品は？」形式の診断で、自然な流れで商品紹介につなげます。</p>
+          <span class="icon">✓</span>
+          <h3>商品・サービス紹介</h3>
+          <p>商品・サービス紹介に診断コンテンツを活用したい方へ。</p>
         </div>
         <div class="service-card">
-          <span class="icon">EV</span>
-          <h3>イベント・販促企画</h3>
-          <p>キャンペーンやイベントの集客企画としても、単発で楽しめる診断コンテンツを制作します。</p>
+          <span class="icon">✓</span>
+          <h3>他社との差別化</h3>
+          <p>オリジナル診断で他社との差別化をしたい方へ。</p>
         </div>
+        <div class="service-card">
+          <span class="icon">✓</span>
+          <h3>AI活用</h3>
+          <p>AIを活用したサービスを取り入れたい方へ。</p>
+        </div>
+        <div class="service-card">
+          <span class="icon">✓</span>
+          <h3>アイデアを形に</h3>
+          <p>アイデアはあるけれど、形にする方法が分からない方へ。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">EXAMPLE</span>
+        <h2>制作できる診断例</h2>
+        <p>以下は一例です。上記以外も対応可能ですので、お気軽にご相談ください。</p>
+      </div>
+      <div class="diagnosis-tags">
+        <span class="diagnosis-tag">恋愛タイプ診断</span>
+        <span class="diagnosis-tag">性格診断</span>
+        <span class="diagnosis-tag">適職診断</span>
+        <span class="diagnosis-tag">美容・スキンケア診断</span>
+        <span class="diagnosis-tag">商品・サービス診断</span>
+        <span class="diagnosis-tag">キャラクター診断</span>
+        <span class="diagnosis-tag">相性診断</span>
+        <span class="diagnosis-tag">健康習慣チェック</span>
+        <span class="diagnosis-tag">あなたに合う◯◯診断</span>
+        <span class="diagnosis-tag">オリジナル診断コンテンツ</span>
       </div>
     </div>
   </section>
@@ -980,23 +1064,23 @@
       <div class="flow-list">
         <div class="flow-step">
           <span class="flow-num">1</span>
-          <h3>ヒアリング</h3>
-          <p>目的・世界観・質問数のイメージをお伺いします。</p>
+          <h3>ご相談・ヒアリング</h3>
+          <p>目的やイメージをお伺いします。</p>
         </div>
         <div class="flow-step">
           <span class="flow-num">2</span>
-          <h3>構成・ラフ提案</h3>
-          <p>質問設計と結果タイプの構成案をご提案します。</p>
+          <h3>診断内容・目的の確認</h3>
+          <p>質問数や結果タイプなど内容を確認します。</p>
         </div>
         <div class="flow-step">
           <span class="flow-num">3</span>
-          <h3>デザイン制作</h3>
-          <p>世界観に合わせたオリジナルデザインで制作します。</p>
+          <h3>AI診断アプリ制作</h3>
+          <p>内容をもとに診断アプリを制作します。</p>
         </div>
         <div class="flow-step">
           <span class="flow-num">4</span>
-          <h3>確認・修正</h3>
-          <p>実際に動作するものをご確認いただき、修正します。</p>
+          <h3>ご確認・修正</h3>
+          <p>実際に動作するものをご確認いただき、修正します（2回まで）。</p>
         </div>
         <div class="flow-step">
           <span class="flow-num">5</span>
@@ -1012,51 +1096,52 @@
       <div class="section-head">
         <span class="kicker">PRICING</span>
         <h2>料金プラン</h2>
-        <p>内容に応じて調整可能です。まずはお気軽にご相談ください。</p>
+        <p>基本料金に含まれる内容と、有料オプションです。まずはお気軽にご相談ください。</p>
       </div>
-      <div class="pricing-grid">
-        <div class="price-card">
-          <span class="badge">LIGHT</span>
-          <h3>ライトプラン</h3>
-          <p class="price-value">¥12,000<span>〜</span></p>
-          <p class="price-meta">納期目安：3〜5日</p>
-          <ul class="price-list">
-            <li>既存テイストをベースにカスタマイズ</li>
-            <li>質問・結果文の内容編集</li>
-            <li>配色・文言の調整</li>
-            <li>修正1回</li>
-          </ul>
-          <a class="btn btn-secondary" href="#contact">このプランで相談する</a>
-        </div>
-        <div class="price-card is-featured">
-          <span class="badge">STANDARD</span>
-          <h3>スタンダードプラン</h3>
-          <p class="price-value">¥28,000<span>〜</span></p>
-          <p class="price-meta">納期目安：7〜10日</p>
-          <ul class="price-list">
-            <li>フルオリジナルデザイン</li>
-            <li>質問8〜15問・結果3〜5タイプ</li>
-            <li>イラスト／画像の選定・調整込み</li>
-            <li>SNSシェア機能（X・LINE・画像保存）</li>
-            <li>修正2回</li>
-          </ul>
-          <a class="btn btn-primary" href="#contact">このプランで相談する</a>
-        </div>
-        <div class="price-card">
-          <span class="badge">PREMIUM</span>
-          <h3>プレミアムプラン</h3>
-          <p class="price-value">¥50,000<span>〜</span></p>
-          <p class="price-meta">納期目安：10〜14日</p>
-          <ul class="price-list">
-            <li>完全オーダーメイド設計</li>
-            <li>独自の診断ロジック設計</li>
-            <li>集客用LPの制作込み</li>
-            <li>修正3回・優先納品</li>
-          </ul>
-          <a class="btn btn-secondary" href="#contact">このプランで相談する</a>
-        </div>
+      <div class="price-card is-featured" style="max-width: 480px; margin: 0 auto 40px;">
+        <span class="badge">BASIC</span>
+        <h3>基本料金</h3>
+        <p class="price-value">【基本料金を入力】<span>円</span></p>
+        <ul class="price-list">
+          <li>診断質問：10問まで</li>
+          <li>診断結果：4パターンまで</li>
+          <li>修正：2回まで</li>
+          <li>納期：7日</li>
+        </ul>
+        <a class="btn btn-primary" href="#contact">このプランで相談する</a>
       </div>
-      <p class="pricing-note">※上記は参考価格です。ご要望の内容に応じて、正式なお見積りをお出しします。</p>
+
+      <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 16px;">有料オプション</h3>
+      <ul class="option-list">
+        <li><span>診断質問を10問追加</span><b>+ 3,000円</b></li>
+        <li><span>診断結果を1パターン追加</span><b>+ 2,000円</b></li>
+        <li><span>修正3回目以降（1回）</span><b>+ 2,000円</b></li>
+        <li><span>まずはご相談だけ（30分）</span><b>+ 1,500円</b></li>
+      </ul>
+
+      <h3 style="font-size: 18px; font-weight: 800; margin: 36px 0 16px;">購入にあたってのお願い</h3>
+      <ul class="notes-list">
+        <li>ご購入前に、制作したい診断内容や目的をメッセージでご相談いただけますと、スムーズにご案内できます。</li>
+        <li>ご希望の内容によっては、有料オプションをご提案させていただく場合がございます。</li>
+        <li>基本料金には「質問10問・診断結果4パターン・修正2回まで」が含まれます。</li>
+        <li>制作開始後の大幅な仕様変更や追加のご要望は、別途料金をお願いする場合がございます。</li>
+        <li>ご連絡が7日以上取れない場合は、その時点の内容で正式な納品とさせていただく場合がございます。</li>
+        <li>公序良俗に反する内容や、法令に抵触する可能性がある内容の制作はお受けできません。</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">BEFORE ORDER</span>
+        <h2>ご購入前に</h2>
+      </div>
+      <p>
+        「まだアイデアがまとまっていない」そんな段階でも大丈夫です。<br>
+        丁寧なヒアリングを通して、一緒に内容を整理し、ご希望に沿った診断アプリを形にしていきます。<br>
+        「こんな診断アプリは作れる？」というご相談だけでも大歓迎です。お気軽にメッセージください。
+      </p>
     </div>
   </section>
 
@@ -1133,8 +1218,9 @@
         <div>
           <h3>こたえ工房</h3>
           <p>
-            【自己紹介文を入力してください。例：Web制作・デザインの経験を活かし、SNSや店舗集客のための診断コンテンツを制作しています。
-            「作って終わり」ではなく、実際に使われて成果につながるコンテンツ作りを大切にしています。】
+            【私が大切にしていること】<br>
+            クライアント様の想いや目的を丁寧にヒアリングし、ご要望を整理しながら最適な形をご提案いたします。<br>
+            「相談しやすい」「要望をしっかり聞いてもらえる」そんな安心感を大切に、丁寧に制作いたします。
           </p>
         </div>
       </div>

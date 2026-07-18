@@ -14,7 +14,7 @@
 
   body {
     position: relative;
-    background: #faf3e6;
+    background: #f3e9da;
     font-family: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", sans-serif;
     overflow: hidden;
   }
@@ -29,19 +29,26 @@
 
   .header {
     position: relative;
-    height: 210px;
+    height: 300px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 8px;
-    border-bottom: 4px dashed #d8c6a8;
+    overflow: hidden;
+    background: linear-gradient(90deg, #faf3e6 0%, rgba(250,243,230,0.75) 55%, rgba(250,243,230,0.35) 100%), url('assets/hero-group.png');
+    background-size: auto 480px, cover;
+    background-position: right -60px top -40px, center 30%;
+    background-repeat: no-repeat;
+    border-bottom: 5px solid #c99a3f;
+  }
+
+  .header-text {
+    position: relative;
+    padding-left: 70px;
   }
 
   .brand {
     font-family: "Klee One", sans-serif;
     font-weight: 600;
-    font-size: 58px;
+    font-size: 64px;
     color: #4a3b34;
     letter-spacing: 0.04em;
   }
@@ -51,112 +58,123 @@
   }
 
   .tagline {
-    font-size: 26px;
+    margin-top: 10px;
+    font-size: 28px;
     color: #8a7566;
-    letter-spacing: 0.05em;
-  }
-
-  .washi {
-    position: absolute;
-    background: rgba(201, 107, 122, 0.55);
-    box-shadow: 0 2px 4px rgba(74,59,52,0.15);
+    letter-spacing: 0.04em;
   }
 
   .grid {
     position: relative;
-    height: calc(1686px - 210px);
+    height: calc(1686px - 300px);
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
+    gap: 24px;
+    padding: 24px;
   }
-
-  .grid > .cell:nth-child(1) { border-right: 4px dashed #d8c6a8; border-bottom: 4px dashed #d8c6a8; }
-  .grid > .cell:nth-child(2) { border-bottom: 4px dashed #d8c6a8; }
-  .grid > .cell:nth-child(3) { border-right: 4px dashed #d8c6a8; }
 
   .cell {
     position: relative;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 22px;
-    padding: 40px;
+    gap: 36px;
+    padding: 0 60px;
+    background: #fffbf3;
+    border: 2px solid #e6d4b8;
+    border-radius: 28px;
+    box-shadow: 10px 12px 0 rgba(74,59,52,0.07);
   }
 
-  .badge {
-    width: 130px;
-    height: 130px;
+  .icon-badge {
+    flex: none;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
-    background: #fffbf3;
+    background: #fff1e8;
     border: 3px solid #c99a3f;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 56px;
+    font-size: 66px;
     color: #b04a5c;
-    box-shadow: 6px 8px 0 rgba(74,59,52,0.08);
   }
 
-  .label {
+  .cell:nth-child(3) .icon-badge,
+  .cell:nth-child(2) .icon-badge {
+    background: #f6e3d8;
+  }
+
+  .text-block .label {
     font-family: "Klee One", sans-serif;
-    font-size: 42px;
+    font-size: 48px;
     font-weight: 600;
     color: #4a3b34;
-    text-align: center;
   }
 
-  .sub {
-    font-size: 22px;
+  .text-block .sub {
+    margin-top: 10px;
+    font-size: 24px;
     color: #8a7566;
   }
 
   .tape {
     position: absolute;
-    width: 150px;
-    height: 44px;
-    background: repeating-linear-gradient(45deg, rgba(201,154,63,0.55), rgba(201,154,63,0.55) 10px, rgba(255,251,243,0.55) 10px, rgba(255,251,243,0.55) 20px);
-    opacity: 0.85;
+    width: 160px;
+    height: 46px;
+    background: repeating-linear-gradient(45deg, rgba(201,107,122,0.65), rgba(201,107,122,0.65) 10px, rgba(255,251,243,0.65) 10px, rgba(255,251,243,0.65) 20px);
+    top: -20px;
+    box-shadow: 0 2px 4px rgba(74,59,52,0.15);
   }
 
-  .cell:nth-child(1) .tape { top: -18px; left: 60px; transform: rotate(-8deg); }
-  .cell:nth-child(2) .tape { top: -18px; right: 60px; transform: rotate(7deg); }
-  .cell:nth-child(3) .tape { bottom: -18px; left: 60px; transform: rotate(6deg); }
-  .cell:nth-child(4) .tape { bottom: -18px; right: 60px; transform: rotate(-7deg); }
+  .cell:nth-child(1) .tape { left: 50px; transform: rotate(-6deg); }
+  .cell:nth-child(2) .tape { right: 50px; transform: rotate(6deg); }
+  .cell:nth-child(3) .tape { left: 50px; transform: rotate(6deg); background: repeating-linear-gradient(45deg, rgba(201,154,63,0.65), rgba(201,154,63,0.65) 10px, rgba(255,251,243,0.65) 10px, rgba(255,251,243,0.65) 20px); }
+  .cell:nth-child(4) .tape { right: 50px; transform: rotate(-6deg); background: repeating-linear-gradient(45deg, rgba(201,154,63,0.65), rgba(201,154,63,0.65) 10px, rgba(255,251,243,0.65) 10px, rgba(255,251,243,0.65) 20px); }
 </style>
 </head>
 <body>
   <div class="paper-texture"></div>
 
   <div class="header">
-    <div class="brand">こたえ<span class="accent">工房</span></div>
-    <div class="tagline">診断アプリ・LINEチャットボット制作</div>
+    <div class="header-text">
+      <div class="brand">こたえ<span class="accent">工房</span></div>
+      <div class="tagline">診断アプリ・LINEチャットボット制作</div>
+    </div>
   </div>
 
   <div class="grid">
     <div class="cell">
       <div class="tape"></div>
-      <div class="badge">✓</div>
-      <div class="label">実績サンプルを見る</div>
-      <div class="sub">診断アプリを体験する</div>
+      <div class="icon-badge"><svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#b04a5c" stroke-width="1.7"><path d="M12 3l1.6 4.7L18 9l-4.4 1.3L12 15l-1.6-4.7L6 9l4.4-1.3L12 3z"/><path d="M19 13l.8 2.3L22 16l-2.2.7L19 19l-.8-2.3L16 16l2.2-.7L19 13z"/><path d="M5 14l.6 1.7L7 16.3l-1.4.6L5 18.6l-.6-1.7L3 16.3l1.4-.6L5 14z"/></svg></div>
+      <div class="text-block">
+        <div class="label">実績サンプルを見る</div>
+        <div class="sub">診断アプリを体験する</div>
+      </div>
     </div>
     <div class="cell">
       <div class="tape"></div>
-      <div class="badge">✎</div>
-      <div class="label">制作を依頼する</div>
-      <div class="sub">サービス詳細・料金</div>
+      <div class="icon-badge"><svg width="58" height="58" viewBox="0 0 24 24" fill="none" stroke="#b04a5c" stroke-width="1.7"><path d="M16.5 3.5l4 4L7 21H3v-4L16.5 3.5z"/><path d="M14.5 5.5l4 4"/></svg></div>
+      <div class="text-block">
+        <div class="label">制作を依頼する</div>
+        <div class="sub">サービス詳細・料金</div>
+      </div>
     </div>
     <div class="cell">
       <div class="tape"></div>
-      <div class="badge">♡</div>
-      <div class="label">ココナラで相談する</div>
-      <div class="sub">お見積り無料</div>
+      <div class="icon-badge"><svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#b04a5c" stroke-width="1.7"><path d="M12 20.5s-7.5-4.6-9.8-9C.7 8.3 2 5 5.2 4.3 7.4 3.8 9.6 4.8 12 7.3c2.4-2.5 4.6-3.5 6.8-3 3.2.7 4.5 4 3 7.2-2.3 4.4-9.8 9-9.8 9z"/></svg></div>
+      <div class="text-block">
+        <div class="label">ココナラで相談する</div>
+        <div class="sub">お見積り無料</div>
+      </div>
     </div>
     <div class="cell">
       <div class="tape"></div>
-      <div class="badge">?</div>
-      <div class="label">よくある質問</div>
-      <div class="sub">FAQ</div>
+      <div class="icon-badge"><svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#b04a5c" stroke-width="1.7"><circle cx="12" cy="12" r="9.3"/><path d="M9.2 9.3a2.8 2.8 0 1 1 3.9 2.6c-.9.4-1.4 1-1.4 2v.4"/><circle cx="12" cy="17" r="0.3" fill="#b04a5c"/></svg></div>
+      <div class="text-block">
+        <div class="label">よくある質問</div>
+        <div class="sub">FAQ</div>
+      </div>
     </div>
   </div>
 </body>

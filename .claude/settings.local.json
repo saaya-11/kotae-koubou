@@ -13,7 +13,20 @@
       "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --hide-scrollbars --window-size=2500,1686 --screenshot=/Users/sayak./Desktop/0001_ココナ/ココナラ診断アプリ/診断アプリサンプル/LINE/rich_menu.png http://localhost:8791/LINE/rich_menu.html)",
       "mcp__claude-in-chrome__tabs_context_mcp",
       "Bash(gh auth *)",
-      "Bash(netlify status *)"
+      "Bash(netlify status *)",
+      "Bash(gh repo *)",
+      "Bash(gh api *)",
+      "Bash(curl -sI https://saaya-11.github.io/kotae-koubou/HP/index.html)",
+      "mcp__claude-in-chrome__browser_batch",
+      "mcp__claude-in-chrome__computer",
+      "mcp__claude-in-chrome__find",
+      "mcp__claude-in-chrome__file_upload",
+      "Bash(cp \"/Users/sayak./Desktop/0001_ココナ/ココナラ診断アプリ/診断アプリサンプル/LINE/rich_menu.png\" \"/private/tmp/claude-501/-Users-sayak--Desktop-0001------------------------/91207ee8-e928-4954-9e8d-5b8c3da91c2e/scratchpad/rich_menu.png\" *)",
+      "Bash(python3 -c ' *)",
+      "Bash(kill %1)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git push *)"
     ]
   }
 }
