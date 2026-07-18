@@ -185,20 +185,28 @@
     text-align: left;
   }
 
-  .mock-aroma {
-    background:
-      linear-gradient(0deg, rgba(20, 15, 8, 0.55) 0%, rgba(20, 15, 8, 0.05) 60%),
-      url("../癒しの香り診断サンプル/assets/aroma-hero.png") center/cover no-repeat;
+  .mock-card {
+    background: var(--indigo-soft);
+    color: var(--ink);
+    align-content: start;
   }
-  .mock-love {
-    background:
-      linear-gradient(0deg, rgba(40, 12, 20, 0.6) 0%, rgba(40, 12, 20, 0.05) 60%),
-      url("../恋愛才能診断サンプル/assets/hero-group.png") center 22%/cover no-repeat;
+
+  .mock-card .mock-step {
+    display: inline-flex;
+    width: 22px;
+    height: 22px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--indigo);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 800;
   }
-  .mock-viral {
-    background:
-      url("../あなたにぴったりのバズり投稿タイプ診断サンプル/assets/hero-phone.png") right bottom/55% auto no-repeat,
-      linear-gradient(135deg, #0b0a13, #7c5cff);
+
+  .mock-card p {
+    margin-top: 10px;
+    color: var(--ink);
   }
 
   /* Problem */
@@ -775,9 +783,9 @@
         </div>
       </div>
       <div class="hero-mocks">
-        <div class="mock-card mock-aroma">香り診断</div>
-        <div class="mock-card mock-love">恋愛才能診断</div>
-        <div class="mock-card mock-viral">バズり投稿タイプ診断</div>
+        <div class="mock-card"><span class="mock-step">1</span><p>質問に回答</p></div>
+        <div class="mock-card"><span class="mock-step">2</span><p>診断結果を表示</p></div>
+        <div class="mock-card"><span class="mock-step">3</span><p>SNSでシェア</p></div>
       </div>
     </div>
   </section>
@@ -993,7 +1001,7 @@
         <h2>ご相談・お見積もりフォーム</h2>
         <p>内容が固まっていない段階でも大歓迎です。フォームからもお気軽にご相談ください。</p>
       </div>
-      <form class="contact-form" action="mailto:【ご相談受付用メールアドレスを入力】" method="post" enctype="text/plain">
+      <form class="contact-form" action="mailto:arukanetto@gmail.com" method="post" enctype="text/plain">
         <label>お名前<input type="text" name="name" required></label>
         <label>メールアドレス<input type="email" name="email" required></label>
         <label>ご相談内容<textarea name="message" rows="5" required placeholder="作りたい診断のイメージ、ご予算、納期のご希望など、わかる範囲で構いません。"></textarea></label>
@@ -1013,7 +1021,7 @@
         <div>STEP3　正式にご注文・制作スタート</div>
       </div>
       <div class="cta-block">
-        <a class="btn btn-primary" href="【ここにココナラの出品ページURLを入力】">ココナラで相談・注文する</a>
+        <a class="btn btn-primary" href="#form">相談・お見積もりをする</a>
         <span class="cta-sub">サービス全体の紹介は<a href="../HP/index.html">こちら</a></span>
       </div>
     </div>
@@ -1025,7 +1033,7 @@
 </footer>
 
 <div class="sticky-cta">
-  <a class="btn btn-primary" href="【ここにココナラの出品ページURLを入力】">ココナラで相談する</a>
+  <a class="btn btn-primary" href="#form">相談する</a>
 </div>
 
 </body>

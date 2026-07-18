@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "static-preview",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-c", "import functools,http.server,socketserver; H=functools.partial(http.server.SimpleHTTPRequestHandler, directory='/Users/sayak./Desktop/0001_ココナ/ココナラ診断アプリ/診断アプリサンプル'); socketserver.TCPServer.allow_reuse_address=True; s=socketserver.TCPServer(('0.0.0.0',8000), H); s.serve_forever()"],
+      "port": 8000
+    }
+  ]
+}

@@ -269,30 +269,50 @@
   }
 
   .phone-card .mock {
-    height: 150px;
     border-radius: 14px;
-    display: grid;
-    align-content: end;
-    padding: 14px;
-    color: #fff;
-    font-weight: 800;
-    font-size: 14px;
+    padding: 20px 18px;
   }
 
-  .mock-aroma {
-    background:
-      linear-gradient(0deg, rgba(20, 15, 8, 0.55) 0%, rgba(20, 15, 8, 0.05) 60%),
-      url("../癒しの香り診断サンプル/assets/aroma-hero.png") center/cover no-repeat;
+  .mock-generic {
+    background: var(--indigo-soft);
   }
-  .mock-love {
-    background:
-      linear-gradient(0deg, rgba(40, 12, 20, 0.6) 0%, rgba(40, 12, 20, 0.05) 60%),
-      url("../恋愛才能診断サンプル/assets/hero-group.png") center 22%/cover no-repeat;
+
+  .mock-progress {
+    height: 6px;
+    border-radius: 999px;
+    background: rgba(60, 51, 176, 0.15);
+    overflow: hidden;
   }
-  .mock-viral {
-    background:
-      url("../あなたにぴったりのバズり投稿タイプ診断サンプル/assets/hero-phone.png") right bottom/55% auto no-repeat,
-      linear-gradient(135deg, #0b0a13, #7c5cff);
+
+  .mock-progress span {
+    display: block;
+    height: 100%;
+    border-radius: 999px;
+    background: var(--indigo);
+  }
+
+  .mock-question {
+    margin-top: 16px;
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--ink);
+  }
+
+  .mock-choice {
+    margin-top: 10px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    background: #fff;
+    border: 1px solid var(--line);
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .mock-choice.is-active {
+    border-color: var(--indigo);
+    color: var(--indigo-deep);
+    font-weight: 700;
+    box-shadow: 0 0 0 3px rgba(91, 79, 233, 0.12);
   }
 
   .phone-card p {
@@ -994,7 +1014,13 @@
       </div>
       <div class="hero-visual">
         <div class="phone-card">
-          <div class="mock mock-love">あなたの恋愛才能診断</div>
+          <div class="mock mock-generic">
+            <div class="mock-progress"><span style="width: 60%;"></span></div>
+            <p class="mock-question">Q. あなたが休日にしたいのは？</p>
+            <div class="mock-choice">静かにインドアで過ごす</div>
+            <div class="mock-choice">友達と出かける</div>
+            <div class="mock-choice is-active">新しい場所を開拓する</div>
+          </div>
           <p>質問設計〜結果ページ〜シェア機能まで、世界観に合わせてフルオーダーメイドで制作します。</p>
         </div>
       </div>
@@ -1344,7 +1370,7 @@
         <h2>ご相談・お見積もりフォーム</h2>
         <p>内容が固まっていない段階でも大歓迎です。フォームからもお気軽にご相談ください。</p>
       </div>
-      <form class="contact-form" action="mailto:【ご相談受付用メールアドレスを入力】" method="post" enctype="text/plain">
+      <form class="contact-form" action="mailto:arukanetto@gmail.com" method="post" enctype="text/plain">
         <label>お名前<input type="text" name="name" required></label>
         <label>メールアドレス<input type="email" name="email" required></label>
         <label>ご相談内容<textarea name="message" rows="5" required placeholder="作りたい診断のイメージ、ご予算、納期のご希望など、わかる範囲で構いません。"></textarea></label>

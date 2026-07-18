@@ -39,7 +39,21 @@
       "Bash(ls /Users/sayak./Desktop/0001_ココナ/ココナラ診断アプリ/診断アプリサンプル/癒しの香り診断サンプル/assets/)",
       "Bash(echo \"--- 恋愛 ---\")",
       "Bash(ls /Users/sayak./Desktop/0001_ココナ/ココナラ診断アプリ/診断アプリサンプル/恋愛才能診断サンプル/assets/)",
-      "Bash(echo \"--- バズり ---\")"
+      "Bash(echo \"--- バズり ---\")",
+      "Bash(lsof -i :8791 -sTCP:LISTEN)",
+      "Bash(curl -s http://localhost:8791/HP/index.html)",
+      "mcp__claude-in-chrome__navigate",
+      "mcp__claude-in-chrome__get_page_text",
+      "Bash(echo \"exit: $?\")",
+      "Bash(python3 -c \"print\\(1235325/1024/1024\\)\")",
+      "Bash(sips --help)",
+      "Bash(sips -s format jpeg -s formatOptions 85 \"リッチメニュー画像.png\" --out \"richmenu_line.jpg\")",
+      "Bash(sips -g pixelWidth -g pixelHeight richmenu_line.jpg)",
+      "Skill(update-config)",
+      "Skill(update-config:*)",
+      "Bash(curl -s \"https://saaya-11.github.io/kotae-koubou/HP/index.html\")",
+      "Bash(cat ~/.claude/settings.json 2>/dev/null || echo \"FILE_NOT_FOUND\")",
+      "Bash(grep -n 'mock-generic\\\\|mock mock-love\\\\|hero-group.png' /Users/sayak./Desktop/0001_ココナ/ココナラ診断アプリ/診断アプリサンプル/HP/index.html)"
     ]
   }
 }
