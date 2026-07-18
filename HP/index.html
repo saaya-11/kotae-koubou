@@ -260,65 +260,153 @@
     gap: 14px;
   }
 
-  .phone-card {
-    padding: 20px;
-    border-radius: 22px;
-    background: #fff;
-    border: 1px solid var(--line);
+  .promo-card {
+    position: relative;
+    padding: 30px 26px;
+    border-radius: 28px;
+    background: linear-gradient(160deg, #fff1f7 0%, #fde7f0 35%, #efe3fb 70%, #fff1e6 100%);
+    border: 1px solid rgba(201, 107, 154, 0.18);
     box-shadow: var(--shadow);
-  }
-
-  .phone-card .mock {
-    border-radius: 14px;
-    padding: 20px 18px;
-  }
-
-  .mock-generic {
-    background: var(--indigo-soft);
-  }
-
-  .mock-progress {
-    height: 6px;
-    border-radius: 999px;
-    background: rgba(60, 51, 176, 0.15);
     overflow: hidden;
   }
 
-  .mock-progress span {
-    display: block;
-    height: 100%;
+  .promo-badge {
+    display: inline-flex;
+    padding: 6px 16px;
     border-radius: 999px;
-    background: var(--indigo);
-  }
-
-  .mock-question {
-    margin-top: 16px;
-    font-size: 14px;
+    background: linear-gradient(135deg, #ff6f9c, #ff8a65);
+    color: #fff;
+    font-size: 13px;
     font-weight: 800;
-    color: var(--ink);
   }
 
-  .mock-choice {
-    margin-top: 10px;
-    padding: 12px 14px;
-    border-radius: 10px;
-    background: #fff;
-    border: 1px solid var(--line);
-    font-size: 13px;
-    color: var(--muted);
+  .promo-title {
+    margin-top: 14px;
+    font-size: 32px;
+    font-weight: 900;
+    color: #2b2540;
+    line-height: 1.2;
   }
 
-  .mock-choice.is-active {
-    border-color: var(--indigo);
-    color: var(--indigo-deep);
+  .promo-title span {
+    display: block;
+    background: linear-gradient(135deg, #ff6f9c, #8a5cf6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: 40px;
+  }
+
+  .promo-sub {
+    margin-top: 8px;
+    color: #6b5f7a;
+    font-size: 14px;
     font-weight: 700;
-    box-shadow: 0 0 0 3px rgba(91, 79, 233, 0.12);
   }
 
-  .phone-card p {
-    margin-top: 12px;
-    color: var(--muted);
+  .promo-phone {
+    position: relative;
+    margin-top: 22px;
+    padding: 18px 16px;
+    border-radius: 20px;
+    background: #fff;
+    border: 1px solid rgba(43, 37, 64, 0.1);
+    box-shadow: 0 14px 30px rgba(43, 34, 110, 0.12);
+  }
+
+  .promo-phone-head {
+    width: 46px;
+    height: 5px;
+    margin: 0 auto 14px;
+    border-radius: 999px;
+    background: #eadcf0;
+  }
+
+  .promo-q-label {
+    color: #b04a8c;
+    font-size: 12px;
+    font-weight: 800;
+  }
+
+  .promo-q {
+    margin-top: 6px;
+    font-size: 15px;
+    font-weight: 800;
+    color: #2b2540;
+    line-height: 1.5;
+  }
+
+  .promo-choice {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: #fdf2f7;
     font-size: 13px;
+    font-weight: 700;
+    color: #4a3b56;
+  }
+
+  .promo-choice span {
+    font-size: 14px;
+  }
+
+  .promo-next {
+    display: inline-flex;
+    margin-top: 14px;
+    padding: 8px 18px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #ff6f9c, #ff8a65);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 800;
+  }
+
+  .promo-note {
+    position: absolute;
+    top: 30px;
+    right: 26px;
+    max-width: 110px;
+    padding: 10px 12px;
+    border-radius: 14px;
+    background: #8a5cf6;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 800;
+    line-height: 1.4;
+    text-align: center;
+  }
+
+  .promo-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 22px;
+  }
+
+  .promo-tag {
+    padding: 7px 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 800;
+    color: #fff;
+  }
+
+  .t-pink { background: #ff6f9c; }
+  .t-orange { background: #ff9a5a; }
+  .t-green { background: #3bb489; }
+  .t-blue { background: #4a90e2; }
+  .t-purple { background: #8a5cf6; }
+
+  .promo-footer {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px dashed rgba(43, 37, 64, 0.15);
+    color: #6b5f7a;
+    font-size: 12px;
+    font-weight: 700;
   }
 
   /* Service */
@@ -1013,15 +1101,28 @@
         </div>
       </div>
       <div class="hero-visual">
-        <div class="phone-card">
-          <div class="mock mock-generic">
-            <div class="mock-progress"><span style="width: 60%;"></span></div>
-            <p class="mock-question">Q. あなたが休日にしたいのは？</p>
-            <div class="mock-choice">静かにインドアで過ごす</div>
-            <div class="mock-choice">友達と出かける</div>
-            <div class="mock-choice is-active">新しい場所を開拓する</div>
+        <div class="promo-card">
+          <span class="promo-badge">オリジナル</span>
+          <h2 class="promo-title">AI診断アプリ<span>制作</span></h2>
+          <p class="promo-sub">あなたのアイデアを診断アプリに！</p>
+          <div class="promo-phone">
+            <div class="promo-phone-head"></div>
+            <p class="promo-q-label">Q1 / 10</p>
+            <p class="promo-q">あなたはどんな時にワクワクしますか？</p>
+            <div class="promo-choice"><span>★</span>新しいことに挑戦している時</div>
+            <div class="promo-choice"><span>♥</span>誰かの役に立てた時</div>
+            <div class="promo-choice"><span>💡</span>アイデアを思いついた時</div>
+            <div class="promo-next">次へ ＞</div>
           </div>
-          <p>質問設計〜結果ページ〜シェア機能まで、世界観に合わせてフルオーダーメイドで制作します。</p>
+          <div class="promo-note">集客・LINE登録にも活用できる！</div>
+          <div class="promo-tags">
+            <span class="promo-tag t-pink">性格診断</span>
+            <span class="promo-tag t-orange">恋愛診断</span>
+            <span class="promo-tag t-green">適職診断</span>
+            <span class="promo-tag t-blue">商品診断</span>
+            <span class="promo-tag t-purple">オリジナル診断</span>
+          </div>
+          <div class="promo-footer">アイデア整理から設計・制作までトータルサポート！</div>
         </div>
       </div>
     </div>

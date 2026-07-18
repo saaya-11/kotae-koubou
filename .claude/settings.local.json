@@ -53,7 +53,12 @@
       "Skill(update-config:*)",
       "Bash(curl -s \"https://saaya-11.github.io/kotae-koubou/HP/index.html\")",
       "Bash(cat ~/.claude/settings.json 2>/dev/null || echo \"FILE_NOT_FOUND\")",
-      "Bash(grep -n 'mock-generic\\\\|mock mock-love\\\\|hero-group.png' /Users/sayak./Desktop/0001_ココナ/ココナラ診断アプリ/診断アプリサンプル/HP/index.html)"
+      "Bash(grep -n 'mock-generic\\\\|mock mock-love\\\\|hero-group.png' /Users/sayak./Desktop/0001_ココナ/ココナラ診断アプリ/診断アプリサンプル/HP/index.html)",
+      "mcp__claude-in-chrome__tabs_create_mcp",
+      "Bash(sips -z 1686 2500 \"リッチメニュー画像.png\" --out richmenu_line_2500x1686.png)",
+      "Bash(sips -s format jpeg -s formatOptions 90 richmenu_line_2500x1686.png --out richmenu_line_2500x1686.jpg)",
+      "Bash(sips -g pixelWidth -g pixelHeight richmenu_line_2500x1686.jpg)",
+      "mcp__claude-in-chrome__javascript_tool"
     ]
   }
 }
