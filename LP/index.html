@@ -1,0 +1,872 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>オリジナル診断アプリ制作｜こたえ工房</title>
+<style>
+  :root {
+    color-scheme: light;
+    --ink: #1c1a2b;
+    --muted: #656279;
+    --line: rgba(28, 26, 50, 0.12);
+    --paper: #faf9fc;
+    --panel: #ffffff;
+    --indigo: #5b4fe9;
+    --indigo-deep: #3c33b0;
+    --indigo-soft: #efedff;
+    --accent: #ff8a65;
+    --accent-soft: #fff1ea;
+    --shadow: 0 24px 64px rgba(43, 34, 110, 0.12);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    padding-bottom: 76px;
+    color: var(--ink);
+    background: var(--paper);
+    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", "Yu Gothic", "Noto Sans JP", system-ui, sans-serif;
+    line-height: 1.7;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  .wrap {
+    width: min(880px, calc(100% - 40px));
+    margin: 0 auto;
+  }
+
+  .section {
+    padding: clamp(52px, 8vw, 96px) 0;
+  }
+
+  .section-alt {
+    background: var(--panel);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .kicker {
+    display: inline-flex;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: var(--indigo-soft);
+    color: var(--indigo-deep);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+  }
+
+  h1, h2, h3, p {
+    margin: 0;
+  }
+
+  .section-head {
+    margin-bottom: 36px;
+    text-align: center;
+  }
+
+  .section-head h2 {
+    margin-top: 14px;
+    font-size: clamp(24px, 3.6vw, 34px);
+    line-height: 1.4;
+    word-break: keep-all;
+    overflow-wrap: normal;
+  }
+
+  .section-head p {
+    margin-top: 14px;
+    color: var(--muted);
+    font-size: 15px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 54px;
+    padding: 0 30px;
+    border-radius: 999px;
+    font-weight: 800;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .btn-primary {
+    border: 0;
+    color: #fff;
+    background: linear-gradient(135deg, var(--indigo), var(--indigo-deep));
+    box-shadow: 0 18px 36px rgba(91, 79, 233, 0.3);
+  }
+
+  .btn-secondary {
+    border: 1px solid var(--line);
+    background: #fff;
+    color: var(--ink);
+  }
+
+  .cta-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+  }
+
+  .cta-sub {
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  /* Hero */
+  .hero {
+    padding: clamp(56px, 10vw, 108px) 0 clamp(48px, 7vw, 80px);
+    text-align: center;
+  }
+
+  .hero .kicker {
+    margin: 0 auto;
+  }
+
+  .hero h1 {
+    margin: 18px auto 0;
+    max-width: 18em;
+    font-size: clamp(28px, 4.6vw, 44px);
+    font-weight: 800;
+    line-height: 1.45;
+    word-break: keep-all;
+    overflow-wrap: normal;
+  }
+
+  .hero-lead {
+    margin: 20px auto 0;
+    max-width: 34em;
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1.9;
+  }
+
+  .hero-actions {
+    margin-top: 32px;
+  }
+
+  .hero-mocks {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 48px;
+  }
+
+  .mock-card {
+    height: 120px;
+    border-radius: 16px;
+    display: grid;
+    align-content: end;
+    padding: 14px;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 800;
+    text-align: left;
+  }
+
+  .mock-aroma { background: linear-gradient(135deg, #d9c9b8, #79606f); }
+  .mock-love { background: linear-gradient(135deg, #f6e3d8, #c96b7a); color: #4a3b34; }
+  .mock-viral { background: linear-gradient(135deg, #0b0a13, #7c5cff); }
+
+  /* Problem */
+  .problem-list {
+    display: grid;
+    gap: 14px;
+  }
+
+  .problem-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 18px 20px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--panel);
+  }
+
+  .problem-item .mark {
+    flex: none;
+    font-size: 20px;
+  }
+
+  .problem-item p {
+    color: var(--ink);
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .problem-lead {
+    margin-top: 30px;
+    padding: 20px 22px;
+    border-radius: 14px;
+    background: var(--indigo-soft);
+    color: var(--indigo-deep);
+    font-weight: 700;
+    text-align: center;
+    font-size: 16px;
+  }
+
+  /* Benefits */
+  .benefit-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .benefit-card {
+    padding: 24px 20px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--panel);
+    text-align: center;
+  }
+
+  .benefit-card .num {
+    display: inline-flex;
+    width: 38px;
+    height: 38px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-weight: 800;
+  }
+
+  .benefit-card h3 {
+    margin-top: 14px;
+    font-size: 16px;
+    font-weight: 800;
+  }
+
+  .benefit-card p {
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  /* Works */
+  .works-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .work-card {
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--panel);
+    text-decoration: none;
+    color: var(--ink);
+  }
+
+  .work-preview {
+    height: 130px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    color: #fff;
+  }
+
+  .preview-aroma { background: linear-gradient(150deg, #fffefa 0%, #e4ded1 45%, #9aa48f 100%); font-family: "Hiragino Mincho ProN", "Yu Mincho", serif; font-weight: 400; }
+  .preview-love { background: linear-gradient(150deg, #fdf6ea 0%, #f2d9c9 50%, #c96b7a 100%); color: #4a3b34; font-family: "Hiragino Maru Gothic ProN", "Rounded Mplus 1c", sans-serif; }
+  .preview-viral { background: linear-gradient(150deg, #07060d 0%, #14121e 55%, #7c5cff 100%); font-weight: 900; letter-spacing: -0.02em; }
+
+  .work-preview span {
+    font-weight: 800;
+    font-size: 15px;
+  }
+
+  .work-card .work-body {
+    padding: 14px 16px 18px;
+  }
+
+  .work-card p {
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  .work-use {
+    margin-top: 10px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    background: var(--indigo-soft);
+    color: var(--indigo-deep);
+    font-size: 11px;
+    line-height: 1.7;
+  }
+
+  .work-use b {
+    margin-right: 5px;
+    font-weight: 800;
+  }
+
+  .work-card .work-link {
+    display: inline-block;
+    margin-top: 10px;
+    color: var(--indigo-deep);
+    font-weight: 700;
+    font-size: 13px;
+  }
+
+  /* Pricing */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .price-card {
+    padding: 26px 22px;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: var(--panel);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .price-card.is-featured {
+    border-color: var(--indigo);
+    box-shadow: 0 20px 44px rgba(91, 79, 233, 0.18);
+  }
+
+  .price-card .badge {
+    align-self: flex-start;
+    margin-bottom: 12px;
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 800;
+  }
+
+  .price-card h3 {
+    font-size: 17px;
+    font-weight: 800;
+  }
+
+  .price-value {
+    margin-top: 8px;
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--indigo-deep);
+  }
+
+  .price-value span {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+  }
+
+  .price-meta {
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 12px;
+  }
+
+  .price-list {
+    margin: 16px 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 8px;
+    flex: 1;
+  }
+
+  .price-list li {
+    display: grid;
+    grid-template-columns: 16px minmax(0, 1fr);
+    gap: 8px;
+    color: var(--ink);
+    font-size: 13px;
+  }
+
+  .price-list li::before {
+    content: "✓";
+    color: var(--indigo);
+    font-weight: 800;
+  }
+
+  .price-card .btn {
+    margin-top: 18px;
+    min-height: 46px;
+    font-size: 14px;
+  }
+
+  .pricing-note {
+    margin-top: 20px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  /* Flow */
+  .flow-list {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .flow-step {
+    padding: 18px 14px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--panel);
+    text-align: center;
+  }
+
+  .flow-num {
+    display: inline-flex;
+    width: 30px;
+    height: 30px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--indigo);
+    color: #fff;
+    font-weight: 800;
+    font-size: 13px;
+  }
+
+  .flow-step h3 {
+    margin-top: 10px;
+    font-size: 13px;
+    font-weight: 800;
+  }
+
+  /* Trust */
+  .trust-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .trust-card {
+    padding: 22px 20px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--panel);
+  }
+
+  .trust-card h3 {
+    font-size: 15px;
+    font-weight: 800;
+  }
+
+  .trust-card p {
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+  /* FAQ */
+  .faq-list {
+    display: grid;
+    gap: 10px;
+  }
+
+  details {
+    padding: 16px 18px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--panel);
+  }
+
+  summary {
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 14px;
+    list-style: none;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  summary::after {
+    content: "+";
+    float: right;
+    color: var(--indigo);
+    font-weight: 800;
+  }
+
+  details[open] summary::after {
+    content: "−";
+  }
+
+  details p {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.85;
+  }
+
+  /* Final CTA */
+  .cta-final {
+    text-align: center;
+  }
+
+  .cta-final h2 {
+    font-size: clamp(24px, 4vw, 36px);
+    font-weight: 800;
+    word-break: keep-all;
+    overflow-wrap: normal;
+  }
+
+  .cta-final p {
+    margin-top: 14px;
+    color: var(--muted);
+    font-size: 15px;
+  }
+
+  .steps-mini {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin: 28px 0;
+    text-align: left;
+  }
+
+  .steps-mini div {
+    padding: 14px 16px;
+    border-radius: 12px;
+    background: var(--indigo-soft);
+    color: var(--indigo-deep);
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  /* Sticky CTA */
+  .sticky-cta {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 50;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(8px);
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: center;
+  }
+
+  .sticky-cta .btn {
+    width: min(420px, 100%);
+  }
+
+  footer.site-footer {
+    padding: 30px 0 90px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+  }
+
+  @media (max-width: 860px) {
+    .benefit-grid,
+    .works-grid,
+    .pricing-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .hero-mocks {
+      grid-template-columns: 1fr;
+    }
+
+    .flow-list {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .steps-mini {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .benefit-grid,
+    .works-grid,
+    .pricing-grid,
+    .trust-grid,
+    .flow-list {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+</head>
+<body>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <span class="kicker">診断アプリ制作サービス</span>
+      <h1>診断コンテンツで<br>フォロワーもお客様も増やす</h1>
+      <p class="hero-lead">
+        質問設計・デザイン・結果ページ・SNSシェア機能まで、目的に合わせてフルオーダーメイドで制作します。
+        「作ってみたいけど自分では作れない」を、そのまま形にします。
+      </p>
+      <div class="hero-actions">
+        <div class="cta-block">
+          <a class="btn btn-primary" href="【ここにココナラの出品ページURLを入力】">ココナラで相談・注文する</a>
+          <span class="cta-sub">まずは無料でご相談いただけます</span>
+        </div>
+      </div>
+      <div class="hero-mocks">
+        <div class="mock-card mock-aroma">香り診断</div>
+        <div class="mock-card mock-love">恋愛才能診断</div>
+        <div class="mock-card mock-viral">バズり投稿タイプ診断</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">こんなお悩みありませんか？</span>
+        <h2>「診断コンテンツを作りたいのに、<br>作れない」を放置していませんか？</h2>
+      </div>
+      <div class="problem-list">
+        <div class="problem-item"><span class="mark">😩</span><p>診断コンテンツを作りたいけど、自分でコードは書けない</p></div>
+        <div class="problem-item"><span class="mark">😩</span><p>フリー素材のテンプレ診断では、世界観が合わない</p></div>
+        <div class="problem-item"><span class="mark">😩</span><p>SNSでシェアされる仕組みまでは自分では作れない</p></div>
+        <div class="problem-item"><span class="mark">😩</span><p>外注しても、スマホでの見え方が崩れて使い物にならなかった</p></div>
+      </div>
+      <p class="problem-lead">そのお悩み、質問設計からシェア機能まで一式おまかせいただけます。</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">BENEFIT</span>
+        <h2>診断アプリを作ると、こう変わります</h2>
+      </div>
+      <div class="benefit-grid">
+        <div class="benefit-card">
+          <span class="num">1</span>
+          <h3>シェアされて広がる</h3>
+          <p>結果をX・LINEでそのままシェアできるので、自然な拡散が生まれます。</p>
+        </div>
+        <div class="benefit-card">
+          <span class="num">2</span>
+          <h3>見込み客の入り口になる</h3>
+          <p>診断結果から商品紹介やLINE公式登録へ、自然に誘導できます。</p>
+        </div>
+        <div class="benefit-card">
+          <span class="num">3</span>
+          <h3>世界観が伝わる</h3>
+          <p>テンプレ感のない、ブランドやアカウントの世界観に合わせたデザインで作ります。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">WORKS</span>
+        <h2>実績サンプル（実際に体験できます）</h2>
+      </div>
+      <div class="works-grid">
+        <a class="work-card" href="../癒しの香り診断サンプル/index.html">
+          <div class="work-preview preview-aroma"><span>あなたを癒す香り診断</span></div>
+          <div class="work-body">
+            <p>和紙×明朝体の落ち着いたトーン。全10問。</p>
+            <p class="work-use"><b>使用用途</b>アロマ・リラクゼーションサロン／ヨガ・ピラティススタジオ／ハンドメイドブランドの集客</p>
+            <span class="work-link">診断してみる →</span>
+          </div>
+        </a>
+        <a class="work-card" href="../恋愛才能診断サンプル/index.html">
+          <div class="work-preview preview-love"><span>あなたの恋愛才能診断</span></div>
+          <div class="work-body">
+            <p>クリーム紙×手書き風フォントのスクラップブック風。全20問。</p>
+            <p class="work-use"><b>使用用途</b>恋愛系インフルエンサー・占い師／マッチングアプリ・婚活サービス／美容室・エステサロンの来店促進</p>
+            <span class="work-link">診断してみる →</span>
+          </div>
+        </a>
+        <a class="work-card" href="../あなたにぴったりのバズり投稿タイプ診断サンプル/code_artifact.html">
+          <div class="work-preview preview-viral"><span>バズり投稿タイプ診断</span></div>
+          <div class="work-body">
+            <p>ダークモード×ネオンアクセントのSNSアプリ風。全10問。</p>
+            <p class="work-use"><b>使用用途</b>SNS運用代行・コンサル／インフルエンサー講座・スクール／企業のSNS担当者向け集客</p>
+            <span class="work-link">診断してみる →</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">PRICING</span>
+        <h2>料金プラン</h2>
+        <p>内容に応じて調整可能です。まずはお気軽にご相談ください。</p>
+      </div>
+      <div class="pricing-grid">
+        <div class="price-card">
+          <span class="badge">LIGHT</span>
+          <h3>ライトプラン</h3>
+          <p class="price-value">¥12,000<span>〜</span></p>
+          <p class="price-meta">納期目安：3〜5日</p>
+          <ul class="price-list">
+            <li>既存テイストをベースにカスタマイズ</li>
+            <li>質問・結果文の内容編集</li>
+            <li>修正1回</li>
+          </ul>
+          <a class="btn btn-secondary" href="【ここにココナラの出品ページURLを入力】">相談する</a>
+        </div>
+        <div class="price-card is-featured">
+          <span class="badge">STANDARD</span>
+          <h3>スタンダードプラン</h3>
+          <p class="price-value">¥28,000<span>〜</span></p>
+          <p class="price-meta">納期目安：7〜10日</p>
+          <ul class="price-list">
+            <li>フルオリジナルデザイン</li>
+            <li>質問8〜15問・結果3〜5タイプ</li>
+            <li>SNSシェア機能込み</li>
+            <li>修正2回</li>
+          </ul>
+          <a class="btn btn-primary" href="【ここにココナラの出品ページURLを入力】">このプランで注文する</a>
+        </div>
+        <div class="price-card">
+          <span class="badge">PREMIUM</span>
+          <h3>プレミアムプラン</h3>
+          <p class="price-value">¥50,000<span>〜</span></p>
+          <p class="price-meta">納期目安：10〜14日</p>
+          <ul class="price-list">
+            <li>完全オーダーメイド設計</li>
+            <li>集客用LPの制作込み</li>
+            <li>修正3回・優先納品</li>
+          </ul>
+          <a class="btn btn-secondary" href="【ここにココナラの出品ページURLを入力】">相談する</a>
+        </div>
+      </div>
+      <p class="pricing-note">※上記は参考価格です。ご要望の内容に応じて、正式なお見積りをお出しします。</p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">FLOW</span>
+        <h2>ご注文から納品までの流れ</h2>
+      </div>
+      <div class="flow-list">
+        <div class="flow-step"><span class="flow-num">1</span><h3>ヒアリング</h3></div>
+        <div class="flow-step"><span class="flow-num">2</span><h3>構成・ラフ提案</h3></div>
+        <div class="flow-step"><span class="flow-num">3</span><h3>デザイン制作</h3></div>
+        <div class="flow-step"><span class="flow-num">4</span><h3>確認・修正</h3></div>
+        <div class="flow-step"><span class="flow-num">5</span><h3>納品</h3></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">TRUST</span>
+        <h2>安心してご依頼いただくために</h2>
+        <p>まだ実績を積み重ねている段階だからこそ、発注前に納得していただける仕組みを大切にしています。</p>
+      </div>
+      <div class="trust-grid">
+        <div class="trust-card">
+          <h3>実績はすべて公開中</h3>
+          <p>掲載しているサンプルは、実際にその場で診断を体験できます。発注前に仕上がりの質感をご確認いただけます。</p>
+        </div>
+        <div class="trust-card">
+          <h3>相談・お見積りは無料</h3>
+          <p>内容が固まっていない段階でも大歓迎です。ヒアリングのうえ、最適なプランをご提案します。</p>
+        </div>
+        <div class="trust-card">
+          <h3>修正回数はプランに含む</h3>
+          <p>追加費用の不安なく、ご希望のイメージに近づくまで調整いただけます（回数は料金プランをご確認ください）。</p>
+        </div>
+        <div class="trust-card">
+          <h3>確認しながら進行</h3>
+          <p>完成品をいきなりお渡しするのではなく、制作の流れの中でイメージのすり合わせを挟みながら進めます。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">FAQ</span>
+        <h2>よくあるご質問</h2>
+      </div>
+      <div class="faq-list">
+        <details>
+          <summary>納期はどれくらいですか？</summary>
+          <p>プランに応じて3日〜14日ほどが目安です。ご依頼状況により前後する場合がありますので、まずはご相談ください。</p>
+        </details>
+        <details>
+          <summary>質問数や結果タイプの数は自由に決められますか？</summary>
+          <p>はい。用途に合わせて設問数・結果タイプ数を自由に設計できます。</p>
+        </details>
+        <details>
+          <summary>スマホでも綺麗に表示されますか？</summary>
+          <p>はい。スマホでの閲覧を前提に設計しているため、SNSでシェアしても崩れにくい作りになっています。</p>
+        </details>
+        <details>
+          <summary>修正は何回までお願いできますか？</summary>
+          <p>プランごとに規定回数がございます。詳細は料金プランをご確認ください。</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="section cta-final">
+    <div class="wrap">
+      <span class="kicker">ORDER</span>
+      <h2>まずはご相談から始めませんか？</h2>
+      <p>ご予算やイメージが固まっていない段階でも大歓迎です。</p>
+      <div class="steps-mini">
+        <div>STEP1　ココナラのメッセージからご相談</div>
+        <div>STEP2　内容・プランのすり合わせ</div>
+        <div>STEP3　正式にご注文・制作スタート</div>
+      </div>
+      <div class="cta-block">
+        <a class="btn btn-primary" href="【ここにココナラの出品ページURLを入力】">ココナラで相談・注文する</a>
+        <a class="btn btn-secondary" href="https://line.me/R/ti/p/@884zvtnn">LINE公式アカウントを友だち追加</a>
+        <span class="cta-sub">サービス全体の紹介は<a href="../HP/index.html">こちら</a></span>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p>© 2026 こたえ工房</p>
+</footer>
+
+<div class="sticky-cta">
+  <a class="btn btn-primary" href="【ここにココナラの出品ページURLを入力】">ココナラで相談する</a>
+</div>
+
+</body>
+</html>

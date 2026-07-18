@@ -1,0 +1,1032 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>あなたの恋愛才能診断</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #4a3b34;
+      --muted: #8a7566;
+      --line: #d8c6a8;
+      --paper: #faf3e6;
+      --panel: #fffbf3;
+      --accent: #c96b7a;
+      --accent-strong: #b04a5c;
+      --accent-mint: #8fa688;
+      --soft: #f6e3d8;
+      --soft-mint: #eaf1e3;
+      --gold: #c99a3f;
+      --shadow: 10px 12px 0 rgba(74, 59, 52, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Hiragino Maru Gothic ProN", "Rounded Mplus 1c", "Yu Gothic", "Hiragino Sans", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 10%, rgba(201, 107, 122, 0.1), transparent 30%),
+        radial-gradient(circle at 90% 14%, rgba(143, 166, 136, 0.14), transparent 28%),
+        var(--paper);
+      background-image:
+        radial-gradient(circle at 12% 10%, rgba(201, 107, 122, 0.1), transparent 30%),
+        radial-gradient(circle at 90% 14%, rgba(143, 166, 136, 0.14), transparent 28%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+    }
+
+    main {
+      width: min(1080px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 32px 0;
+    }
+
+    .shell {
+      display: grid;
+      grid-template-columns: minmax(290px, 0.86fr) minmax(340px, 1fr);
+      min-height: min(780px, calc(100vh - 64px));
+      overflow: hidden;
+      border: 2px dashed var(--line);
+      border-radius: 34px 12px 34px 12px / 12px 34px 12px 34px;
+      background: rgba(255, 251, 243, 0.92);
+      box-shadow: var(--shadow);
+    }
+
+    .visual {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 18px;
+      padding: 30px;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, #fdf6ea 0%, #f6e6d8 52%, #efe1cf 100%);
+      border-right: 2px dashed var(--line);
+    }
+
+    .visual > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-group {
+      display: block;
+      width: 100%;
+      margin-top: 34px;
+      border: 10px solid #fffdf8;
+      border-radius: 4px;
+      object-fit: contain;
+      transform: rotate(-1.4deg);
+      box-shadow: 0 14px 26px rgba(74, 59, 52, 0.16);
+    }
+
+    .visual-copy {
+      margin-top: 2px;
+      padding: 0 4px;
+    }
+
+    .brand {
+      position: absolute;
+      top: 24px;
+      left: 24px;
+      width: fit-content;
+      padding: 7px 14px;
+      border-radius: 3px;
+      background: rgba(201, 154, 63, 0.85);
+      color: #fffaf0;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      transform: rotate(-3deg);
+      box-shadow: 3px 4px 0 rgba(74, 59, 52, 0.12);
+    }
+
+    .visual h1 {
+      margin: 0;
+      max-width: 9em;
+      font-size: clamp(32px, 4.6vw, 56px);
+      font-weight: 800;
+      line-height: 1.18;
+      letter-spacing: 0.01em;
+      color: var(--accent-strong);
+      text-shadow: none;
+      text-wrap: balance;
+      word-break: keep-all;
+      overflow-wrap: normal;
+    }
+
+    .title-line,
+    .type-line {
+      display: block;
+    }
+
+    .title-line:first-child {
+      display: inline-block;
+      transform: rotate(-1.5deg);
+    }
+
+    .visual p {
+      margin: 14px 0 0;
+      max-width: 24em;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.75;
+      text-shadow: none;
+      word-break: keep-all;
+      overflow-wrap: anywhere;
+    }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 640px;
+      padding: clamp(26px, 5vw, 56px);
+      background:
+        repeating-linear-gradient(180deg, rgba(216, 198, 168, 0.16) 0px, rgba(216, 198, 168, 0.16) 1px, transparent 1px, transparent 38px),
+        linear-gradient(180deg, rgba(255, 251, 243, 0.98), rgba(253, 246, 234, 0.98));
+    }
+
+    .screen {
+      display: none;
+    }
+
+    .screen.active {
+      display: block;
+      animation: rise 0.28s ease;
+    }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .kicker {
+      display: inline-flex;
+      width: fit-content;
+      margin-bottom: 14px;
+      padding: 6px 14px;
+      border: 1px dashed var(--accent);
+      border-radius: 3px;
+      color: var(--accent-strong);
+      background: var(--soft);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      transform: rotate(-1deg);
+    }
+
+    h2 {
+      margin: 0 0 18px;
+      color: var(--accent-strong);
+      font-weight: 800;
+      font-size: clamp(28px, 3.6vw, 40px);
+      line-height: 1.3;
+      letter-spacing: 0.01em;
+      word-break: keep-all;
+      overflow-wrap: normal;
+    }
+
+    .intro-copy {
+      margin: 0 0 28px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 2.05;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-top: 22px;
+    }
+
+    .primary,
+    .secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 26px;
+      border-radius: 999px 8px 999px 8px;
+      cursor: pointer;
+      font-weight: 800;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    }
+
+    .primary {
+      border: 2px solid var(--accent-strong);
+      color: #fffaf3;
+      background: var(--accent-strong);
+      box-shadow: 4px 5px 0 rgba(74, 59, 52, 0.18);
+    }
+
+    .secondary {
+      border: 2px dashed var(--line);
+      color: var(--accent-strong);
+      background: #fffdf8;
+    }
+
+    .primary:hover,
+    .secondary:hover,
+    .option:hover {
+      transform: translate(-1px, -2px) rotate(-0.4deg);
+    }
+
+    .primary:hover {
+      background: #98394a;
+    }
+
+    .primary:focus-visible,
+    .secondary:focus-visible,
+    .option:focus-visible {
+      outline: 3px solid rgba(201, 107, 122, 0.35);
+      outline-offset: 3px;
+    }
+
+    .progress-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .progress-label {
+      min-width: 64px;
+      color: var(--accent-strong);
+      font-weight: 900;
+    }
+
+    .progress-track {
+      flex: 1;
+      height: 10px;
+      overflow: hidden;
+      border-radius: 999px;
+      background-image: linear-gradient(90deg, var(--line) 50%, transparent 50%);
+      background-size: 10px 2px;
+      background-repeat: repeat-x;
+      background-position: 0 center;
+    }
+
+    .progress-bar {
+      width: 5%;
+      height: 100%;
+      border-radius: inherit;
+      background: var(--accent);
+      transition: width 0.26s ease;
+    }
+
+    .question {
+      margin: 0 0 22px;
+      color: var(--ink);
+      font-weight: 800;
+      font-size: clamp(23px, 2.8vw, 32px);
+      line-height: 1.4;
+      letter-spacing: 0.01em;
+      word-break: keep-all;
+      overflow-wrap: normal;
+    }
+
+    .options {
+      display: grid;
+      gap: 12px;
+    }
+
+    .option {
+      display: grid;
+      grid-template-columns: 40px minmax(0, 1fr);
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      min-height: 62px;
+      padding: 12px 16px;
+      border: 1.5px dashed var(--line);
+      border-radius: 4px 16px 4px 16px;
+      background: var(--panel);
+      color: var(--ink);
+      text-align: left;
+      cursor: pointer;
+      transition: transform 0.18s ease, border 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .option:nth-child(odd) {
+      transform: rotate(-0.35deg);
+    }
+
+    .option:nth-child(even) {
+      transform: rotate(0.35deg);
+    }
+
+    .option:hover {
+      border-color: var(--accent);
+      border-style: solid;
+      box-shadow: 4px 5px 0 rgba(74, 59, 52, 0.1);
+    }
+
+    .option-key {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--soft);
+      color: var(--accent-strong);
+      font-weight: 900;
+    }
+
+    .option-text {
+      overflow-wrap: anywhere;
+      font-weight: 700;
+    }
+
+    .result {
+      display: grid;
+      gap: 14px;
+    }
+
+    .result-hero {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(124px, 0.46fr) minmax(0, 1fr);
+      gap: 18px;
+      align-items: center;
+      margin-bottom: 8px;
+      padding: 16px;
+      border: 2px dashed var(--line);
+      border-radius: 4px 20px 4px 20px;
+      background: #fffdf8;
+      box-shadow: var(--shadow);
+    }
+
+    .result-image {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border: 8px solid #fffdf8;
+      border-radius: 3px;
+      background: var(--paper);
+      transform: rotate(-2deg);
+      box-shadow: 0 10px 20px rgba(74, 59, 52, 0.16);
+    }
+
+    .type-label {
+      margin: 0 0 8px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+    }
+
+    .type-name {
+      margin: 0;
+      color: var(--accent-strong);
+      font-weight: 800;
+      font-size: clamp(22px, 2.8vw, 32px);
+      line-height: 1.3;
+      letter-spacing: 0.01em;
+      word-break: keep-all;
+      overflow-wrap: normal;
+    }
+
+    .type-copy {
+      margin: 12px 0 0;
+      color: var(--muted);
+      line-height: 1.85;
+      word-break: keep-all;
+      overflow-wrap: anywhere;
+    }
+
+    .result-block {
+      padding: 18px 0;
+      border-top: 1px dashed var(--line);
+    }
+
+    .result-block h3 {
+      margin: 0 0 8px;
+      color: var(--accent-strong);
+      font-weight: 800;
+      font-size: 19px;
+      letter-spacing: 0.01em;
+    }
+
+    .result-block p,
+    .tips li {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.9;
+    }
+
+    .result-text {
+      display: grid;
+      gap: 0.82em;
+      max-width: 42em;
+    }
+
+    .result-text span {
+      display: block;
+    }
+
+    .tips {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .tips li {
+      display: grid;
+      grid-template-columns: 28px minmax(0, 1fr);
+      gap: 10px;
+      align-items: start;
+    }
+
+    .tip-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      margin-top: 3px;
+      border-radius: 50%;
+      background: var(--soft-mint);
+      color: var(--accent-mint);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .thanks {
+      margin: 8px 0 0;
+      padding: 14px 16px;
+      border-left: 4px dashed var(--accent);
+      border-radius: 3px;
+      background: var(--soft);
+      color: #7a4650;
+      line-height: 1.8;
+    }
+
+    .share-row {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px dashed var(--line);
+    }
+
+    .share-label {
+      margin: 0 0 12px;
+      color: var(--accent-strong);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+    }
+
+    .share-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .share-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 46px;
+      padding: 0 20px;
+      border: 1.5px dashed var(--line);
+      border-radius: 4px 14px 4px 14px;
+      background: #fffdf8;
+      color: var(--ink);
+      font-weight: 800;
+      font-size: 14px;
+      cursor: pointer;
+      transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .share-btn:hover {
+      transform: translate(-1px, -2px);
+      border-style: solid;
+      box-shadow: 3px 4px 0 rgba(74, 59, 52, 0.12);
+    }
+
+    .share-btn.x {
+      border-color: rgba(74, 59, 52, 0.4);
+    }
+
+    .share-btn.line {
+      border-color: rgba(31, 138, 74, 0.4);
+      color: #1f8a4a;
+    }
+
+    .share-btn.image {
+      border-color: var(--accent);
+    }
+
+    .cta-link {
+      margin-top: 16px;
+      font-size: 14px;
+    }
+
+    .cta-link a {
+      color: var(--accent-strong);
+      font-weight: 800;
+      text-decoration: underline wavy;
+      text-underline-offset: 4px;
+    }
+
+    @media (max-width: 840px) {
+      main {
+        width: 100%;
+        padding: 0;
+      }
+
+      .shell {
+        grid-template-columns: 1fr;
+        min-height: 100vh;
+        border: 0;
+        border-radius: 0;
+      }
+
+      .visual {
+        min-height: auto;
+        padding: 22px 20px 28px;
+        gap: 14px;
+        border-right: 0;
+        border-bottom: 2px dashed var(--line);
+      }
+
+      .brand {
+        top: 20px;
+        left: 20px;
+      }
+
+      .hero-group {
+        margin-top: 36px;
+      }
+
+      .visual h1 {
+        max-width: 8em;
+        font-size: clamp(30px, 9.6vw, 42px);
+      }
+
+      .content {
+        min-height: auto;
+        padding: 28px 20px 38px;
+      }
+
+      .result-hero {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        padding: 14px;
+      }
+
+      .result-block {
+        padding: 16px 0;
+      }
+
+      .result-image {
+        width: min(100%, 320px);
+        margin: 0 auto;
+      }
+
+      .type-name {
+        font-size: clamp(25px, 7.4vw, 34px);
+      }
+
+      .actions {
+        display: grid;
+      }
+
+      .primary,
+      .secondary {
+        width: 100%;
+      }
+
+      .share-buttons {
+        display: grid;
+      }
+
+      .share-btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="shell" aria-live="polite">
+      <aside class="visual">
+        <div class="brand">LOVE TALENT CHECK</div>
+        <img class="hero-group" src="assets/hero-group.png" alt="4タイプの女性イラスト">
+        <div class="visual-copy">
+          <h1><span class="title-line">あなたの</span><span class="title-line">恋愛才能診断</span></h1>
+          <p>20問で、恋愛で自然に輝く魅力を見つけます。</p>
+        </div>
+      </aside>
+
+      <section class="content">
+        <div id="intro" class="screen active">
+          <div class="kicker">20 questions</div>
+          <h2><span class="title-line">あなたの</span><span class="title-line">恋愛才能診断</span></h2>
+          <p class="intro-copy">
+            20問の質問に答えるだけで、<br>
+            あなたが恋愛で自然と輝ける魅力が分かります。<br><br>
+            直感で答えてください。<br><br>
+            それでは始めます。
+          </p>
+          <div class="actions">
+            <button class="primary" type="button" id="startButton">診断を始める</button>
+          </div>
+        </div>
+
+        <div id="quiz" class="screen">
+          <div class="progress-row">
+            <span class="progress-label" id="progressLabel">【1/20】</span>
+            <div class="progress-track" aria-hidden="true">
+              <div class="progress-bar" id="progressBar"></div>
+            </div>
+          </div>
+          <h2 class="question" id="questionText"></h2>
+          <div class="options" id="options"></div>
+          <div class="actions">
+            <button class="secondary" type="button" id="backButton">前の質問へ戻る</button>
+          </div>
+        </div>
+
+        <div id="result" class="screen">
+          <div class="result" id="resultBody"></div>
+        </div>
+      </section>
+    </section>
+  </main>
+  <canvas id="shareCanvas" width="1080" height="1350" style="display:none" aria-hidden="true"></canvas>
+
+  <script>
+    const questions = [
+      { text: "好きな人ができたら？", options: [["A", "自分から話しかける"], ["B", "相手の様子を見る"], ["C", "友達に相談する"], ["D", "相手から来るのを待つ"]] },
+      { text: "理想のデートは？", options: [["A", "アクティブ"], ["B", "のんびり"], ["C", "おいしいご飯"], ["D", "家でまったり"]] },
+      { text: "LINEの返信は？", options: [["A", "すぐ返す"], ["B", "少し考えて返す"], ["C", "気分次第"], ["D", "相手に合わせる"]] },
+      { text: "恋人に一番求めるものは？", options: [["A", "楽しさ"], ["B", "安心感"], ["C", "尊敬"], ["D", "ドキドキ"]] },
+      { text: "ケンカしたら？", options: [["A", "すぐ謝る"], ["B", "話し合う"], ["C", "少し距離を置く"], ["D", "相手から来てほしい"]] },
+      { text: "休日は？", options: [["A", "出かけたい"], ["B", "家でゆっくり"], ["C", "趣味を楽しむ"], ["D", "その時次第"]] },
+      { text: "告白するなら？", options: [["A", "自分から"], ["B", "タイミングを見る"], ["C", "雰囲気次第"], ["D", "相手から来てほしい"]] },
+      { text: "好きな人が異性と話していたら？", options: [["A", "気にならない"], ["B", "少し気になる"], ["C", "嫉妬する"], ["D", "不安になる"]] },
+      { text: "サプライズは？", options: [["A", "大好き"], ["B", "あれば嬉しい"], ["C", "苦手"], ["D", "相手次第"]] },
+      { text: "恋愛で一番大切なのは？", options: [["A", "信頼"], ["B", "会話"], ["C", "思いやり"], ["D", "ときめき"]] },
+      { text: "初対面では？", options: [["A", "自分から話す"], ["B", "聞き役になる"], ["C", "緊張する"], ["D", "相手に合わせる"]] },
+      { text: "記念日は？", options: [["A", "盛大に祝いたい"], ["B", "二人でゆっくり"], ["C", "プレゼント重視"], ["D", "あまり気にしない"]] },
+      { text: "恋人から相談されたら？", options: [["A", "解決策を考える"], ["B", "最後まで聞く"], ["C", "励ます"], ["D", "共感する"]] },
+      { text: "付き合う決め手は？", options: [["A", "一緒にいて楽しい"], ["B", "安心できる"], ["C", "尊敬できる"], ["D", "外見"]] },
+      { text: "好きな人へのアピールは？", options: [["A", "積極的"], ["B", "優しくする"], ["C", "さりげなく"], ["D", "恥ずかしくてできない"]] },
+      { text: "恋人と毎日連絡は？", options: [["A", "必須"], ["B", "できればしたい"], ["C", "数日に一度"], ["D", "気にしない"]] },
+      { text: "遠距離恋愛は？", options: [["A", "大丈夫"], ["B", "少し不安"], ["C", "難しい"], ["D", "やってみないと分からない"]] },
+      { text: "相手に甘える？", options: [["A", "よく甘える"], ["B", "時々甘える"], ["C", "あまり甘えない"], ["D", "甘えられない"]] },
+      { text: "恋愛中のあなたは？", options: [["A", "明るい"], ["B", "優しい"], ["C", "一途"], ["D", "慎重"]] },
+      { text: "恋人に言われたい言葉は？", options: [["A", "一緒にいると楽しい"], ["B", "安心する"], ["C", "尊敬してる"], ["D", "ずっと好き"]] }
+    ];
+
+    const traitsByAnswer = {
+      A: ["spark", "action", "joy"],
+      B: ["calm", "trust", "listen"],
+      C: ["care", "depth", "support"],
+      D: ["romance", "pace", "sense"]
+    };
+
+    const resultProfiles = {
+      spark: {
+        typeName: "ときめきリードタイプ",
+        typeLines: ["ときめきリード", "タイプ"],
+        typeCopy: "自然体の明るさで、相手との距離を心地よく近づけられるタイプです。",
+        image: "assets/type-spark.png",
+        talent: [
+          "あなたの恋愛才能は、場の空気を明るくし、相手の心を自然に前向きにするところに表れます。好意を重く見せず、会話や行動の中に楽しいリズムを作れる人です。相手は一緒にいるうちに緊張がほどけ、自分らしく笑える感覚を受け取りやすいでしょう。素直な反応や小さな誘いかけが、あなたならではの魅力として伝わります。",
+          "あなたには、恋愛の空気を軽やかに動かす才能があります。気持ちを抱え込むより、言葉や行動で温度を届けられるので、相手にとって近づきやすい存在になりやすいでしょう。楽しさを共有する力、場を明るくする表情、思いついたことを一緒に楽しもうとする姿勢が、自然な魅力として輝きます。"
+        ],
+        advice: [
+          "魅力を伝える時は、完璧な言葉を探すより、短い一言や軽い誘いを大切にしてみてください。「これ一緒に行きたい」「話せてうれしい」のような素直な表現が、あなたらしさを一番きれいに届けます。相手の反応を見ながら、楽しさを押しつけず分け合う意識を持つと、明るさに安心感も加わります。",
+          "あなたらしさは、勢いだけでなく相手を楽しませたい気持ちの中にあります。連絡やデートでは、面白そう、行ってみたい、聞いてみたいという小さな好奇心を言葉にしてみましょう。相手が落ち着いたタイプなら少し余白を置くと、あなたの前向きさがより心地よく伝わります。"
+        ],
+        tips: ["気になることを一つだけ質問して会話のきっかけを作る", "楽しかった場面をその日のうちに短く伝える", "誘う時は候補を二つ出して相手が選びやすくする"],
+        match: "一緒に笑う時間を大切にし、前向きな提案を喜んで受け取ってくれる人と相性が良いでしょう。あなたの明るさを楽しみながら、自分のペースも穏やかに伝えてくれる相手なら、刺激と安心のバランスが育ちます。",
+        message: "あなたの明るさは、誰かを急かす力ではなく、心を少し軽くする力です。素直な一歩を大切にすれば、魅力は自然に届いていきます。"
+      },
+      calm: {
+        typeName: "ぬくもり安心タイプ",
+        typeLines: ["ぬくもり安心", "タイプ"],
+        typeCopy: "落ち着いたやさしさで、相手が素のままでいられる空気を作れるタイプです。",
+        image: "assets/type-calm.png",
+        talent: [
+          "あなたの恋愛才能は、相手に安心できる居場所を感じさせるところにあります。急いで距離を詰めるより、相手の様子を見ながら丁寧に関係を育てられる人です。穏やかな聞き方や、言葉を選んで返す姿勢が信頼につながりやすいでしょう。一緒にいると気持ちが整う、そんな落ち着いた魅力が自然ににじみます。",
+          "あなたには、恋愛をあたたかく安定させる才能があります。派手な表現よりも、約束を大切にすること、相手の話を受け止めること、無理なく続く関わり方を選べることが魅力です。相手はあなたといると、自分の気持ちを急いで飾らなくてよいと感じやすいでしょう。"
+        ],
+        advice: [
+          "あなたらしさを表現するには、思っていることを少しだけ見える形にするのがおすすめです。安心感は十分に伝わりやすいので、「今日は話せて落ち着いた」「その考え方いいね」など、短くても具体的な言葉を添えてみましょう。穏やかな魅力に温度が加わり、相手も近づきやすくなります。",
+          "無理に盛り上げようとしなくても、あなたの丁寧さは十分魅力になります。会話では相づちだけで終えず、自分の感想を一つ足してみてください。デートや連絡も、続けやすいペースを先に共有すると、安心感と誠実さがより伝わります。"
+        ],
+        tips: ["相手の話で印象に残った一言をあとで伝える", "連絡頻度や会うペースの希望をやわらかく共有する", "感謝を具体的に一つ言葉にする"],
+        match: "穏やかな関係を大切にし、信頼を少しずつ積み重ねたい人と相性が良いでしょう。感情を丁寧に言葉にできる相手や、あなたのペースを尊重してくれる人とは、落ち着いた深い関係が育ちやすいです。",
+        message: "あなたの穏やかさは、恋愛を静かに支える大きな魅力です。少しだけ気持ちを言葉にすれば、安心感はもっとあたたかく届きます。"
+      },
+      care: {
+        typeName: "寄り添い上手タイプ",
+        typeLines: ["寄り添い上手", "タイプ"],
+        typeCopy: "相手の気持ちを丁寧に受け取り、関係を深く育てていけるタイプです。",
+        image: "assets/type-care.png",
+        talent: [
+          "あなたの恋愛才能は、相手の気持ちの奥にあるものを丁寧に受け取れるところにあります。表面的な楽しさだけでなく、相手が大切にしている価値観や頑張りに気づきやすい人です。相談に寄り添ったり、必要な時に励ましたりする力が、深い信頼につながります。思いやりを行動に変えられることが、あなたの自然な魅力です。",
+          "あなたには、関係を深く育てる才能があります。相手の小さな変化に気づき、ただ合わせるのではなく、どうしたら心地よく支え合えるかを考えられる人です。優しさ、共感、尊重が重なった魅力があり、相手はあなたの前で本音を話しやすくなるでしょう。"
+        ],
+        advice: [
+          "あなたらしさを伝える時は、相手を思う気持ちと同じくらい、自分の希望も大切にしてみてください。「力になりたい」と「私はこう感じた」を両方言えると、優しさが一方通行にならず、自然な距離感が生まれます。さりげない気配りに自分の言葉を添えることで、魅力がよりはっきり届きます。",
+          "思いやりが強い人ほど、相手を優先しすぎる場面があります。あなたの魅力を生かすには、できることを全部引き受けるより、気持ちを分かち合う意識が役立ちます。相談を聞いた後に「私はこう応援したい」と伝えると、やさしさに芯が通ります。"
+        ],
+        tips: ["相手を励ます時は具体的に良いと思った点を伝える", "自分がうれしい連絡や接し方を一つ共有する", "気を配った後は自分の休む時間も確保する"],
+        match: "思いやりを当たり前にせず、感謝や尊重を言葉で返してくれる人と相性が良いでしょう。深い会話を大切にし、お互いの考えや夢を応援し合える相手なら、あなたの優しさがのびのび生きます。",
+        message: "あなたの優しさは、相手を包むだけでなく関係を育てる力です。自分の気持ちも一緒に大切にすると、魅力はさらに輝きます。"
+      },
+      romance: {
+        typeName: "ロマンティック余韻タイプ",
+        typeLines: ["ロマンティック", "余韻タイプ"],
+        typeCopy: "言葉や空気の余韻を大切にし、恋愛に特別感を添えられるタイプです。",
+        image: "assets/type-romance.png",
+        talent: [
+          "あなたの恋愛才能は、関係に特別感やときめきを生み出せるところにあります。相手の言葉や雰囲気を繊細に受け取り、心が動く瞬間を大切にできる人です。慎重に見える場面も、気持ちを丁寧に扱いたい思いの表れでしょう。深く好きになる力や、相手との時間を大切な記憶に変える感性が魅力です。",
+          "あなたには、恋愛を味わい深いものにする才能があります。すぐに結論を出すより、相手との空気や言葉の温度を感じながら関係を育てられる人です。大切に思うほど繊細になる感覚も、心を込めて向き合える魅力の一部です。相手はあなたのまっすぐな想いに特別さを感じやすいでしょう。"
+        ],
+        advice: [
+          "あなたらしさを表現するには、心の中のときめきを小さな形で外に出すことが効果的です。長い告白でなくても、「その言葉うれしかった」「また話したい」と伝えるだけで十分です。相手の反応を待つ時間も大切にしながら、自分の気持ちを少しずつ見せると、繊細な魅力が安心して届きます。",
+          "大切な気持ちは、完璧なタイミングを待ちすぎず、小さく渡してみると伝わりやすくなります。好きなものを共有する、印象に残った会話を覚えておく、会えた後に一言送るなど、控えめでも温度のある行動があなたの魅力に合っています。"
+        ],
+        tips: ["うれしかった一言をそのまま相手に伝える", "好きな映画や音楽など感性が出る話題を共有する", "不安な時は決めつけず確認の言葉に置き換える"],
+        match: "気持ちの深さを大切にし、急かさずに関係を育ててくれる人と相性が良いでしょう。言葉や記念日、小さな思い出を大事にする相手なら、あなたの繊細なときめきが自然に引き出されます。",
+        message: "あなたのときめきを大切にする感性は、恋愛にあたたかな特別感を生みます。少しずつ言葉にすれば、想いはやさしく届きます。"
+      }
+    };
+
+    const state = {
+      current: 0,
+      answers: []
+    };
+
+    const intro = document.querySelector("#intro");
+    const quiz = document.querySelector("#quiz");
+    const result = document.querySelector("#result");
+    const startButton = document.querySelector("#startButton");
+    const progressLabel = document.querySelector("#progressLabel");
+    const progressBar = document.querySelector("#progressBar");
+    const questionText = document.querySelector("#questionText");
+    const options = document.querySelector("#options");
+    const resultBody = document.querySelector("#resultBody");
+    const backButton = document.querySelector("#backButton");
+
+    startButton.addEventListener("click", () => {
+      showScreen(quiz);
+      renderQuestion();
+    });
+
+    backButton.addEventListener("click", () => {
+      if (state.current === 0) {
+        showScreen(intro);
+        return;
+      }
+
+      state.current -= 1;
+      state.answers.pop();
+      renderQuestion();
+    });
+
+    function showScreen(screen) {
+      [intro, quiz, result].forEach((item) => item.classList.remove("active"));
+      screen.classList.add("active");
+    }
+
+    function renderQuestion() {
+      const question = questions[state.current];
+      progressLabel.textContent = `【${state.current + 1}/20】`;
+      progressBar.style.width = `${((state.current + 1) / questions.length) * 100}%`;
+      questionText.textContent = question.text;
+      backButton.textContent = state.current === 0 ? "最初に戻る" : "前の質問へ戻る";
+      options.replaceChildren();
+
+      question.options.forEach(([key, label]) => {
+        const button = document.createElement("button");
+        button.className = "option";
+        button.type = "button";
+        button.innerHTML = `<span class="option-key">${key}</span><span class="option-text">${label}</span>`;
+        button.addEventListener("click", () => answer(key));
+        options.append(button);
+      });
+    }
+
+    function answer(key) {
+      state.answers.push(key);
+      state.current += 1;
+
+      if (state.current >= questions.length) {
+        renderResult();
+        showScreen(result);
+        return;
+      }
+
+      renderQuestion();
+    }
+
+    function renderResult() {
+      const profileKey = pickProfile();
+      const profile = resultProfiles[profileKey];
+      const variant = state.answers.reduce((sum, key) => sum + key.charCodeAt(0), 0) % 2;
+      const html = `
+        <div class="result-hero">
+          <img class="result-image" src="${profile.image}" alt="${profile.typeName}のイラスト">
+          <div>
+            <p class="type-label">診断結果</p>
+            <h2 class="type-name">${profile.typeLines.map((line) => `<span class="type-line">${line}</span>`).join("")}</h2>
+            <p class="type-copy">${profile.typeCopy}</p>
+          </div>
+        </div>
+        <div class="result-block">
+          <h3>あなたの恋愛才能</h3>
+          <p class="result-text">${formatParagraph(profile.talent[variant])}</p>
+        </div>
+        <div class="result-block">
+          <h3>あなたらしさを表現するアドバイス</h3>
+          <p class="result-text">${formatParagraph(profile.advice[variant])}</p>
+        </div>
+        <div class="result-block">
+          <h3>恋愛運アップのヒント</h3>
+          <ol class="tips">
+            ${profile.tips.map((tip, index) => `<li><span class="tip-num">${index + 1}</span><span>${tip}</span></li>`).join("")}
+          </ol>
+        </div>
+        <div class="result-block">
+          <h3>相性が良い人</h3>
+          <p class="result-text">${formatParagraph(profile.match)}</p>
+        </div>
+        <div class="result-block">
+          <h3>あなたへのメッセージ</h3>
+          <p>${profile.message}</p>
+        </div>
+        <div class="share-row">
+          <p class="share-label">診断結果をシェアする</p>
+          <div class="share-buttons">
+            <button class="share-btn x" type="button" id="shareXBtn">Xでシェア</button>
+            <button class="share-btn line" type="button" id="shareLineBtn">LINEでシェア</button>
+            <button class="share-btn image" type="button" id="saveImageBtn">結果を画像で保存</button>
+          </div>
+        </div>
+        <p class="thanks">もう一度診断したい場合は、下の「最初に戻る」から始められます。<br>ご利用ありがとうございました。</p>
+        <p class="cta-link"><a href="../LP/index.html">こんな診断アプリを作ってみませんか？</a></p>
+        <div class="actions">
+          <button class="secondary" type="button" id="restartButton">最初に戻る</button>
+        </div>
+      `;
+
+      resultBody.innerHTML = html;
+      document.querySelector("#restartButton").addEventListener("click", restart);
+      document.querySelector("#shareXBtn").addEventListener("click", () => shareOnX(profile));
+      document.querySelector("#shareLineBtn").addEventListener("click", () => shareOnLine(profile));
+      document.querySelector("#saveImageBtn").addEventListener("click", () => downloadResultImage(profile));
+    }
+
+    function shareOnX(profile) {
+      const text = `私の恋愛才能は「${profile.typeName}」でした。${profile.message}\n#恋愛才能診断`;
+      const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(location.href)}`;
+      window.open(url, "_blank", "noopener,noreferrer");
+    }
+
+    function shareOnLine(profile) {
+      const text = `私の恋愛才能は「${profile.typeName}」でした。`;
+      const url = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(location.href)}&text=${encodeURIComponent(text)}`;
+      window.open(url, "_blank", "noopener,noreferrer");
+    }
+
+    function wrapCanvasText(ctx, text, x, y, maxWidth, lineHeight) {
+      let line = "";
+      let cursorY = y;
+      for (const char of text) {
+        const testLine = line + char;
+        if (ctx.measureText(testLine).width > maxWidth && line !== "") {
+          ctx.fillText(line, x, cursorY);
+          line = char;
+          cursorY += lineHeight;
+        } else {
+          line = testLine;
+        }
+      }
+      ctx.fillText(line, x, cursorY);
+      return cursorY;
+    }
+
+    function downloadResultImage(profile) {
+      const canvas = document.getElementById("shareCanvas");
+      const ctx = canvas.getContext("2d");
+      const w = canvas.width;
+      const h = canvas.height;
+
+      ctx.fillStyle = "#faf3e6";
+      ctx.fillRect(0, 0, w, h);
+
+      ctx.fillStyle = "#fffdf8";
+      ctx.fillRect(56, 56, w - 112, h - 112);
+
+      ctx.strokeStyle = "#d8c6a8";
+      ctx.lineWidth = 3;
+      ctx.setLineDash([10, 8]);
+      ctx.strokeRect(56, 56, w - 112, h - 112);
+      ctx.setLineDash([]);
+
+      ctx.fillStyle = "#c99a3f";
+      ctx.font = "800 26px 'Hiragino Maru Gothic ProN', sans-serif";
+      ctx.fillText("LOVE TALENT CHECK", 100, 170);
+
+      ctx.fillStyle = "#b04a5c";
+      ctx.font = "800 58px 'Hiragino Maru Gothic ProN', sans-serif";
+      let cursorY = 290;
+      profile.typeLines.forEach((line, index) => {
+        ctx.fillText(line, 100, cursorY + index * 78);
+      });
+      cursorY += profile.typeLines.length * 78;
+
+      ctx.fillStyle = "#8a7566";
+      ctx.font = "400 30px 'Hiragino Maru Gothic ProN', sans-serif";
+      wrapCanvasText(ctx, profile.typeCopy, 100, cursorY + 60, w - 300, 46);
+
+      ctx.fillStyle = "#c96b7a";
+      ctx.font = "700 22px 'Hiragino Maru Gothic ProN', sans-serif";
+      ctx.fillText("あなたの恋愛才能診断", 100, h - 100);
+
+      const link = document.createElement("a");
+      link.download = `恋愛才能診断_${profile.typeName}.png`;
+      link.href = canvas.toDataURL("image/png");
+      link.click();
+    }
+
+    function formatParagraph(text) {
+      const sentences = text.split("。").filter(Boolean).map((sentence) => `${sentence}。`);
+      const groups = [];
+
+      for (let index = 0; index < sentences.length; index += 2) {
+        groups.push(sentences.slice(index, index + 2).join(""));
+      }
+
+      return groups.map((group) => `<span>${group}</span>`).join("");
+    }
+
+    function restart() {
+      state.current = 0;
+      state.answers = [];
+      renderQuestion();
+      showScreen(intro);
+    }
+
+    function pickProfile() {
+      const scores = {
+        spark: 0,
+        calm: 0,
+        care: 0,
+        romance: 0,
+        action: 0,
+        joy: 0,
+        trust: 0,
+        listen: 0,
+        depth: 0,
+        support: 0,
+        pace: 0,
+        sense: 0
+      };
+
+      state.answers.forEach((answerKey) => {
+        traitsByAnswer[answerKey].forEach((trait) => {
+          scores[trait] += 1;
+        });
+      });
+
+      scores.spark += scores.action * 0.55 + scores.joy * 0.45;
+      scores.calm += scores.trust * 0.5 + scores.listen * 0.5;
+      scores.care += scores.depth * 0.5 + scores.support * 0.5;
+      scores.romance += scores.pace * 0.45 + scores.sense * 0.55;
+
+      const ranked = ["spark", "calm", "care", "romance"].sort((a, b) => scores[b] - scores[a]);
+      return ranked[0];
+    }
+  </script>
+</body>
+</html>

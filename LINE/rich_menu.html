@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Klee+One:wght@400;600&family=Zen+Maru+Gothic:wght@400;500;700&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    width: 2500px;
+    height: 1686px;
+  }
+
+  body {
+    position: relative;
+    background: #faf3e6;
+    font-family: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", sans-serif;
+    overflow: hidden;
+  }
+
+  .paper-texture {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(74,59,52,0.05) 2px, transparent 2px);
+    background-size: 26px 26px;
+    opacity: 0.5;
+  }
+
+  .header {
+    position: relative;
+    height: 210px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+    border-bottom: 4px dashed #d8c6a8;
+  }
+
+  .brand {
+    font-family: "Klee One", sans-serif;
+    font-weight: 600;
+    font-size: 58px;
+    color: #4a3b34;
+    letter-spacing: 0.04em;
+  }
+
+  .brand .accent {
+    color: #c96b7a;
+  }
+
+  .tagline {
+    font-size: 26px;
+    color: #8a7566;
+    letter-spacing: 0.05em;
+  }
+
+  .washi {
+    position: absolute;
+    background: rgba(201, 107, 122, 0.55);
+    box-shadow: 0 2px 4px rgba(74,59,52,0.15);
+  }
+
+  .grid {
+    position: relative;
+    height: calc(1686px - 210px);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+
+  .grid > .cell:nth-child(1) { border-right: 4px dashed #d8c6a8; border-bottom: 4px dashed #d8c6a8; }
+  .grid > .cell:nth-child(2) { border-bottom: 4px dashed #d8c6a8; }
+  .grid > .cell:nth-child(3) { border-right: 4px dashed #d8c6a8; }
+
+  .cell {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    padding: 40px;
+  }
+
+  .badge {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background: #fffbf3;
+    border: 3px solid #c99a3f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 56px;
+    color: #b04a5c;
+    box-shadow: 6px 8px 0 rgba(74,59,52,0.08);
+  }
+
+  .label {
+    font-family: "Klee One", sans-serif;
+    font-size: 42px;
+    font-weight: 600;
+    color: #4a3b34;
+    text-align: center;
+  }
+
+  .sub {
+    font-size: 22px;
+    color: #8a7566;
+  }
+
+  .tape {
+    position: absolute;
+    width: 150px;
+    height: 44px;
+    background: repeating-linear-gradient(45deg, rgba(201,154,63,0.55), rgba(201,154,63,0.55) 10px, rgba(255,251,243,0.55) 10px, rgba(255,251,243,0.55) 20px);
+    opacity: 0.85;
+  }
+
+  .cell:nth-child(1) .tape { top: -18px; left: 60px; transform: rotate(-8deg); }
+  .cell:nth-child(2) .tape { top: -18px; right: 60px; transform: rotate(7deg); }
+  .cell:nth-child(3) .tape { bottom: -18px; left: 60px; transform: rotate(6deg); }
+  .cell:nth-child(4) .tape { bottom: -18px; right: 60px; transform: rotate(-7deg); }
+</style>
+</head>
+<body>
+  <div class="paper-texture"></div>
+
+  <div class="header">
+    <div class="brand">こたえ<span class="accent">工房</span></div>
+    <div class="tagline">診断アプリ・LINEチャットボット制作</div>
+  </div>
+
+  <div class="grid">
+    <div class="cell">
+      <div class="tape"></div>
+      <div class="badge">✓</div>
+      <div class="label">実績サンプルを見る</div>
+      <div class="sub">診断アプリを体験する</div>
+    </div>
+    <div class="cell">
+      <div class="tape"></div>
+      <div class="badge">✎</div>
+      <div class="label">制作を依頼する</div>
+      <div class="sub">サービス詳細・料金</div>
+    </div>
+    <div class="cell">
+      <div class="tape"></div>
+      <div class="badge">♡</div>
+      <div class="label">ココナラで相談する</div>
+      <div class="sub">お見積り無料</div>
+    </div>
+    <div class="cell">
+      <div class="tape"></div>
+      <div class="badge">?</div>
+      <div class="label">よくある質問</div>
+      <div class="sub">FAQ</div>
+    </div>
+  </div>
+</body>
+</html>

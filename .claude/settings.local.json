@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p \"/Users/sayak./Desktop/0001_ココナ/ココナラ診断アプリ/診断アプリサンプル/HP\" \"/Users/sayak./Desktop/0001_ココナ/ココナラ診断アプリ/診断アプリサンプル/LP\")",
+      "mcp__77e474c3-d791-4a36-9f29-5bdd51317485__generate-design",
+      "mcp__77e474c3-d791-4a36-9f29-5bdd51317485__create-design-from-candidate",
+      "mcp__77e474c3-d791-4a36-9f29-5bdd51317485__resize-design",
+      "Bash(BASE=\"/Users/sayak./Desktop/0001_ココナ/ココナラ診断アプリ/診断アプリサンプル\" *)",
+      "Bash(nohup python3 -m http.server 8791)",
+      "Bash(curl -sI http://localhost:8791/LINE/rich_menu.html)",
+      "Read(//Applications/Google Chrome.app/Contents/MacOS/**)",
+      "Read(//Applications/**)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --hide-scrollbars --window-size=2500,1686 --screenshot=/Users/sayak./Desktop/0001_ココナ/ココナラ診断アプリ/診断アプリサンプル/LINE/rich_menu.png http://localhost:8791/LINE/rich_menu.html)",
+      "mcp__claude-in-chrome__tabs_context_mcp",
+      "Bash(gh auth *)",
+      "Bash(netlify status *)"
+    ]
+  }
+}

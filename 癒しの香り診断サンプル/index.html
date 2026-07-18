@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>あなたを癒す香り診断</title>
+  <style>
+    :root {
+      --ink: #211d1a;
+      --muted: #746d66;
+      --paper: rgba(255, 255, 255, 0.9);
+      --line: rgba(44, 37, 31, 0.12);
+      --accent: #9aa48f;
+      --accent-strong: #4f5b4d;
+      --plum: #79606f;
+      --rose: #bd8f85;
+      --amber: #b9854e;
+      --mint: #6f9389;
+      --wood: #7e6554;
+      --shadow: 0 30px 90px rgba(63, 54, 46, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      min-height: 100%;
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      min-height: 100dvh;
+      margin: 0;
+      color: var(--ink);
+      font-family: "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", "Noto Serif JP", Georgia, serif;
+      letter-spacing: 0;
+      background:
+        linear-gradient(120deg, rgba(255, 255, 255, 0.96), rgba(255, 253, 249, 0.84)),
+        linear-gradient(155deg, #fffefa 0%, #faf7f1 52%, #f7faf5 100%);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(112, 98, 85, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(112, 98, 85, 0.022) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.18), transparent 72%);
+    }
+
+    button {
+      font: inherit;
+      touch-action: manipulation;
+    }
+
+    button:focus-visible {
+      outline: 3px solid rgba(85, 117, 80, 0.35);
+      outline-offset: 3px;
+    }
+
+    .app {
+      width: min(100%, 1120px);
+      min-height: 100dvh;
+      margin: 0 auto;
+      padding: clamp(16px, 4vw, 42px) clamp(14px, 4vw, 34px) max(22px, env(safe-area-inset-bottom));
+      display: grid;
+      align-items: center;
+    }
+
+    .shell {
+      overflow: hidden;
+      border: 1px solid rgba(44, 37, 31, 0.11);
+      border-radius: 2px;
+      background: var(--paper);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, 390px);
+      gap: clamp(24px, 6vw, 74px);
+      padding: clamp(34px, 7vw, 78px);
+      border-bottom: 1px solid var(--line);
+      background:
+        linear-gradient(90deg, rgba(255, 255, 255, 0.86), rgba(255, 255, 255, 0.3)),
+        linear-gradient(135deg, rgba(252, 249, 244, 0.9), rgba(248, 251, 246, 0.9));
+    }
+
+    .kicker {
+      margin: 0 0 22px;
+      color: var(--accent-strong);
+      font-family: Optima, "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3, p {
+      margin-top: 0;
+    }
+
+    h1 {
+      margin-bottom: 22px;
+      max-width: 9em;
+      font-size: clamp(2.4rem, 7vw, 5.25rem);
+      font-weight: 400;
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    h1 span {
+      display: block;
+      white-space: nowrap;
+    }
+
+    .lead {
+      margin-bottom: 0;
+      color: var(--muted);
+      max-width: 28em;
+      font-size: clamp(0.98rem, 2.1vw, 1.08rem);
+      line-height: 2;
+      text-wrap: balance;
+    }
+
+    .illustration {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      border-radius: 2px;
+      object-fit: cover;
+      align-self: center;
+      box-shadow: 0 24px 60px rgba(58, 49, 42, 0.15);
+    }
+
+    .panel {
+      padding: clamp(30px, 5vw, 58px) clamp(24px, 6vw, 72px) clamp(34px, 6vw, 68px);
+    }
+
+    .progress {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 30px;
+    }
+
+    .progress-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--muted);
+      font-family: "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .bar {
+      height: 3px;
+      overflow: hidden;
+      border-radius: 0;
+      background: rgba(67, 54, 41, 0.11);
+    }
+
+    .bar-fill {
+      width: 0%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #31372f, #9d8672, #c5a679);
+      transition: width 0.35s ease;
+    }
+
+    .question {
+      margin-bottom: 30px;
+      font-size: clamp(1.7rem, 5vw, 2.95rem);
+      font-weight: 400;
+      line-height: 1.36;
+      letter-spacing: 0;
+    }
+
+    .choices {
+      display: grid;
+      gap: 10px;
+    }
+
+    .choice {
+      width: 100%;
+      min-height: 64px;
+      padding: 17px 20px;
+      display: grid;
+      grid-template-columns: 36px minmax(0, 1fr);
+      align-items: center;
+      gap: 16px;
+      border: 1px solid var(--line);
+      border-radius: 2px;
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.42);
+      box-shadow: none;
+      cursor: pointer;
+      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease, color 0.18s ease;
+      text-align: left;
+    }
+
+    .choice:hover {
+      transform: translateY(-2px);
+      border-color: rgba(44, 37, 31, 0.32);
+      background: rgba(255, 255, 255, 0.88);
+    }
+
+    .choice-mark {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(44, 37, 31, 0.22);
+      border-radius: 50%;
+      color: #514940;
+      background: rgba(255, 255, 255, 0.68);
+      font-family: "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+      font-weight: 600;
+    }
+
+    .choice-text {
+      min-width: 0;
+      font-size: 1.04rem;
+      font-weight: 400;
+      overflow-wrap: anywhere;
+    }
+
+    .nav-row {
+      margin-top: 28px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .ghost,
+    .primary {
+      min-height: 48px;
+      padding: 12px 18px;
+      border-radius: 2px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      font-family: "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+      font-size: 0.86rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+    }
+
+    .ghost {
+      color: var(--muted);
+      background: transparent;
+      border-color: var(--line);
+    }
+
+    .primary {
+      color: white;
+      background: linear-gradient(135deg, #252822, #65705d);
+      box-shadow: 0 14px 32px rgba(37, 40, 34, 0.22);
+    }
+
+    .primary:disabled {
+      cursor: default;
+      opacity: 0.55;
+      box-shadow: none;
+    }
+
+    .result {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
+      gap: clamp(24px, 5vw, 54px);
+      align-items: center;
+    }
+
+    .result h2 {
+      margin-bottom: 22px;
+      font-size: clamp(2.25rem, 7vw, 4.35rem);
+      font-weight: 400;
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    .result h2 span {
+      display: block;
+      white-space: nowrap;
+    }
+
+    .result-label {
+      margin: 0 0 10px;
+      color: #6b6258;
+      font-family: "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+      font-size: 0.76rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .scent-name {
+      display: inline-flex;
+      align-items: center;
+      min-height: 40px;
+      margin-bottom: 20px;
+      padding: 9px 14px;
+      border-radius: 2px;
+      color: white;
+      background: var(--accent-strong);
+      font-family: "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+      font-size: 0.86rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    .section {
+      margin-top: 26px;
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
+    }
+
+    .section h3 {
+      margin-bottom: 10px;
+      color: #514940;
+      font-family: "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .section p {
+      margin-bottom: 0;
+      color: var(--muted);
+      line-height: 2;
+    }
+
+    .usage {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .usage li {
+      padding: 9px 13px;
+      border: 1px solid var(--line);
+      border-radius: 2px;
+      background: rgba(255, 255, 255, 0.5);
+      color: var(--ink);
+      font-weight: 400;
+    }
+
+    .result-art {
+      padding: 8px;
+      border-radius: 2px;
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid var(--line);
+    }
+
+    .result-art img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      height: auto;
+      display: block;
+      object-fit: cover;
+      border-radius: 1px;
+    }
+
+    .restart-row {
+      margin-top: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .share-row {
+      margin-top: 28px;
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
+    }
+
+    .share-label {
+      margin: 0 0 12px;
+      color: #514940;
+      font-family: "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .share-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .share-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 46px;
+      padding: 10px 18px;
+      border: 1px solid var(--line);
+      border-radius: 2px;
+      background: rgba(255, 255, 255, 0.6);
+      color: var(--ink);
+      font-family: "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    }
+
+    .share-btn:hover {
+      transform: translateY(-2px);
+      border-color: rgba(44, 37, 31, 0.32);
+      background: rgba(255, 255, 255, 0.95);
+    }
+
+    .share-btn.x {
+      border-color: rgba(23, 23, 23, 0.25);
+    }
+
+    .share-btn.line {
+      border-color: rgba(6, 199, 85, 0.35);
+      color: #1a7a3e;
+    }
+
+    .share-btn.image {
+      border-color: rgba(79, 91, 77, 0.35);
+    }
+
+    .cta-link {
+      margin-top: 22px;
+      font-size: 0.86rem;
+    }
+
+    .cta-link a {
+      color: var(--accent-strong);
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .fade {
+      animation: fade 0.32s ease both;
+    }
+
+    @keyframes fade {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 760px) {
+      .app {
+        align-items: start;
+        padding-inline: 12px;
+      }
+
+      .shell {
+        border-radius: 2px;
+      }
+
+      .hero,
+      .result {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-bottom: 24px;
+        gap: 26px;
+      }
+
+      .illustration {
+        width: min(82vw, 280px);
+        aspect-ratio: 4 / 5;
+        margin: 0 auto;
+        box-shadow: 0 18px 42px rgba(58, 49, 42, 0.12);
+      }
+
+      h1 {
+        max-width: none;
+        font-size: clamp(2.35rem, 10.5vw, 3.25rem);
+        line-height: 1.14;
+      }
+
+      .lead {
+        max-width: 16em;
+        font-size: 0.98rem;
+        line-height: 1.8;
+      }
+
+      .result h2 {
+        font-size: clamp(2.2rem, 11vw, 3.15rem);
+      }
+
+      .result h2 span {
+        white-space: nowrap;
+      }
+
+      .panel {
+        padding-inline: 18px;
+      }
+
+      .choice {
+        grid-template-columns: 38px minmax(0, 1fr);
+      }
+
+      .choice-mark {
+        width: 38px;
+        height: 38px;
+      }
+
+      .nav-row {
+        align-items: stretch;
+      }
+
+      .ghost,
+      .primary {
+        flex: 1 1 auto;
+      }
+
+      .share-buttons {
+        flex-direction: column;
+      }
+
+      .share-btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <section class="shell" aria-live="polite">
+      <div class="hero">
+        <div>
+          <p class="kicker">Aroma Healing Quiz</p>
+          <h1><span>あなたを癒す</span><span>香り診断</span></h1>
+          <p class="lead" id="introText">全10問。直感でお選びください。</p>
+        </div>
+        <img class="illustration" src="assets/aroma-hero.png" alt="アロマボトル、ラベンダー、オレンジ、ミント、サンダルウッドの写真">
+      </div>
+      <div class="panel" id="appPanel"></div>
+    </section>
+  </main>
+  <canvas id="shareCanvas" width="1080" height="1350" style="display:none" aria-hidden="true"></canvas>
+
+  <script>
+    const questions = [
+      {
+        text: '今の気分に一番近いものは？',
+        choices: [
+          ['A', 'のんびりしたい', 'lavender'],
+          ['B', '元気になりたい', 'orange'],
+          ['C', '前向きになりたい', 'orange'],
+          ['D', '心を落ち着けたい', 'sandalwood']
+        ]
+      },
+      {
+        text: '休日はどんな過ごし方が好き？',
+        choices: [
+          ['A', '家でゆっくり', 'lavender'],
+          ['B', 'カフェ巡り', 'orange'],
+          ['C', '自然の中へ行く', 'sandalwood'],
+          ['D', 'ショッピング', 'orange']
+        ]
+      },
+      {
+        text: '好きな季節は？',
+        choices: [
+          ['A', '春', 'lavender'],
+          ['B', '夏', 'orange'],
+          ['C', '秋', 'sandalwood'],
+          ['D', '冬', 'peppermint']
+        ]
+      },
+      {
+        text: '今、一番欲しいものは？',
+        choices: [
+          ['A', '癒し', 'lavender'],
+          ['B', '元気', 'orange'],
+          ['C', '自信', 'peppermint'],
+          ['D', '安心感', 'sandalwood']
+        ]
+      },
+      {
+        text: '好きな色は？',
+        choices: [
+          ['A', '緑', 'sandalwood'],
+          ['B', '黄色', 'orange'],
+          ['C', 'ピンク', 'lavender'],
+          ['D', '青', 'peppermint']
+        ]
+      },
+      {
+        text: '朝起きた時の気分は？',
+        choices: [
+          ['A', 'のんびり', 'lavender'],
+          ['B', 'ワクワク', 'orange'],
+          ['C', '眠い', 'peppermint'],
+          ['D', 'スッキリ', 'peppermint']
+        ]
+      },
+      {
+        text: 'ストレス発散方法は？',
+        choices: [
+          ['A', '寝る', 'lavender'],
+          ['B', '運動', 'peppermint'],
+          ['C', 'おしゃべり', 'orange'],
+          ['D', '音楽', 'sandalwood']
+        ]
+      },
+      {
+        text: '理想の休日は？',
+        choices: [
+          ['A', '森林浴', 'sandalwood'],
+          ['B', '海', 'peppermint'],
+          ['C', '温泉', 'lavender'],
+          ['D', 'カフェ', 'orange']
+        ]
+      },
+      {
+        text: '好きな香りは？',
+        choices: [
+          ['A', '花', 'lavender'],
+          ['B', '柑橘', 'orange'],
+          ['C', 'ハーブ', 'peppermint'],
+          ['D', '木', 'sandalwood']
+        ]
+      },
+      {
+        text: '今のあなたに必要なのは？',
+        choices: [
+          ['A', 'リラックス', 'lavender'],
+          ['B', '活力', 'orange'],
+          ['C', '前向きさ', 'peppermint'],
+          ['D', '心の安定', 'sandalwood']
+        ]
+      }
+    ];
+
+    const results = {
+      lavender: {
+        title: '深く休む時間',
+        scent: 'ラベンダー',
+        color: '#79606f',
+        feature: '心も身体も頑張りすぎる傾向があります。ゆっくり休息を取ることで本来の力を発揮できます。',
+        usage: ['寝る前', 'お風呂', '寝室'],
+        message: '今日は自分を甘やかしても大丈夫。頑張るより、休むことも大切です。',
+        art: 'lavender'
+      },
+      orange: {
+        title: '心が軽くなる明るさ',
+        scent: 'スイートオレンジ',
+        color: '#b9854e',
+        feature: '明るく前向きですが、知らないうちに疲れをため込みます。',
+        usage: ['朝', '仕事前', '気分転換'],
+        message: '笑顔はあなたの最大の魅力です。香りで心もリフレッシュしましょう。',
+        art: 'orange'
+      },
+      peppermint: {
+        title: '頭をすっきり整える力',
+        scent: 'ペパーミント',
+        color: '#6f9389',
+        feature: '考えすぎたり集中しすぎたりするタイプです。',
+        usage: ['勉強', '仕事', '眠気覚まし'],
+        message: '少し深呼吸すると、新しいアイデアが浮かびます。',
+        art: 'peppermint'
+      },
+      sandalwood: {
+        title: '心を落ち着ける安心感',
+        scent: 'サンダルウッド',
+        color: '#7e6554',
+        feature: '落ち着いた雰囲気で、人に安心感を与えます。心を整える時間が運気アップにつながります。',
+        usage: ['瞑想', '読書', '夜のリラックスタイム'],
+        message: '焦らず、自分のペースを大切にしてください。',
+        art: 'sandalwood'
+      }
+    };
+
+    const state = {
+      step: 0,
+      answers: []
+    };
+
+    const panel = document.getElementById('appPanel');
+
+    function render() {
+      if (state.step >= questions.length) {
+        renderResult();
+        return;
+      }
+
+      const q = questions[state.step];
+      const percent = Math.round((state.step / questions.length) * 100);
+
+      panel.innerHTML = `
+        <div class="fade">
+          <div class="progress" aria-label="診断の進み具合">
+            <div class="progress-row">
+              <span>Q${state.step + 1} / ${questions.length}</span>
+              <span>${percent}%</span>
+            </div>
+            <div class="bar"><div class="bar-fill" style="width: ${percent}%"></div></div>
+          </div>
+          <h2 class="question">${q.text}</h2>
+          <div class="choices">
+            ${q.choices.map(choice => `
+              <button class="choice" type="button" data-type="${choice[2]}" data-label="${choice[0]}">
+                <span class="choice-mark">${choice[0]}</span>
+                <span class="choice-text">${choice[1]}</span>
+              </button>
+            `).join('')}
+          </div>
+          <div class="nav-row">
+            <button class="ghost" type="button" id="backBtn" ${state.step === 0 ? 'disabled' : ''}>戻る</button>
+            <button class="primary" type="button" id="resetBtn">はじめから</button>
+          </div>
+        </div>
+      `;
+
+      panel.querySelectorAll('.choice').forEach(button => {
+        button.addEventListener('click', () => {
+          state.answers[state.step] = button.dataset.type;
+          state.step += 1;
+          render();
+        });
+      });
+
+      panel.querySelector('#backBtn').addEventListener('click', () => {
+        if (state.step > 0) {
+          state.step -= 1;
+          state.answers.pop();
+          render();
+        }
+      });
+
+      panel.querySelector('#resetBtn').addEventListener('click', reset);
+    }
+
+    function getResultKey() {
+      const scores = {
+        lavender: 0,
+        orange: 0,
+        peppermint: 0,
+        sandalwood: 0
+      };
+
+      state.answers.forEach(type => {
+        scores[type] += 1;
+      });
+
+      const priority = ['lavender', 'orange', 'peppermint', 'sandalwood'];
+      return priority.reduce((best, key) => {
+        if (scores[key] > scores[best]) return key;
+        return best;
+      }, priority[0]);
+    }
+
+    function renderResult() {
+      const key = getResultKey();
+      const result = results[key];
+      const usageHtml = result.usage.map(item => `<li>${item}</li>`).join('');
+
+      panel.innerHTML = `
+        <div class="fade result">
+          <div>
+            <div class="progress" aria-label="診断完了">
+              <div class="progress-row">
+                <span>診断結果</span>
+                <span>100%</span>
+              </div>
+              <div class="bar"><div class="bar-fill" style="width: 100%"></div></div>
+            </div>
+            <p class="result-label">今のあなたに届けたいもの</p>
+            <h2>${formatResultTitle(result.title)}</h2>
+            <span class="scent-name" style="background:${result.color}">あなたを癒す香り：${result.scent}</span>
+            <div class="section">
+              <h3>あなたの特徴</h3>
+              <p>${result.feature}</p>
+            </div>
+            <div class="section">
+              <h3>おすすめの使い方</h3>
+              <ul class="usage">${usageHtml}</ul>
+            </div>
+            <div class="section">
+              <h3>メッセージ</h3>
+              <p>${result.message}</p>
+            </div>
+            <div class="restart-row">
+              <button class="primary" type="button" id="againBtn">もう一度診断する</button>
+            </div>
+            <div class="share-row">
+              <p class="share-label">診断結果をシェアする</p>
+              <div class="share-buttons">
+                <button class="share-btn x" type="button" id="shareXBtn">Xでシェア</button>
+                <button class="share-btn line" type="button" id="shareLineBtn">LINEでシェア</button>
+                <button class="share-btn image" type="button" id="saveImageBtn">結果を画像で保存</button>
+              </div>
+            </div>
+            <p class="cta-link"><a href="../LP/index.html">こんな診断アプリを作ってみませんか？</a></p>
+          </div>
+          <div class="result-art" aria-label="${result.scent}の写真">
+            ${createArt(result.art)}
+          </div>
+        </div>
+      `;
+
+      document.querySelector('#againBtn').addEventListener('click', reset);
+      document.querySelector('#shareXBtn').addEventListener('click', () => shareOnX(result));
+      document.querySelector('#shareLineBtn').addEventListener('click', () => shareOnLine(result));
+      document.querySelector('#saveImageBtn').addEventListener('click', () => downloadResultImage(result));
+    }
+
+    function reset() {
+      state.step = 0;
+      state.answers = [];
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      render();
+    }
+
+    const titleLineMap = {
+      '深く休む時間': ['深く休む', '時間'],
+      '心が軽くなる明るさ': ['心が軽くなる', '明るさ'],
+      '頭をすっきり整える力': ['頭をすっきり', '整える力'],
+      '心を落ち着ける安心感': ['心を落ち着ける', '安心感']
+    };
+
+    function getTitleLines(title) {
+      return titleLineMap[title] || [title];
+    }
+
+    function formatResultTitle(title) {
+      return getTitleLines(title).map(line => `<span>${line}</span>`).join('');
+    }
+
+    function shareOnX(result) {
+      const text = `私を癒す香りは「${result.scent}」でした。${result.message}\n#あなたを癒す香り診断`;
+      const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(location.href)}`;
+      window.open(url, '_blank', 'noopener,noreferrer');
+    }
+
+    function shareOnLine(result) {
+      const text = `私を癒す香りは「${result.scent}」でした。`;
+      const url = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(location.href)}&text=${encodeURIComponent(text)}`;
+      window.open(url, '_blank', 'noopener,noreferrer');
+    }
+
+    function wrapCanvasText(ctx, text, x, y, maxWidth, lineHeight) {
+      let line = '';
+      let cursorY = y;
+      for (const char of text) {
+        const testLine = line + char;
+        if (ctx.measureText(testLine).width > maxWidth && line !== '') {
+          ctx.fillText(line, x, cursorY);
+          line = char;
+          cursorY += lineHeight;
+        } else {
+          line = testLine;
+        }
+      }
+      ctx.fillText(line, x, cursorY);
+      return cursorY;
+    }
+
+    function downloadResultImage(result) {
+      const canvas = document.getElementById('shareCanvas');
+      const ctx = canvas.getContext('2d');
+      const w = canvas.width;
+      const h = canvas.height;
+
+      const gradient = ctx.createLinearGradient(0, 0, w, h);
+      gradient.addColorStop(0, '#fffefa');
+      gradient.addColorStop(1, result.color);
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, w, h);
+
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+      ctx.fillRect(56, 56, w - 112, h - 112);
+
+      ctx.fillStyle = '#4f5b4d';
+      ctx.font = '600 26px "Avenir Next", "Helvetica Neue", Arial, sans-serif';
+      ctx.fillText('AROMA HEALING QUIZ', 100, 160);
+
+      ctx.fillStyle = '#211d1a';
+      ctx.font = '400 62px "Hiragino Mincho ProN", "Yu Mincho", serif';
+      let cursorY = 280;
+      getTitleLines(result.title).forEach((line, index) => {
+        ctx.fillText(line, 100, cursorY + index * 82);
+      });
+      cursorY += getTitleLines(result.title).length * 82;
+
+      ctx.fillStyle = result.color;
+      ctx.font = 'bold 34px "Avenir Next", "Helvetica Neue", Arial, sans-serif';
+      ctx.fillText(`あなたを癒す香り：${result.scent}`, 100, cursorY + 50);
+
+      ctx.fillStyle = '#746d66';
+      ctx.font = '400 30px "Hiragino Mincho ProN", "Yu Mincho", serif';
+      wrapCanvasText(ctx, result.message, 100, cursorY + 130, w - 300, 46);
+
+      ctx.fillStyle = '#9aa48f';
+      ctx.font = '600 22px "Avenir Next", "Helvetica Neue", Arial, sans-serif';
+      ctx.fillText('あなたを癒す香り診断', 100, h - 100);
+
+      const link = document.createElement('a');
+      link.download = `香り診断_${result.scent}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+
+    function createArt(type) {
+      const photos = {
+        lavender: ['assets/lavender.png', 'ラベンダーとアロマボトルの写真'],
+        orange: ['assets/sweet-orange.png', 'スイートオレンジとアロマボトルの写真'],
+        peppermint: ['assets/peppermint.png', 'ペパーミントとアロマボトルの写真'],
+        sandalwood: ['assets/sandalwood.png', 'サンダルウッドとアロマボトルの写真']
+      };
+      const photo = photos[type] || photos.lavender;
+      return `<img src="${photo[0]}" alt="${photo[1]}" loading="lazy">`;
+    }
+
+    render();
+  </script>
+</body>
+</html>
