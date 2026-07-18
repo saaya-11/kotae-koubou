@@ -27,7 +27,11 @@
       "Bash(git add *)",
       "Bash(git commit *)",
       "Bash(git push *)",
-      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(d['status']\\)\")"
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(d['status']\\)\")",
+      "Bash(curl -sI http://localhost:8791/HP/index.html)",
+      "Bash(python3 -)",
+      "mcp__claude-in-chrome__read_page",
+      "Bash(git checkout *)"
     ]
   }
 }

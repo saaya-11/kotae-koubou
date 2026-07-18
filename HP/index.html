@@ -629,6 +629,83 @@
     line-height: 1.8;
   }
 
+  /* LINE panel */
+  .line-panel {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 32px;
+    border-radius: 20px;
+    background: #eafcf2;
+    border: 1px solid rgba(6, 199, 85, 0.25);
+  }
+
+  .line-panel h2 {
+    margin-top: 10px;
+    font-size: clamp(22px, 3vw, 30px);
+    font-weight: 800;
+  }
+
+  .line-panel p {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 15px;
+  }
+
+  .btn-line {
+    background: #06c755;
+    color: #fff;
+    border: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .line-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 8px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.25);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+  }
+
+  /* Contact form */
+  .contact-form {
+    display: grid;
+    gap: 18px;
+    max-width: 560px;
+  }
+
+  .contact-form label {
+    display: grid;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    padding: 12px 14px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--panel);
+    font: inherit;
+    color: var(--ink);
+    resize: vertical;
+  }
+
+  .contact-form button {
+    justify-self: start;
+    border: 0;
+  }
+
   /* Reasons */
   .reasons-grid {
     display: grid;
@@ -861,9 +938,10 @@
       <a href="#pricing">料金</a>
       <a href="#flow">流れ</a>
       <a href="#faq">FAQ</a>
-      <a href="#contact">お問い合わせ</a>
+      <a href="#line">公式LINE</a>
+      <a href="#form">お問い合わせ</a>
     </nav>
-    <a class="nav-cta" href="#contact">ご相談はこちら</a>
+    <a class="nav-cta" href="#form">ご相談はこちら</a>
     <button class="nav-toggle" id="navToggle" type="button" aria-label="メニューを開く">☰</button>
   </div>
   <div class="mobile-links wrap" id="mobileLinks">
@@ -872,8 +950,9 @@
     <a href="#pricing">料金</a>
     <a href="#flow">流れ</a>
     <a href="#faq">FAQ</a>
-    <a href="#contact">お問い合わせ</a>
-    <a class="btn btn-primary" href="#contact">ご相談はこちら</a>
+    <a href="#line">公式LINE</a>
+    <a href="#form">お問い合わせ</a>
+    <a class="btn btn-primary" href="#form">ご相談はこちら</a>
   </div>
 </header>
 
@@ -1228,6 +1307,37 @@
     </div>
   </section>
 
+  <section id="line" class="section section-alt">
+    <div class="wrap">
+      <div class="line-panel">
+        <div>
+          <span class="kicker">OFFICIAL LINE</span>
+          <h2>公式LINEはこちら</h2>
+          <p>実績サンプルやお得な情報、ご相談はLINEからも受け付けています。</p>
+        </div>
+        <a class="btn btn-line" href="https://line.me/R/ti/p/@884zvtnn">
+          <span class="line-icon">LINE</span>友だち追加する
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="form" class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">FORM</span>
+        <h2>ご相談・お見積もりフォーム</h2>
+        <p>内容が固まっていない段階でも大歓迎です。フォームからもお気軽にご相談ください。</p>
+      </div>
+      <form class="contact-form" action="mailto:【ご相談受付用メールアドレスを入力】" method="post" enctype="text/plain">
+        <label>お名前<input type="text" name="name" required></label>
+        <label>メールアドレス<input type="email" name="email" required></label>
+        <label>ご相談内容<textarea name="message" rows="5" required placeholder="作りたい診断のイメージ、ご予算、納期のご希望など、わかる範囲で構いません。"></textarea></label>
+        <button type="submit" class="btn btn-primary">この内容で送信する</button>
+      </form>
+    </div>
+  </section>
+
   <section id="contact" class="section cta-final">
     <div class="wrap">
       <span class="kicker">CONTACT</span>
@@ -1236,7 +1346,6 @@
       <div class="hero-actions">
         <a class="btn btn-primary" href="【ここにココナラの出品ページURLを入力】">ココナラで相談する</a>
         <a class="btn btn-secondary" href="../LP/index.html">サービス詳細LPを見る</a>
-        <a class="btn btn-secondary" href="https://line.me/R/ti/p/@884zvtnn">LINE公式アカウントを友だち追加</a>
       </div>
     </div>
   </section>
