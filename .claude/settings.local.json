@@ -31,7 +31,10 @@
       "Bash(curl -sI http://localhost:8791/HP/index.html)",
       "Bash(python3 -)",
       "mcp__claude-in-chrome__read_page",
-      "Bash(git checkout *)"
+      "Bash(git checkout *)",
+      "Bash(git commit -m ' *)",
+      "mcp__claude-in-chrome__form_input",
+      "Bash(gh pr create --title LINE連携パネル・お問い合わせフォームをHP/LPに追加 --body ' *)"
     ]
   }
 }
