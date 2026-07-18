@@ -829,6 +829,24 @@
     border: 0;
   }
 
+  .form-embed {
+    max-width: 640px;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+  }
+
+  .form-embed iframe {
+    display: block;
+  }
+
+  .form-fallback {
+    margin-top: 14px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+
   /* Reasons */
   .reasons-grid {
     display: grid;
@@ -1468,15 +1486,13 @@
     <div class="wrap">
       <div class="section-head">
         <span class="kicker">FORM</span>
-        <h2>ご相談・お見積もりフォーム</h2>
+        <h2>ご相談・ご依頼フォーム</h2>
         <p>内容が固まっていない段階でも大歓迎です。フォームからもお気軽にご相談ください。</p>
       </div>
-      <form class="contact-form" action="mailto:arukanetto@gmail.com" method="post" enctype="text/plain">
-        <label>お名前<input type="text" name="name" required></label>
-        <label>メールアドレス<input type="email" name="email" required></label>
-        <label>ご相談内容<textarea name="message" rows="5" required placeholder="作りたい診断のイメージ、ご予算、納期のご希望など、わかる範囲で構いません。"></textarea></label>
-        <button type="submit" class="btn btn-primary">この内容で送信する</button>
-      </form>
+      <div class="form-embed">
+        <iframe src="https://forms.gle/2Hb22qXQPLnXXMCX7" width="100%" height="900" frameborder="0" marginheight="0" marginwidth="0">読み込んでいます…</iframe>
+      </div>
+      <p class="form-fallback">フォームが表示されない場合は<a href="https://forms.gle/2Hb22qXQPLnXXMCX7" target="_blank" rel="noopener">こちら</a>から直接開けます。</p>
     </div>
   </section>
 

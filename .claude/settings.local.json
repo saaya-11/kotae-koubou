@@ -63,7 +63,19 @@
       "Bash(python3 -c \"from PIL import Image; print\\('PIL available'\\)\")",
       "Bash(python3)",
       "Bash(git pull *)",
-      "Bash(git merge *)"
+      "Bash(git merge *)",
+      "mcp__claude-in-chrome__tabs_close_mcp",
+      "Bash(npx --version)",
+      "Bash(node -e \"require\\('puppeteer'\\)\")",
+      "Bash(node -e \"require\\('playwright'\\)\")",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --hide-scrollbars --force-device-scale-factor=1 --window-size=2500,843 --screenshot=/private/tmp/claude-501/-Users-sayak--Desktop-0001------------------------/8f03f1e1-b969-4a9f-b9ed-7eadc2a86bcd/scratchpad/richmenu_v2_raw.png file:///private/tmp/claude-501/-Users-sayak--Desktop-0001------------------------/8f03f1e1-b969-4a9f-b9ed-7eadc2a86bcd/scratchpad/richmenu_design.html)",
+      "Bash(cp \"/private/tmp/claude-501/-Users-sayak--Desktop-0001------------------------/8f03f1e1-b969-4a9f-b9ed-7eadc2a86bcd/scratchpad/richmenu_v2.jpg\" \"/Users/sayak./Desktop/0001_ココナ/ココナラ診断アプリ/診断アプリサンプル/LINE/richmenu_v2_2500x843.jpg\" *)",
+      "Bash(sips -g pixelWidth -g pixelHeight \"LINE/リッチメニュー画像２.png\")",
+      "Bash(grep -rn ご相談・お見積もり /Users/sayak./Desktop/0001_ココナ/ココナラ診断アプリ/診断アプリサンプル/HP/index.html /Users/sayak./Desktop/0001_ココナ/ココナラ診断アプリ/診断アプリサンプル/LP/index.html)",
+      "Bash(python3 -c \"import qrcode; print\\('qrcode available'\\)\")",
+      "Bash(python3 -c \"import segno; print\\('segno available'\\)\")",
+      "Bash(pip3 install *)",
+      "Bash(python3 -c \"import qrcode; print\\('ok'\\)\")"
     ]
   }
 }
