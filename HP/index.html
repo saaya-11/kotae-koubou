@@ -369,9 +369,26 @@
     overflow: hidden;
   }
 
-  .preview-aroma { background: linear-gradient(150deg, #fffefa 0%, #e4ded1 45%, #9aa48f 100%); font-family: "Hiragino Mincho ProN", "Yu Mincho", serif; }
-  .preview-love { background: linear-gradient(150deg, #fdf6ea 0%, #f2d9c9 50%, #c96b7a 100%); color: #4a3b34; font-family: "Hiragino Maru Gothic ProN", "Rounded Mplus 1c", sans-serif; }
-  .preview-viral { background: linear-gradient(150deg, #07060d 0%, #14121e 55%, #7c5cff 100%); font-weight: 900; letter-spacing: -0.02em; }
+  .preview-aroma {
+    background:
+      linear-gradient(0deg, rgba(20, 15, 8, 0.55) 0%, rgba(20, 15, 8, 0.05) 60%),
+      url("../癒しの香り診断サンプル/assets/aroma-hero.png") center/cover no-repeat;
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", serif;
+  }
+  .preview-love {
+    background:
+      linear-gradient(0deg, rgba(40, 12, 20, 0.6) 0%, rgba(40, 12, 20, 0.05) 60%),
+      url("../恋愛才能診断サンプル/assets/hero-group.png") center 22%/cover no-repeat;
+    color: #fff;
+    font-family: "Hiragino Maru Gothic ProN", "Rounded Mplus 1c", sans-serif;
+  }
+  .preview-viral {
+    background:
+      linear-gradient(150deg, #07060d 0%, #14121e 55%, #7c5cff 100%),
+      url("../あなたにぴったりのバズり投稿タイプ診断サンプル/assets/hero-phone.png") right bottom/55% auto no-repeat;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+  }
 
   .work-preview .tag {
     align-self: flex-start;
@@ -382,11 +399,6 @@
     font-weight: 800;
     letter-spacing: 0.05em;
     backdrop-filter: blur(4px);
-  }
-
-  .preview-love .tag {
-    background: rgba(74, 59, 52, 0.12);
-    color: #4a3b34;
   }
 
   .preview-viral .tag {
@@ -401,10 +413,6 @@
     text-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
   }
 
-  .preview-love .preview-title {
-    text-shadow: none;
-  }
-
   .preview-aroma .preview-title {
     font-weight: 400;
   }
@@ -415,11 +423,6 @@
     background-image: radial-gradient(rgba(255, 255, 255, 0.16) 1.5px, transparent 1.5px);
     background-size: 20px 20px;
     opacity: 0.5;
-  }
-
-  .preview-love .dots,
-  .preview-aroma .dots {
-    background-image: radial-gradient(rgba(74, 59, 52, 0.14) 1.5px, transparent 1.5px);
   }
 
   .work-body {

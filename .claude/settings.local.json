@@ -34,7 +34,12 @@
       "Bash(git checkout *)",
       "Bash(git commit -m ' *)",
       "mcp__claude-in-chrome__form_input",
-      "Bash(gh pr create --title LINE連携パネル・お問い合わせフォームをHP/LPに追加 --body ' *)"
+      "Bash(gh pr create --title LINE連携パネル・お問い合わせフォームをHP/LPに追加 --body ' *)",
+      "Bash(echo \"--- 香り ---\")",
+      "Bash(ls /Users/sayak./Desktop/0001_ココナ/ココナラ診断アプリ/診断アプリサンプル/癒しの香り診断サンプル/assets/)",
+      "Bash(echo \"--- 恋愛 ---\")",
+      "Bash(ls /Users/sayak./Desktop/0001_ココナ/ココナラ診断アプリ/診断アプリサンプル/恋愛才能診断サンプル/assets/)",
+      "Bash(echo \"--- バズり ---\")"
     ]
   }
 }
