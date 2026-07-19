@@ -1,0 +1,1577 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>診断アプリ制作サービス｜こたえ工房</title>
+<style>
+  :root {
+    color-scheme: light;
+    --ink: #1c1a2b;
+    --muted: #656279;
+    --line: rgba(28, 26, 50, 0.12);
+    --paper: #faf9fc;
+    --panel: #ffffff;
+    --indigo: #5b4fe9;
+    --indigo-deep: #3c33b0;
+    --indigo-soft: #efedff;
+    --accent: #ff8a65;
+    --accent-soft: #fff1ea;
+    --shadow: 0 24px 64px rgba(43, 34, 110, 0.12);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--paper);
+    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", "Yu Gothic", "Noto Sans JP", system-ui, sans-serif;
+    line-height: 1.7;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+  }
+
+  .wrap {
+    width: min(1120px, calc(100% - 40px));
+    margin: 0 auto;
+  }
+
+  /* Header */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: rgba(250, 249, 252, 0.88);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .nav-inner {
+    width: min(1120px, calc(100% - 40px));
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    min-height: 68px;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-right: auto;
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+  }
+
+  .brand-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 22px;
+  }
+
+  .nav-links a {
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .nav-links a:hover {
+    color: var(--indigo);
+  }
+
+  .nav-cta {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    padding: 0 18px;
+    border-radius: 999px;
+    background: var(--indigo);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .nav-toggle {
+    display: none;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: #fff;
+    font-size: 18px;
+    cursor: pointer;
+  }
+
+  .mobile-links {
+    display: none;
+  }
+
+  /* Section shells */
+  .section {
+    padding: clamp(56px, 9vw, 108px) 0;
+  }
+
+  .section-alt {
+    background: var(--panel);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .kicker {
+    display: inline-flex;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: var(--indigo-soft);
+    color: var(--indigo-deep);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+  }
+
+  h1, h2, h3, p {
+    margin: 0;
+  }
+
+  .section-head {
+    max-width: 40em;
+    margin-bottom: 44px;
+  }
+
+  .section-head h2 {
+    margin-top: 14px;
+    font-size: clamp(26px, 3.4vw, 38px);
+    line-height: 1.35;
+    letter-spacing: 0;
+    word-break: keep-all;
+    overflow-wrap: normal;
+  }
+
+  .section-head p {
+    margin-top: 14px;
+    color: var(--muted);
+    font-size: 16px;
+  }
+
+  /* Hero */
+  .hero {
+    padding: clamp(64px, 11vw, 128px) 0 clamp(56px, 8vw, 96px);
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(260px, 0.7fr);
+    gap: 48px;
+    align-items: center;
+  }
+
+  .hero h1 {
+    font-size: clamp(30px, 4.4vw, 48px);
+    font-weight: 800;
+    line-height: 1.4;
+    letter-spacing: 0;
+    word-break: keep-all;
+    overflow-wrap: normal;
+  }
+
+  .hero-lead {
+    margin-top: 20px;
+    max-width: 32em;
+    color: var(--muted);
+    font-size: 17px;
+    line-height: 1.9;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 32px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 52px;
+    padding: 0 26px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 15px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .btn-primary {
+    border: 0;
+    color: #fff;
+    background: linear-gradient(135deg, var(--indigo), var(--indigo-deep));
+    box-shadow: 0 16px 32px rgba(91, 79, 233, 0.28);
+  }
+
+  .btn-secondary {
+    border: 1px solid var(--line);
+    background: #fff;
+    color: var(--ink);
+  }
+
+  .hero-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+    margin-top: 40px;
+  }
+
+  .hero-stat b {
+    display: block;
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--indigo-deep);
+  }
+
+  .hero-stat span {
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  .hero-visual {
+    position: relative;
+    display: grid;
+    gap: 14px;
+  }
+
+  .hero-main-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 30px;
+    box-shadow: 0 28px 70px rgba(61, 47, 121, 0.2);
+  }
+
+  .promo-card {
+    position: relative;
+    padding: 30px 26px;
+    border-radius: 28px;
+    background: linear-gradient(160deg, #fff1f7 0%, #fde7f0 35%, #efe3fb 70%, #fff1e6 100%);
+    border: 1px solid rgba(201, 107, 154, 0.18);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+
+  .promo-badge {
+    display: inline-flex;
+    padding: 6px 16px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #ff6f9c, #ff8a65);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 800;
+  }
+
+  .promo-title {
+    margin-top: 14px;
+    font-size: 32px;
+    font-weight: 900;
+    color: #2b2540;
+    line-height: 1.2;
+  }
+
+  .promo-title span {
+    display: block;
+    background: linear-gradient(135deg, #ff6f9c, #8a5cf6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: 40px;
+  }
+
+  .promo-sub {
+    margin-top: 8px;
+    color: #6b5f7a;
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .promo-phone {
+    position: relative;
+    margin-top: 22px;
+    padding: 18px 16px;
+    border-radius: 20px;
+    background: #fff;
+    border: 1px solid rgba(43, 37, 64, 0.1);
+    box-shadow: 0 14px 30px rgba(43, 34, 110, 0.12);
+  }
+
+  .promo-phone-head {
+    width: 46px;
+    height: 5px;
+    margin: 0 auto 14px;
+    border-radius: 999px;
+    background: #eadcf0;
+  }
+
+  .promo-q-label {
+    color: #b04a8c;
+    font-size: 12px;
+    font-weight: 800;
+  }
+
+  .promo-q {
+    margin-top: 6px;
+    font-size: 15px;
+    font-weight: 800;
+    color: #2b2540;
+    line-height: 1.5;
+  }
+
+  .promo-choice {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: #fdf2f7;
+    font-size: 13px;
+    font-weight: 700;
+    color: #4a3b56;
+  }
+
+  .promo-choice span {
+    font-size: 14px;
+  }
+
+  .promo-next {
+    display: inline-flex;
+    margin-top: 14px;
+    padding: 8px 18px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #ff6f9c, #ff8a65);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 800;
+  }
+
+  .promo-note {
+    position: absolute;
+    top: 30px;
+    right: 26px;
+    max-width: 110px;
+    padding: 10px 12px;
+    border-radius: 14px;
+    background: #8a5cf6;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 800;
+    line-height: 1.4;
+    text-align: center;
+  }
+
+  .promo-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 22px;
+  }
+
+  .promo-tag {
+    padding: 7px 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 800;
+    color: #fff;
+  }
+
+  .t-pink { background: #ff6f9c; }
+  .t-orange { background: #ff9a5a; }
+  .t-green { background: #3bb489; }
+  .t-blue { background: #4a90e2; }
+  .t-purple { background: #8a5cf6; }
+
+  .promo-footer {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px dashed rgba(43, 37, 64, 0.15);
+    color: #6b5f7a;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  /* Service */
+  .service-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .service-card {
+    padding: 24px 20px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--panel);
+  }
+
+  .service-card .icon {
+    display: inline-flex;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-weight: 800;
+  }
+
+  .service-card h3 {
+    margin-top: 14px;
+    font-size: 16px;
+    font-weight: 800;
+  }
+
+  .service-card p {
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  /* Diagnosis tags */
+  .diagnosis-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .diagnosis-tag {
+    padding: 10px 18px;
+    border-radius: 999px;
+    background: var(--indigo-soft);
+    color: var(--indigo-deep);
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  /* Works */
+  .works-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  .work-card {
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: var(--panel);
+    box-shadow: 0 14px 34px rgba(43, 34, 110, 0.06);
+  }
+
+  .work-preview {
+    position: relative;
+    height: 190px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #fff;
+    overflow: hidden;
+  }
+
+  .preview-aroma {
+    background:
+      linear-gradient(0deg, rgba(20, 15, 8, 0.55) 0%, rgba(20, 15, 8, 0.05) 60%),
+      url("../癒しの香り診断サンプル/assets/aroma-hero.png") center/cover no-repeat;
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", serif;
+  }
+  .preview-love {
+    background:
+      linear-gradient(0deg, rgba(40, 12, 20, 0.6) 0%, rgba(40, 12, 20, 0.05) 60%),
+      url("../恋愛才能診断サンプル/assets/hero-group.png") center 22%/cover no-repeat;
+    color: #fff;
+    font-family: "Hiragino Maru Gothic ProN", "Rounded Mplus 1c", sans-serif;
+  }
+  .preview-viral {
+    background:
+      url("../あなたにぴったりのバズり投稿タイプ診断サンプル/assets/hero-phone.png") right bottom/55% auto no-repeat,
+      linear-gradient(150deg, #07060d 0%, #14121e 55%, #7c5cff 100%);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+  }
+
+  .work-preview .tag {
+    align-self: flex-start;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.24);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    backdrop-filter: blur(4px);
+  }
+
+  .preview-viral .tag {
+    background: rgba(124, 92, 255, 0.22);
+    color: #e4defc;
+  }
+
+  .work-preview .preview-title {
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1.3;
+    text-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+  }
+
+  .preview-aroma .preview-title {
+    font-weight: 400;
+  }
+
+  .work-preview .dots {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.16) 1.5px, transparent 1.5px);
+    background-size: 20px 20px;
+    opacity: 0.5;
+  }
+
+  .work-body {
+    padding: 20px;
+  }
+
+  .work-body h3 {
+    font-size: 17px;
+    font-weight: 800;
+  }
+
+  .work-body p {
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
+  .work-use {
+    margin-top: 12px;
+    padding: 9px 12px;
+    border-radius: 8px;
+    background: var(--indigo-soft);
+    color: var(--indigo-deep);
+    font-size: 12px;
+    line-height: 1.7;
+  }
+
+  .work-use b {
+    margin-right: 6px;
+    font-weight: 800;
+  }
+
+  .work-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 16px;
+    color: var(--indigo-deep);
+    font-weight: 700;
+    font-size: 14px;
+    text-decoration: none;
+  }
+
+  .work-link:hover {
+    text-decoration: underline;
+  }
+
+  /* Flow */
+  .flow-list {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .flow-step {
+    padding: 22px 18px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--panel);
+  }
+
+  .flow-num {
+    display: inline-flex;
+    width: 34px;
+    height: 34px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--indigo);
+    color: #fff;
+    font-weight: 800;
+    font-size: 14px;
+  }
+
+  .flow-step h3 {
+    margin-top: 14px;
+    font-size: 15px;
+    font-weight: 800;
+  }
+
+  .flow-step p {
+    margin-top: 6px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  /* Pricing */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  .price-card {
+    padding: 28px 24px;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: var(--panel);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .price-card.is-featured {
+    border-color: var(--indigo);
+    box-shadow: 0 20px 44px rgba(91, 79, 233, 0.18);
+    transform: translateY(-6px);
+  }
+
+  .price-card .badge {
+    align-self: flex-start;
+    margin-bottom: 14px;
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 800;
+  }
+
+  .price-card h3 {
+    font-size: 18px;
+    font-weight: 800;
+  }
+
+  .price-value {
+    margin-top: 10px;
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--indigo-deep);
+  }
+
+  .price-value span {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--muted);
+  }
+
+  .price-meta {
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  .price-list {
+    margin: 18px 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 10px;
+    flex: 1;
+  }
+
+  .price-list li {
+    display: grid;
+    grid-template-columns: 18px minmax(0, 1fr);
+    gap: 8px;
+    color: var(--ink);
+    font-size: 14px;
+  }
+
+  .price-list li::before {
+    content: "✓";
+    color: var(--indigo);
+    font-weight: 800;
+  }
+
+  .price-card .btn {
+    margin-top: 22px;
+  }
+
+  .pricing-note {
+    margin-top: 22px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  .option-list {
+    list-style: none;
+    display: grid;
+    gap: 10px;
+    padding: 0;
+  }
+
+  .option-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--panel);
+    font-size: 14px;
+  }
+
+  .option-list li b {
+    color: var(--indigo-deep);
+    font-weight: 800;
+  }
+
+  .option-detail {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  .support-plan {
+    display: grid;
+    grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+    gap: 28px;
+    align-items: center;
+    margin-top: 38px;
+    padding: 30px;
+    border: 1px solid rgba(91, 79, 233, 0.2);
+    border-radius: 22px;
+    background: linear-gradient(135deg, #fff 0%, #f2f0ff 100%);
+    box-shadow: 0 18px 44px rgba(91, 79, 233, 0.1);
+  }
+
+  .support-plan .badge {
+    display: inline-flex;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: var(--indigo);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 800;
+  }
+
+  .support-plan h3 { margin-top: 12px; font-size: 21px; line-height: 1.5; }
+  .support-plan .price-value { margin-top: 8px; }
+  .support-plan .price-list { margin-top: 0; }
+  .support-note { margin-top: 12px; color: var(--muted); font-size: 12px; line-height: 1.7; }
+
+  .notes-list {
+    display: grid;
+    gap: 10px;
+    padding-left: 20px;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
+  /* LINE panel */
+  .line-panel {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 32px;
+    border-radius: 20px;
+    background: #eafcf2;
+    border: 1px solid rgba(6, 199, 85, 0.25);
+  }
+
+  .line-panel h2 {
+    margin-top: 10px;
+    font-size: clamp(22px, 3vw, 30px);
+    font-weight: 800;
+  }
+
+  .line-panel p {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 15px;
+  }
+
+  .btn-line {
+    background: #06c755;
+    color: #fff;
+    border: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .line-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 8px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.25);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+  }
+
+  /* Contact form */
+  .contact-form {
+    display: grid;
+    gap: 18px;
+    max-width: 560px;
+  }
+
+  .contact-form label {
+    display: grid;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    padding: 12px 14px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--panel);
+    font: inherit;
+    color: var(--ink);
+    resize: vertical;
+  }
+
+  .contact-form button {
+    justify-self: start;
+    border: 0;
+  }
+
+  .form-embed {
+    max-width: 640px;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+  }
+
+  .form-embed iframe {
+    display: block;
+  }
+
+  .form-fallback {
+    margin-top: 14px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  /* Reasons */
+  .reasons-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .reason-card {
+    padding: 22px 18px;
+    border-radius: 16px;
+    background: var(--indigo-soft);
+  }
+
+  .reason-card h3 {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--indigo-deep);
+  }
+
+  .reason-card p {
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  /* FAQ */
+  .faq-list {
+    display: grid;
+    gap: 12px;
+  }
+
+  details {
+    padding: 18px 20px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--panel);
+  }
+
+  summary {
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 15px;
+    list-style: none;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  summary::after {
+    content: "+";
+    float: right;
+    color: var(--indigo);
+    font-weight: 800;
+  }
+
+  details[open] summary::after {
+    content: "−";
+  }
+
+  details p {
+    margin-top: 12px;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.85;
+  }
+
+  /* Profile */
+  .profile-card {
+    display: grid;
+    grid-template-columns: 140px minmax(0, 1fr);
+    gap: 28px;
+    align-items: center;
+    padding: 30px;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    background: var(--panel);
+  }
+
+  .profile-avatar {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .profile-card h3 {
+    font-size: 18px;
+    font-weight: 800;
+  }
+
+  .profile-card p {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.9;
+  }
+
+  /* Final CTA */
+  .cta-final {
+    text-align: center;
+  }
+
+  .cta-final h2 {
+    font-size: clamp(26px, 3.6vw, 40px);
+    font-weight: 800;
+    word-break: keep-all;
+    overflow-wrap: normal;
+  }
+
+  .cta-final p {
+    margin-top: 16px;
+    color: var(--muted);
+    font-size: 16px;
+  }
+
+  .cta-final .hero-actions {
+    justify-content: center;
+  }
+
+  /* Footer */
+  .site-footer {
+    padding: 40px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  .footer-inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 16px;
+  }
+
+  .footer-links a {
+    text-decoration: none;
+    color: var(--muted);
+  }
+
+  @media (max-width: 980px) {
+    .service-grid,
+    .reasons-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .flow-list {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .works-grid,
+    .pricing-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .hero-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .nav-links,
+    .nav-cta {
+      display: none;
+    }
+
+    .nav-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mobile-links {
+      display: none;
+      flex-direction: column;
+      gap: 2px;
+      padding: 10px 0 16px;
+      border-top: 1px solid var(--line);
+    }
+
+    .mobile-links.is-open {
+      display: flex;
+    }
+
+    .mobile-links a {
+      padding: 12px 4px;
+      color: var(--ink);
+      font-weight: 700;
+      text-decoration: none;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .mobile-links .btn {
+      margin-top: 10px;
+    }
+
+    .service-grid,
+    .reasons-grid,
+    .flow-list,
+    .works-grid,
+    .pricing-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .price-card.is-featured {
+      transform: none;
+    }
+
+    .profile-card {
+      grid-template-columns: 1fr;
+      text-align: center;
+      justify-items: center;
+    }
+  }
+  @media (max-width: 560px) {
+    .support-plan { grid-template-columns: 1fr; gap: 20px; padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="nav-inner">
+    <a class="brand" href="#top"><img class="brand-icon" src="assets/profile-icon.png" alt="">こたえ工房</a>
+    <nav class="nav-links">
+      <a href="#service">サービス</a>
+      <a href="#works">実績</a>
+      <a href="#pricing">料金</a>
+      <a href="#flow">流れ</a>
+      <a href="#faq">FAQ</a>
+      <a href="#line">公式LINE</a>
+      <a href="https://docs.google.com/forms/d/1AIHHO5uOsPTYHvANWx5HTYBVjuUcCbOMwhJrslYFOFo/viewform" target="_blank" rel="noopener">お問い合わせ</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" type="button" aria-label="メニューを開く">☰</button>
+  </div>
+  <div class="mobile-links wrap" id="mobileLinks">
+    <a href="#service">サービス</a>
+    <a href="#works">実績</a>
+    <a href="#pricing">料金</a>
+    <a href="#flow">流れ</a>
+    <a href="#faq">FAQ</a>
+    <a href="#line">公式LINE</a>
+    <a href="https://docs.google.com/forms/d/1AIHHO5uOsPTYHvANWx5HTYBVjuUcCbOMwhJrslYFOFo/viewform" target="_blank" rel="noopener">お問い合わせ</a>
+  </div>
+</header>
+
+<main>
+  <section id="top" class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="kicker">診断アプリ制作サービス</span>
+        <h1>SNSやビジネスに<br>オリジナル診断アプリを</h1>
+        <p class="hero-lead">
+          フォロワー増加・リード獲得・商品訴求まで。目的に合わせてゼロから設計する、
+          スマホでサクサク動く診断アプリを制作します。質問設計から結果ページ、
+          SNSシェア機能まで一式おまかせいただけます。
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/1AIHHO5uOsPTYHvANWx5HTYBVjuUcCbOMwhJrslYFOFo/viewform" target="_blank" rel="noopener">無料で制作可否・概算見積もりを確認</a>
+          <a class="btn btn-secondary" href="#works">実績サンプルを見る</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat"><b>3種</b><span>公開中の実績サンプル</span></div>
+          <div class="hero-stat"><b>納期7日</b><span>特急対応で3日〜も可能</span></div>
+          <div class="hero-stat"><b>スマホ完全対応</b><span>SNSシェアもそのまま</span></div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <img class="hero-main-image" src="assets/hero-ai-diagnosis-v2.png" alt="オリジナルAI診断アプリ制作。性格・恋愛・適職・商品・オリジナル診断に対応" width="1254" height="1254">
+      </div>
+    </div>
+  </section>
+
+  <section id="service" class="section section-alt">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">SERVICE</span>
+        <h2>オリジナルAI診断アプリを制作します！</h2>
+        <p>
+          集客・SNS・LINE・ホームページで活用できる、オリジナルAI診断アプリを制作いたします。<br>
+          「診断コンテンツを作りたいけれど、何から始めればいいか分からない」<br>
+          制作可否や概算見積もりは無料でご案内します。詳しい企画整理は30分1,500円の個別相談で承ります。
+        </p>
+      </div>
+      <div class="service-grid">
+        <div class="service-card">
+          <span class="icon">✓</span>
+          <h3>SNSで反応が取れる診断</h3>
+          <p>SNSで反応が取れる診断コンテンツを作りたい方へ。</p>
+        </div>
+        <div class="service-card">
+          <span class="icon">✓</span>
+          <h3>LINE登録・集客</h3>
+          <p>LINE登録や集客につながる診断を作りたい方へ。</p>
+        </div>
+        <div class="service-card">
+          <span class="icon">✓</span>
+          <h3>商品・サービス紹介</h3>
+          <p>商品・サービス紹介に診断コンテンツを活用したい方へ。</p>
+        </div>
+        <div class="service-card">
+          <span class="icon">✓</span>
+          <h3>他社との差別化</h3>
+          <p>オリジナル診断で他社との差別化をしたい方へ。</p>
+        </div>
+        <div class="service-card">
+          <span class="icon">✓</span>
+          <h3>AI活用</h3>
+          <p>AIを活用したサービスを取り入れたい方へ。</p>
+        </div>
+        <div class="service-card">
+          <span class="icon">✓</span>
+          <h3>アイデアを形に</h3>
+          <p>アイデアはあるけれど、形にする方法が分からない方へ。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">EXAMPLE</span>
+        <h2>制作できる診断例</h2>
+        <p>以下は一例です。上記以外の制作可否についても、無料でお問い合わせいただけます。</p>
+      </div>
+      <div class="diagnosis-tags">
+        <span class="diagnosis-tag">恋愛タイプ診断</span>
+        <span class="diagnosis-tag">性格診断</span>
+        <span class="diagnosis-tag">適職診断</span>
+        <span class="diagnosis-tag">美容・スキンケア診断</span>
+        <span class="diagnosis-tag">商品・サービス診断</span>
+        <span class="diagnosis-tag">キャラクター診断</span>
+        <span class="diagnosis-tag">相性診断</span>
+        <span class="diagnosis-tag">健康習慣チェック</span>
+        <span class="diagnosis-tag">あなたに合う◯◯診断</span>
+        <span class="diagnosis-tag">オリジナル診断コンテンツ</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="works" class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">WORKS</span>
+        <h2>実績サンプル</h2>
+        <p>実際に公開しているサンプルです。カードをクリックすると、そのまま診断を体験できます。</p>
+      </div>
+      <div class="works-grid">
+        <a class="work-card" href="../癒しの香り診断サンプル/index.html">
+          <div class="work-preview preview-aroma">
+            <div class="dots"></div>
+            <span class="tag">癒し・ライフスタイル系</span>
+            <span class="preview-title">あなたを癒す香り診断</span>
+          </div>
+          <div class="work-body">
+            <h3>あなたを癒す香り診断</h3>
+            <p>全10問。和紙と明朝体を基調にした、落ち着いたトーンのデザイン。結果ごとに異なるアロマ写真を使用。</p>
+            <p class="work-use"><b>使用用途</b>アロマ・リラクゼーションサロンの集客／ヨガ・ピラティススタジオのSNS企画／ハンドメイド・雑貨ブランドのファン化施策</p>
+            <span class="work-link">実際に診断してみる →</span>
+          </div>
+        </a>
+        <a class="work-card" href="../恋愛才能診断サンプル/index.html">
+          <div class="work-preview preview-love">
+            <div class="dots"></div>
+            <span class="tag">恋愛・占い系</span>
+            <span class="preview-title">あなたの恋愛才能診断</span>
+          </div>
+          <div class="work-body">
+            <h3>あなたの恋愛才能診断</h3>
+            <p>全20問。クリーム紙×手書き風フォント×ワッシーテープ風の装飾で、スクラップブックのような温かみを演出。4タイプ×2パターンの結果文で、同じタイプでも飽きさせない設計。</p>
+            <p class="work-use"><b>使用用途</b>恋愛系インフルエンサー・占い師のアカウント運用／マッチングアプリ・婚活サービスのリード獲得／美容室・エステサロンの来店促進企画</p>
+            <span class="work-link">実際に診断してみる →</span>
+          </div>
+        </a>
+        <a class="work-card" href="../あなたにぴったりのバズり投稿タイプ診断サンプル/code_artifact.html">
+          <div class="work-preview preview-viral">
+            <div class="dots"></div>
+            <span class="tag">SNS・マーケ系</span>
+            <span class="preview-title">バズり投稿タイプ診断</span>
+          </div>
+          <div class="work-body">
+            <h3>バズり投稿タイプ診断</h3>
+            <p>全10問。ダークモード×コーラル/インディゴのネオンアクセントで、SNSアプリの通知画面のような世界観。相性の良いSNSランキングまで提案する実用型診断。</p>
+            <p class="work-use"><b>使用用途</b>SNS運用代行・コンサルの新規集客／インフルエンサー講座・スクールの体験コンテンツ／企業のSNS担当者向けセミナー集客</p>
+            <span class="work-link">実際に診断してみる →</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">TRUST</span>
+        <h2>安心してご依頼いただくために</h2>
+        <p>まだ実績を積み重ねている段階だからこそ、発注前に納得していただける仕組みを大切にしています。</p>
+      </div>
+      <div class="reasons-grid">
+        <div class="reason-card">
+          <h3>実績はすべて公開中</h3>
+          <p>掲載しているサンプルは、実際にその場で診断を体験できます。発注前に仕上がりの質感をご確認いただけます。</p>
+        </div>
+        <div class="reason-card">
+          <h3>お問い合わせ・概算見積もりは無料</h3>
+          <p>制作可否や料金の目安を無料でご案内します。企画整理などの詳しい個別相談は30分1,500円です。</p>
+        </div>
+        <div class="reason-card">
+          <h3>修正回数はプランに含む</h3>
+          <p>追加費用の不安なく、ご希望のイメージに近づくまで調整いただけます（回数は料金プランをご確認ください）。</p>
+        </div>
+        <div class="reason-card">
+          <h3>確認しながら進行</h3>
+          <p>完成品をいきなりお渡しするのではなく、制作の流れの中でイメージのすり合わせを挟みながら進めます。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="flow" class="section section-alt">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">FLOW</span>
+        <h2>制作の流れ</h2>
+        <p>お問い合わせから納品まで、5つのステップで進めます。</p>
+      </div>
+      <div class="flow-list">
+        <div class="flow-step">
+          <span class="flow-num">1</span>
+          <h3>お問い合わせ・内容確認</h3>
+          <p>制作したい内容と目的を確認します。</p>
+        </div>
+        <div class="flow-step">
+          <span class="flow-num">2</span>
+          <h3>診断内容・目的の確認</h3>
+          <p>質問数や結果タイプなど内容を確認します。</p>
+        </div>
+        <div class="flow-step">
+          <span class="flow-num">3</span>
+          <h3>AI診断アプリ制作</h3>
+          <p>内容をもとに診断アプリを制作します。</p>
+        </div>
+        <div class="flow-step">
+          <span class="flow-num">4</span>
+          <h3>ご確認・修正</h3>
+          <p>実際に動作するものをご確認いただき、修正します（2回まで）。</p>
+        </div>
+        <div class="flow-step">
+          <span class="flow-num">5</span>
+          <h3>納品</h3>
+          <p>そのまま使えるファイル一式を納品します。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing" class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">PRICING</span>
+        <h2>料金プラン</h2>
+        <p>簡単なお問い合わせと概算見積もりは無料です。詳しい企画相談は個別相談をご利用ください。</p>
+      </div>
+      <div class="price-card is-featured" style="max-width: 480px; margin: 0 auto 40px;">
+        <span class="badge">BASIC</span>
+        <h3>基本料金</h3>
+        <p class="price-value">¥5,000</p>
+        <ul class="price-list">
+          <li>診断質問：10問まで</li>
+          <li>診断結果：4パターンまで</li>
+          <li>修正：2回まで</li>
+          <li>納期：7日</li>
+        </ul>
+        <a class="btn btn-primary" href="https://docs.google.com/forms/d/1AIHHO5uOsPTYHvANWx5HTYBVjuUcCbOMwhJrslYFOFo/viewform" target="_blank" rel="noopener">無料で概算見積もりを確認</a>
+      </div>
+
+      <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 16px;">有料オプション</h3>
+      <ul class="option-list">
+        <li><span>診断質問を10問追加</span><b>+ 3,000円</b></li>
+        <li><span>診断結果を1パターン追加</span><b>+ 2,000円</b></li>
+        <li><span>修正3回目以降（1回）</span><b>+ 2,000円</b></li>
+        <li><span>特急対応（3日納品）</span><b>+ 3,000円</b></li>
+        <li>
+          <span>個別相談（30分）<small class="option-detail">企画整理・質問内容・方向性を具体的にご提案します</small></span>
+          <b>1,500円</b>
+        </li>
+      </ul>
+
+      <div class="support-plan">
+        <div>
+          <span class="badge">SELF BUILD SUPPORT</span>
+          <h3>自分で診断アプリを作りたい方向け<br>1か月伴走プラン</h3>
+          <p class="price-value">¥60,000</p>
+          <p class="price-meta">サポート期間：開始日から30日間</p>
+        </div>
+        <div>
+          <ul class="price-list">
+            <li>Zoomサポート：全4回・各60分</li>
+            <li>チャットでの質問：期間中回数無制限</li>
+            <li>質問設計・診断ロジック・デザイン・公開までサポート</li>
+            <li>制作作業はご本人に進めていただきます</li>
+          </ul>
+          <p class="support-note">チャットは原則24〜48時間以内に返信します。コードやデザインの全面的な制作代行、大幅な作り直しは含まれません。</p>
+        </div>
+      </div>
+
+      <h3 style="font-size: 18px; font-weight: 800; margin: 36px 0 16px;">購入にあたってのお願い</h3>
+      <ul class="notes-list">
+        <li>ご購入前の簡単なお問い合わせ、制作可否の確認、概算見積もりは無料です。</li>
+        <li>企画整理や質問内容など、具体的な提案を伴う個別相談は30分1,500円です。</li>
+        <li>ご希望の内容によっては、有料オプションをご提案させていただく場合がございます。</li>
+        <li>基本料金には「質問10問・診断結果4パターン・修正2回まで」が含まれます。</li>
+        <li>制作開始後の大幅な仕様変更や追加のご要望は、別途料金をお願いする場合がございます。</li>
+        <li>ご連絡が7日以上取れない場合は、その時点の内容で正式な納品とさせていただく場合がございます。</li>
+        <li>公序良俗に反する内容や、法令に抵触する可能性がある内容の制作はお受けできません。</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">BEFORE ORDER</span>
+        <h2>ご購入前に</h2>
+      </div>
+      <p>
+        「こんな診断アプリは作れる？」という制作可否の確認や概算見積もりは無料です。<br>
+        まだアイデアがまとまっておらず、企画や質問内容から一緒に整理したい場合は、30分1,500円の個別相談をご利用いただけます。
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">WHY US</span>
+        <h2>選ばれる理由</h2>
+      </div>
+      <div class="reasons-grid">
+        <div class="reason-card">
+          <h3>世界観に合わせたデザイン</h3>
+          <p>テンプレートの使い回しではなく、用途に合わせたオリジナルデザインで制作します。</p>
+        </div>
+        <div class="reason-card">
+          <h3>スマホ完全対応</h3>
+          <p>SNSからの流入を前提に、スマホでの見え方・操作感を最優先で設計します。</p>
+        </div>
+        <div class="reason-card">
+          <h3>シェア機能も標準対応</h3>
+          <p>X・LINEシェアや結果画像のダウンロードなど、拡散を後押しする機能を組み込めます。</p>
+        </div>
+        <div class="reason-card">
+          <h3>納品後もそのまま使える</h3>
+          <p>特別なソフトや契約不要。ファイルを開くだけで動作するシンプルな納品形式です。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">FAQ</span>
+        <h2>よくあるご質問</h2>
+      </div>
+      <div class="faq-list">
+        <details>
+          <summary>納期はどれくらいですか？</summary>
+          <p>基本料金の場合、納期の目安は7日です。お急ぎの場合は特急対応（+3,000円）で3日納品も可能です。ご依頼状況により前後する場合がありますので、まずはお問い合わせください。</p>
+        </details>
+        <details>
+          <summary>質問数や結果タイプの数は自由に決められますか？</summary>
+          <p>はい。用途に合わせて設問数・結果タイプ数を自由に設計できます。既存サンプルの構成を参考にすることも可能です。</p>
+        </details>
+        <details>
+          <summary>スマホでも綺麗に表示されますか？</summary>
+          <p>はい。全てスマホでの閲覧を前提に設計しているため、そのままSNSでシェアしても崩れにくい作りになっています。</p>
+        </details>
+        <details>
+          <summary>診断結果をSNSでシェアできるようにできますか？</summary>
+          <p>はい。X・LINEへのシェアボタンや、結果を画像として保存できる機能も標準でご用意できます。</p>
+        </details>
+        <details>
+          <summary>デザインの雰囲気はおまかせできますか？</summary>
+          <p>はい。ご希望のテイストやターゲットをヒアリングしたうえで、世界観に合わせたオリジナルデザインをご提案します。</p>
+        </details>
+        <details>
+          <summary>修正は何回までお願いできますか？</summary>
+          <p>プランごとに規定回数がございます。詳細は料金プランをご確認ください。規定回数を超える修正は別途ご相談となります。</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">PROFILE</span>
+        <h2>プロフィール</h2>
+      </div>
+      <div class="profile-card">
+        <img class="profile-avatar" src="assets/profile-icon.png" alt="こたえ工房のプロフィールアイコン">
+        <div>
+          <h3>こたえ工房</h3>
+          <p>
+            【私が大切にしていること】<br>
+            クライアント様の想いや目的を丁寧にヒアリングし、ご要望を整理しながら最適な形をご提案いたします。<br>
+            「相談しやすい」「要望をしっかり聞いてもらえる」そんな安心感を大切に、丁寧に制作いたします。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="line" class="section section-alt">
+    <div class="wrap">
+      <div class="line-panel">
+        <div>
+          <span class="kicker">OFFICIAL LINE</span>
+          <h2>公式LINEはこちら</h2>
+          <p>実績サンプルのご案内や、無料のお問い合わせ・概算見積もりをLINEでも受け付けています。</p>
+        </div>
+        <a class="btn btn-line" href="https://line.me/R/ti/p/@374wafyy">
+          <span class="line-icon">LINE</span>友だち追加する
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section cta-final">
+    <div class="wrap">
+      <span class="kicker">CONTACT</span>
+      <h2>まずは無料のお問い合わせから</h2>
+      <p>制作できる内容かどうか、料金はいくらになるかを無料で確認できます。</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="https://docs.google.com/forms/d/1AIHHO5uOsPTYHvANWx5HTYBVjuUcCbOMwhJrslYFOFo/viewform" target="_blank" rel="noopener">無料で制作可否・概算見積もりを確認</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <p>© 2026 こたえ工房</p>
+    <div class="footer-links">
+      <a href="#service">サービス</a>
+      <a href="#works">実績</a>
+      <a href="#pricing">料金</a>
+      <a href="#faq">FAQ</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const mobileLinks = document.getElementById('mobileLinks');
+
+  navToggle.addEventListener('click', () => {
+    mobileLinks.classList.toggle('is-open');
+  });
+
+  mobileLinks.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      mobileLinks.classList.remove('is-open');
+    });
+  });
+</script>
+</body>
+</html>
