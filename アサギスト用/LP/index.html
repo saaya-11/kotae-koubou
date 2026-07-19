@@ -758,6 +758,31 @@
     color: var(--muted);
   }
 
+  .price-original {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  .price-original del {
+    margin-left: 5px;
+    color: var(--ink);
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .price-monitor-label {
+    display: inline-flex;
+    align-self: flex-start;
+    margin-top: 10px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 800;
+  }
+
   .price-meta {
     margin-top: 4px;
     color: var(--muted);
@@ -1403,6 +1428,8 @@
       <div class="price-card is-featured" style="max-width: 480px; margin: 0 auto 40px;">
         <span class="badge">BASIC</span>
         <h3>基本料金</h3>
+        <p class="price-original">モニター終了後予定価格 <del>¥30,000</del></p>
+        <span class="price-monitor-label">モニター価格</span>
         <p class="price-value">¥5,000</p>
         <ul class="price-list">
           <li>診断質問：10問まで</li>
@@ -1429,6 +1456,8 @@
         <div>
           <span class="badge">SELF BUILD SUPPORT</span>
           <h3>自分で診断アプリを作りたい方向け<br>1か月伴走プラン</h3>
+          <p class="price-original">モニター終了後予定価格 <del>¥100,000</del></p>
+          <span class="price-monitor-label">モニター価格</span>
           <p class="price-value">¥60,000</p>
           <p class="price-meta">サポート期間：開始日から30日間</p>
         </div>
@@ -1532,11 +1561,11 @@
       <div class="line-panel">
         <div>
           <span class="kicker">OFFICIAL LINE</span>
-          <h2>「さぁやAI」公式LINE</h2>
+          <h2>公式LINE</h2>
           <p>アサギスト向けのAI活用情報、実績サンプルのご案内、無料のお問い合わせ・概算見積もりを受け付けています。</p>
         </div>
         <a class="btn btn-line" href="https://line.me/R/ti/p/@374wafyy">
-          <span class="line-icon">LINE</span>さぁやAIを友だち追加
+          <span class="line-icon">LINE</span>友だち追加
         </a>
       </div>
     </div>
