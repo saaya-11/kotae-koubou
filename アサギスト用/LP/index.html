@@ -641,32 +641,51 @@
   }
 
   .work-preview {
+    position: relative;
     height: 130px;
     padding: 14px;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     color: #fff;
+    overflow: hidden;
+  }
+
+  .work-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .work-preview::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(0deg, rgba(20, 15, 8, 0.58) 0%, rgba(20, 15, 8, 0.04) 65%);
+    pointer-events: none;
+  }
+
+  .work-preview > span {
+    position: relative;
+    z-index: 2;
   }
 
   .preview-aroma {
-    background:
-      linear-gradient(0deg, rgba(20, 15, 8, 0.55) 0%, rgba(20, 15, 8, 0.05) 60%),
-      url("assets/work-aroma.png") center/cover no-repeat;
+    background: #ece8e2;
     font-family: "Hiragino Mincho ProN", "Yu Mincho", serif;
     font-weight: 400;
   }
   .preview-love {
-    background:
-      linear-gradient(0deg, rgba(40, 12, 20, 0.6) 0%, rgba(40, 12, 20, 0.05) 60%),
-      url("assets/work-love.png") center 22%/cover no-repeat;
+    background: #eadde2;
     color: #fff;
     font-family: "Hiragino Maru Gothic ProN", "Rounded Mplus 1c", sans-serif;
   }
   .preview-viral {
-    background:
-      url("assets/work-viral.png") right bottom/55% auto no-repeat,
-      linear-gradient(150deg, #07060d 0%, #14121e 55%, #7c5cff 100%);
+    background: linear-gradient(150deg, #07060d 0%, #14121e 55%, #7c5cff 100%);
     font-weight: 900;
     letter-spacing: -0.02em;
   }
@@ -1391,7 +1410,7 @@
       </div>
       <div class="works-grid">
         <a class="work-card" href="../癒しの香り診断サンプル/index.html">
-          <div class="work-preview preview-aroma"><span>あなたを癒す香り診断</span></div>
+          <div class="work-preview preview-aroma"><img class="work-image" src="assets/work-aroma.png" alt="" width="1536" height="1024"><span>あなたを癒す香り診断</span></div>
           <div class="work-body">
             <p>和紙×明朝体の落ち着いたトーン。全10問。</p>
             <p class="work-use"><b>使用用途</b>アロマ・リラクゼーションサロン／ヨガ・ピラティススタジオ／ハンドメイドブランドの集客</p>
@@ -1399,7 +1418,7 @@
           </div>
         </a>
         <a class="work-card" href="../恋愛才能診断サンプル/index.html">
-          <div class="work-preview preview-love"><span>あなたの恋愛才能診断</span></div>
+          <div class="work-preview preview-love"><img class="work-image" src="assets/work-love.png" alt="" width="1536" height="1024"><span>あなたの恋愛才能診断</span></div>
           <div class="work-body">
             <p>クリーム紙×手書き風フォントのスクラップブック風。全20問。</p>
             <p class="work-use"><b>使用用途</b>恋愛系インフルエンサー・占い師／マッチングアプリ・婚活サービス／美容室・エステサロンの来店促進</p>
@@ -1407,7 +1426,7 @@
           </div>
         </a>
         <a class="work-card" href="../あなたにぴったりのバズり投稿タイプ診断サンプル/code_artifact.html">
-          <div class="work-preview preview-viral"><span>バズり投稿タイプ診断</span></div>
+          <div class="work-preview preview-viral"><img class="work-image" src="assets/work-viral.png" alt="" width="1536" height="1024"><span>バズり投稿タイプ診断</span></div>
           <div class="work-body">
             <p>ダークモード×ネオンアクセントのSNSアプリ風。全10問。</p>
             <p class="work-use"><b>使用用途</b>SNS運用代行・コンサル／インフルエンサー講座・スクール／企業のSNS担当者向け集客</p>
