@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>診断アプリ制作サービス｜こたえ工房</title>
+<title>診断アプリ制作サービス</title>
 <style>
   :root {
     color-scheme: light;
@@ -427,6 +427,16 @@
   }
 
   /* Service */
+  .service-subhead {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    font-size: 19px;
+    font-weight: 800;
+    color: var(--indigo-deep);
+  }
+
   .service-grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -434,27 +444,30 @@
   }
 
   .service-card {
-    padding: 24px 20px;
-    border: 1px solid var(--line);
-    border-radius: 16px;
+    padding: 26px 22px;
+    border: 2px solid var(--indigo-soft);
+    border-radius: 18px;
     background: var(--panel);
+    box-shadow: 0 12px 30px rgba(91, 79, 233, 0.1);
   }
 
   .service-card .icon {
     display: inline-flex;
-    width: 40px;
-    height: 40px;
+    width: 48px;
+    height: 48px;
     align-items: center;
     justify-content: center;
-    border-radius: 12px;
-    background: var(--accent-soft);
-    color: var(--accent);
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--indigo), var(--indigo-deep));
+    color: #fff;
     font-weight: 800;
+    font-size: 20px;
+    box-shadow: 0 10px 20px rgba(91, 79, 233, 0.28);
   }
 
   .service-card h3 {
-    margin-top: 14px;
-    font-size: 16px;
+    margin-top: 16px;
+    font-size: 17px;
     font-weight: 800;
   }
 
@@ -1170,7 +1183,7 @@
 
 <header class="site-header">
   <div class="nav-inner">
-    <a class="brand" href="#top"><img class="brand-icon" src="assets/profile-icon.png" alt="">こたえ工房</a>
+    <a class="brand" href="#top"><img class="brand-icon" src="assets/profile-icon.png" alt=""></a>
     <nav class="nav-links">
       <a href="#service">サービス</a>
       <a href="#works">実績</a>
@@ -1231,6 +1244,7 @@
           制作可否や概算見積もりは無料でご案内します。詳しい企画整理は30分1,500円の個別相談で承ります。
         </p>
       </div>
+      <p class="service-subhead">💡 こんな方におすすめです</p>
       <div class="service-grid">
         <div class="service-card">
           <span class="icon">✓</span>
@@ -1556,9 +1570,8 @@
         <h2>プロフィール</h2>
       </div>
       <div class="profile-card">
-        <img class="profile-avatar" src="assets/profile-icon.png" alt="こたえ工房のプロフィールアイコン">
+        <img class="profile-avatar" src="assets/profile-icon.png" alt="プロフィールアイコン">
         <div>
-          <h3>こたえ工房</h3>
           <p>
             【私が大切にしていること】<br>
             クライアント様の想いや目的を丁寧にヒアリングし、ご要望を整理しながら最適な形をご提案いたします。<br>
@@ -1598,7 +1611,7 @@
 
 <footer class="site-footer">
   <div class="wrap footer-inner">
-    <p>© 2026 こたえ工房</p>
+    <p>© 2026</p>
     <div class="footer-links">
       <a href="#service">サービス</a>
       <a href="#works">実績</a>

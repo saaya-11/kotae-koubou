@@ -427,6 +427,16 @@
   }
 
   /* Service */
+  .service-subhead {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    font-size: 19px;
+    font-weight: 800;
+    color: var(--indigo-deep);
+  }
+
   .service-grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -434,27 +444,30 @@
   }
 
   .service-card {
-    padding: 24px 20px;
-    border: 1px solid var(--line);
-    border-radius: 16px;
+    padding: 26px 22px;
+    border: 2px solid var(--indigo-soft);
+    border-radius: 18px;
     background: var(--panel);
+    box-shadow: 0 12px 30px rgba(91, 79, 233, 0.1);
   }
 
   .service-card .icon {
     display: inline-flex;
-    width: 40px;
-    height: 40px;
+    width: 48px;
+    height: 48px;
     align-items: center;
     justify-content: center;
-    border-radius: 12px;
-    background: var(--accent-soft);
-    color: var(--accent);
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--indigo), var(--indigo-deep));
+    color: #fff;
     font-weight: 800;
+    font-size: 20px;
+    box-shadow: 0 10px 20px rgba(91, 79, 233, 0.28);
   }
 
   .service-card h3 {
-    margin-top: 14px;
-    font-size: 16px;
+    margin-top: 16px;
+    font-size: 17px;
     font-weight: 800;
   }
 
@@ -1189,6 +1202,7 @@
           制作可否や概算見積もりは無料でご案内します。詳しい企画整理は30分1,500円の個別相談で承ります。
         </p>
       </div>
+      <p class="service-subhead">💡 こんな方におすすめです</p>
       <div class="service-grid">
         <div class="service-card">
           <span class="icon">✓</span>
