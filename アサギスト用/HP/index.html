@@ -506,23 +506,40 @@
     overflow: hidden;
   }
 
+  .work-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .work-preview::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(0deg, rgba(20, 15, 8, 0.58) 0%, rgba(20, 15, 8, 0.04) 65%);
+    pointer-events: none;
+  }
+
+  .work-preview > :not(.work-image) {
+    position: relative;
+    z-index: 2;
+  }
+
   .preview-aroma {
-    background:
-      linear-gradient(0deg, rgba(20, 15, 8, 0.55) 0%, rgba(20, 15, 8, 0.05) 60%),
-      url("../癒しの香り診断サンプル/assets/aroma-hero.png") center/cover no-repeat;
+    background: #ece8e2;
     font-family: "Hiragino Mincho ProN", "Yu Mincho", serif;
   }
   .preview-love {
-    background:
-      linear-gradient(0deg, rgba(40, 12, 20, 0.6) 0%, rgba(40, 12, 20, 0.05) 60%),
-      url("../恋愛才能診断サンプル/assets/hero-group.png") center 22%/cover no-repeat;
+    background: #eadde2;
     color: #fff;
     font-family: "Hiragino Maru Gothic ProN", "Rounded Mplus 1c", sans-serif;
   }
   .preview-viral {
-    background:
-      url("../あなたにぴったりのバズり投稿タイプ診断サンプル/assets/hero-phone.png") right bottom/55% auto no-repeat,
-      linear-gradient(150deg, #07060d 0%, #14121e 55%, #7c5cff 100%);
+    background: linear-gradient(150deg, #07060d 0%, #14121e 55%, #7c5cff 100%);
     font-weight: 900;
     letter-spacing: -0.02em;
   }
@@ -1188,7 +1205,7 @@
           SNSシェア機能まで一式おまかせいただけます。
         </p>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="https://docs.google.com/forms/d/1AIHHO5uOsPTYHvANWx5HTYBVjuUcCbOMwhJrslYFOFo/viewform" target="_blank" rel="noopener">お見積もりとご相談はこちら</a>
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/1AIHHO5uOsPTYHvANWx5HTYBVjuUcCbOMwhJrslYFOFo/viewform" target="_blank" rel="noopener">制作について問い合わせる</a>
           <a class="btn btn-secondary" href="#works">実績サンプルを見る</a>
         </div>
         <div class="hero-stats">
@@ -1211,7 +1228,7 @@
         <p>
           集客・SNS・LINE・ホームページで活用できる、オリジナルAI診断アプリを制作いたします。<br>
           「診断コンテンツを作りたいけれど、何から始めればいいか分からない」<br>
-          概算見積もりは無料でご案内します。詳しい企画整理は30分1,500円の個別相談で承ります。
+          制作可否や概算見積もりは無料でご案内します。詳しい企画整理は30分1,500円の個別相談で承ります。
         </p>
       </div>
       <div class="service-grid">
@@ -1254,7 +1271,7 @@
       <div class="section-head">
         <span class="kicker">EXAMPLE</span>
         <h2>制作できる診断例</h2>
-        <p>以下は一例です。上記以外の内容についても、無料でお問い合わせいただけます。</p>
+        <p>以下は一例です。上記以外の制作可否についても、無料でお問い合わせいただけます。</p>
       </div>
       <div class="diagnosis-tags">
         <span class="diagnosis-tag">恋愛タイプ診断</span>
@@ -1279,8 +1296,9 @@
         <p>実際に公開しているサンプルです。カードをクリックすると、そのまま診断を体験できます。</p>
       </div>
       <div class="works-grid">
-        <a class="work-card" href="../癒しの香り診断サンプル/index.html">
+        <a class="work-card" href="../../癒しの香り診断サンプル/index.html">
           <div class="work-preview preview-aroma">
+            <img class="work-image" src="assets/work-aroma.png" alt="" width="1536" height="1024">
             <div class="dots"></div>
             <span class="tag">癒し・ライフスタイル系</span>
             <span class="preview-title">あなたを癒す香り診断</span>
@@ -1292,8 +1310,9 @@
             <span class="work-link">実際に診断してみる →</span>
           </div>
         </a>
-        <a class="work-card" href="../恋愛才能診断サンプル/index.html">
+        <a class="work-card" href="../../恋愛才能診断サンプル/index.html">
           <div class="work-preview preview-love">
+            <img class="work-image" src="assets/work-love.png" alt="" width="1536" height="1024">
             <div class="dots"></div>
             <span class="tag">恋愛・占い系</span>
             <span class="preview-title">あなたの恋愛才能診断</span>
@@ -1305,8 +1324,9 @@
             <span class="work-link">実際に診断してみる →</span>
           </div>
         </a>
-        <a class="work-card" href="../あなたにぴったりのバズり投稿タイプ診断サンプル/code_artifact.html">
+        <a class="work-card" href="../../あなたにぴったりのバズり投稿タイプ診断サンプル/code_artifact.html">
           <div class="work-preview preview-viral">
+            <img class="work-image" src="assets/work-viral.png" alt="" width="1536" height="1024">
             <div class="dots"></div>
             <span class="tag">SNS・マーケ系</span>
             <span class="preview-title">バズり投稿タイプ診断</span>
@@ -1336,7 +1356,7 @@
         </div>
         <div class="reason-card">
           <h3>お問い合わせ・概算見積もりは無料</h3>
-          <p>料金の目安を無料でご案内します。企画整理などの詳しい個別相談は30分1,500円です。</p>
+          <p>制作可否や料金の目安を無料でご案内します。企画整理などの詳しい個別相談は30分1,500円です。</p>
         </div>
         <div class="reason-card">
           <h3>修正回数はプランに含む</h3>
@@ -1406,7 +1426,7 @@
           <li>修正：2回まで</li>
           <li>納期：7日</li>
         </ul>
-        <a class="btn btn-primary" href="https://docs.google.com/forms/d/1AIHHO5uOsPTYHvANWx5HTYBVjuUcCbOMwhJrslYFOFo/viewform" target="_blank" rel="noopener">無料で概算見積もりを確認</a>
+        <a class="btn btn-primary" href="https://docs.google.com/forms/d/1AIHHO5uOsPTYHvANWx5HTYBVjuUcCbOMwhJrslYFOFo/viewform" target="_blank" rel="noopener">制作について問い合わせる</a>
       </div>
 
       <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 16px;">有料オプション</h3>
@@ -1443,7 +1463,7 @@
 
       <h3 style="font-size: 18px; font-weight: 800; margin: 36px 0 16px;">購入にあたってのお願い</h3>
       <ul class="notes-list">
-        <li>ご購入前の簡単なお問い合わせ・概算見積もりは無料です。</li>
+        <li>ご購入前の簡単なお問い合わせ、制作可否の確認、概算見積もりは無料です。</li>
         <li>企画整理や質問内容など、具体的な提案を伴う個別相談は30分1,500円です。</li>
         <li>ご希望の内容によっては、有料オプションをご提案させていただく場合がございます。</li>
         <li>基本料金には「質問10問・診断結果4パターン・修正2回まで」が含まれます。</li>
@@ -1461,7 +1481,7 @@
         <h2>ご購入前に</h2>
       </div>
       <p>
-        「こんな診断アプリは作れる？」というご相談や概算見積もりは無料です。<br>
+        「こんな診断アプリは作れる？」という制作可否の確認や概算見積もりは無料です。<br>
         まだアイデアがまとまっておらず、企画や質問内容から一緒に整理したい場合は、30分1,500円の個別相談をご利用いただけます。
       </p>
     </div>
@@ -1570,7 +1590,7 @@
       <h2>まずは無料のお問い合わせから</h2>
       <p>制作できる内容かどうか、料金はいくらになるかを無料で確認できます。</p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="https://docs.google.com/forms/d/1AIHHO5uOsPTYHvANWx5HTYBVjuUcCbOMwhJrslYFOFo/viewform" target="_blank" rel="noopener">お見積もりとご相談はこちら</a>
+        <a class="btn btn-primary" href="https://docs.google.com/forms/d/1AIHHO5uOsPTYHvANWx5HTYBVjuUcCbOMwhJrslYFOFo/viewform" target="_blank" rel="noopener">制作について問い合わせる</a>
       </div>
     </div>
   </section>
