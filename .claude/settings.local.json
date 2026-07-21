@@ -75,7 +75,15 @@
       "Bash(python3 -c \"import qrcode; print\\('qrcode available'\\)\")",
       "Bash(python3 -c \"import segno; print\\('segno available'\\)\")",
       "Bash(pip3 install *)",
-      "Bash(python3 -c \"import qrcode; print\\('ok'\\)\")"
+      "Bash(python3 -c \"import qrcode; print\\('ok'\\)\")",
+      "Bash(cat > *)",
+      "Bash(mkdir -p ~/.claude/scheduled-tasks/crowdworks-writing-job-search && cat ~/.claude/scheduled-tasks/crowdworks-writing-job-search/seen_jobs.txt 2>/dev/null || echo \"NOFILE\")",
+      "Bash(mkdir -p \"/Users/sayak./Desktop/クラウドワークス\" && mv \"/Users/sayak./Desktop/0001_ココナ/ココナラ診断アプリ/診断アプリサンプル/CLAUDE.md\" \"/Users/sayak./Desktop/クラウドワークス/CLAUDE.md\" && ls -la \"/Users/sayak./Desktop/クラウドワークス/\")",
+      "Bash(mkdir -p /Users/sayak./.claude/skills/crowdworks-line-notify)",
+      "Bash(rm \"/Users/sayak./Desktop/クラウドワークス/CLAUDE.md\" && echo \"削除完了\" && ls \"/Users/sayak./.claude/skills/crowdworks-line-notify/\")",
+      "Bash(mkdir -p ~/.claude/scheduled-tasks/crowdworks-writing-job-search && cat ~/.claude/scheduled-tasks/crowdworks-writing-job-search/seen_jobs.txt 2>/dev/null || echo \"FILE_NOT_FOUND\")",
+      "Bash(mkdir -p ~/.claude/scheduled-tasks/crowdworks-writing-job-search && cat ~/.claude/scheduled-tasks/crowdworks-writing-job-search/seen_jobs.txt 2>/dev/null | wc -l)",
+      "Bash(mkdir -p ~/.claude/scheduled-tasks/crowdworks-writing-job-search && cat ~/.claude/scheduled-tasks/crowdworks-writing-job-search/seen_jobs.txt 2>/dev/null | tail -50; echo \"---COUNT---\"; wc -l ~/.claude/scheduled-tasks/crowdworks-writing-job-search/seen_jobs.txt 2>/dev/null; echo \"---LINE CONFIG EXISTS---\"; test -f ~/.claude/scheduled-tasks/crowdworks-writing-job-search/line_config.txt && echo \"YES\" || echo \"NO\")"
     ]
   }
 }

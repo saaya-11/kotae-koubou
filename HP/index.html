@@ -760,6 +760,42 @@
     font-weight: 800;
   }
 
+  .option-detail {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  .support-plan {
+    display: grid;
+    grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+    gap: 28px;
+    align-items: center;
+    margin-top: 38px;
+    padding: 30px;
+    border: 1px solid rgba(91, 79, 233, 0.2);
+    border-radius: 22px;
+    background: linear-gradient(135deg, #fff 0%, #f2f0ff 100%);
+    box-shadow: 0 18px 44px rgba(91, 79, 233, 0.1);
+  }
+
+  .support-plan .badge {
+    display: inline-flex;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: var(--indigo);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 800;
+  }
+
+  .support-plan h3 { margin-top: 12px; font-size: 21px; line-height: 1.5; }
+  .support-plan .price-value { margin-top: 8px; }
+  .support-plan .price-list { margin-top: 0; }
+  .support-note { margin-top: 12px; color: var(--muted); font-size: 12px; line-height: 1.7; }
+
   .notes-list {
     display: grid;
     gap: 10px;
@@ -1083,6 +1119,9 @@
       justify-items: center;
     }
   }
+  @media (max-width: 560px) {
+    .support-plan { grid-template-columns: 1fr; gap: 20px; padding: 24px 20px; }
+  }
 </style>
 </head>
 <body>
@@ -1124,7 +1163,7 @@
           SNSシェア機能まで一式おまかせいただけます。
         </p>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="https://docs.google.com/forms/d/1AIHHO5uOsPTYHvANWx5HTYBVjuUcCbOMwhJrslYFOFo/viewform" target="_blank" rel="noopener">相談する</a>
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/1AIHHO5uOsPTYHvANWx5HTYBVjuUcCbOMwhJrslYFOFo/viewform" target="_blank" rel="noopener">無料で制作可否・概算見積もりを確認</a>
           <a class="btn btn-secondary" href="#works">実績サンプルを見る</a>
         </div>
         <div class="hero-stats">
@@ -1147,7 +1186,7 @@
         <p>
           集客・SNS・LINE・ホームページで活用できる、オリジナルAI診断アプリを制作いたします。<br>
           「診断コンテンツを作りたいけれど、何から始めればいいか分からない」<br>
-          そんな方も安心してご相談ください。アイデア整理から設計・制作までサポートいたします。
+          制作可否や概算見積もりは無料でご案内します。詳しい企画整理は30分1,500円の個別相談で承ります。
         </p>
       </div>
       <div class="service-grid">
@@ -1190,7 +1229,7 @@
       <div class="section-head">
         <span class="kicker">EXAMPLE</span>
         <h2>制作できる診断例</h2>
-        <p>以下は一例です。上記以外も対応可能ですので、お気軽にご相談ください。</p>
+        <p>以下は一例です。上記以外の制作可否についても、無料でお問い合わせいただけます。</p>
       </div>
       <div class="diagnosis-tags">
         <span class="diagnosis-tag">恋愛タイプ診断</span>
@@ -1271,8 +1310,8 @@
           <p>掲載しているサンプルは、実際にその場で診断を体験できます。発注前に仕上がりの質感をご確認いただけます。</p>
         </div>
         <div class="reason-card">
-          <h3>相談・お見積りは無料</h3>
-          <p>内容が固まっていない段階でも大歓迎です。ヒアリングのうえ、最適なプランをご提案します。</p>
+          <h3>お問い合わせ・概算見積もりは無料</h3>
+          <p>制作可否や料金の目安を無料でご案内します。企画整理などの詳しい個別相談は30分1,500円です。</p>
         </div>
         <div class="reason-card">
           <h3>修正回数はプランに含む</h3>
@@ -1291,13 +1330,13 @@
       <div class="section-head">
         <span class="kicker">FLOW</span>
         <h2>制作の流れ</h2>
-        <p>ご相談から納品まで、5つのステップで進めます。</p>
+        <p>お問い合わせから納品まで、5つのステップで進めます。</p>
       </div>
       <div class="flow-list">
         <div class="flow-step">
           <span class="flow-num">1</span>
-          <h3>ご相談・ヒアリング</h3>
-          <p>目的やイメージをお伺いします。</p>
+          <h3>お問い合わせ・内容確認</h3>
+          <p>制作したい内容と目的を確認します。</p>
         </div>
         <div class="flow-step">
           <span class="flow-num">2</span>
@@ -1328,7 +1367,7 @@
       <div class="section-head">
         <span class="kicker">PRICING</span>
         <h2>料金プラン</h2>
-        <p>基本料金に含まれる内容と、有料オプションです。まずはお気軽にご相談ください。</p>
+        <p>簡単なお問い合わせと概算見積もりは無料です。詳しい企画相談は個別相談をご利用ください。</p>
       </div>
       <div class="price-card is-featured" style="max-width: 480px; margin: 0 auto 40px;">
         <span class="badge">BASIC</span>
@@ -1340,7 +1379,7 @@
           <li>修正：2回まで</li>
           <li>納期：7日</li>
         </ul>
-        <a class="btn btn-primary" href="https://docs.google.com/forms/d/1AIHHO5uOsPTYHvANWx5HTYBVjuUcCbOMwhJrslYFOFo/viewform" target="_blank" rel="noopener">このプランで相談する</a>
+        <a class="btn btn-primary" href="https://docs.google.com/forms/d/1AIHHO5uOsPTYHvANWx5HTYBVjuUcCbOMwhJrslYFOFo/viewform" target="_blank" rel="noopener">無料で概算見積もりを確認</a>
       </div>
 
       <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 16px;">有料オプション</h3>
@@ -1349,12 +1388,34 @@
         <li><span>診断結果を1パターン追加</span><b>+ 2,000円</b></li>
         <li><span>修正3回目以降（1回）</span><b>+ 2,000円</b></li>
         <li><span>特急対応（3日納品）</span><b>+ 3,000円</b></li>
-        <li><span>まずは相談だけ（30分1,500円）</span></li>
+        <li>
+          <span>個別相談（30分）<small class="option-detail">企画整理・質問内容・方向性を具体的にご提案します</small></span>
+          <b>1,500円</b>
+        </li>
       </ul>
+
+      <div class="support-plan">
+        <div>
+          <span class="badge">SELF BUILD SUPPORT</span>
+          <h3>自分で診断アプリを作りたい方向け<br>1か月伴走プラン</h3>
+          <p class="price-value">¥60,000</p>
+          <p class="price-meta">サポート期間：開始日から30日間</p>
+        </div>
+        <div>
+          <ul class="price-list">
+            <li>Zoomサポート：全4回・各60分</li>
+            <li>チャットでの質問：期間中回数無制限</li>
+            <li>質問設計・診断ロジック・デザイン・公開までサポート</li>
+            <li>制作作業はご本人に進めていただきます</li>
+          </ul>
+          <p class="support-note">チャットは原則24〜48時間以内に返信します。コードやデザインの全面的な制作代行、大幅な作り直しは含まれません。</p>
+        </div>
+      </div>
 
       <h3 style="font-size: 18px; font-weight: 800; margin: 36px 0 16px;">購入にあたってのお願い</h3>
       <ul class="notes-list">
-        <li>ご購入前に、制作したい診断内容や目的をメッセージでご相談いただけますと、スムーズにご案内できます。</li>
+        <li>ご購入前の簡単なお問い合わせ、制作可否の確認、概算見積もりは無料です。</li>
+        <li>企画整理や質問内容など、具体的な提案を伴う個別相談は30分1,500円です。</li>
         <li>ご希望の内容によっては、有料オプションをご提案させていただく場合がございます。</li>
         <li>基本料金には「質問10問・診断結果4パターン・修正2回まで」が含まれます。</li>
         <li>制作開始後の大幅な仕様変更や追加のご要望は、別途料金をお願いする場合がございます。</li>
@@ -1371,9 +1432,8 @@
         <h2>ご購入前に</h2>
       </div>
       <p>
-        「まだアイデアがまとまっていない」そんな段階でも大丈夫です。<br>
-        丁寧なヒアリングを通して、一緒に内容を整理し、ご希望に沿った診断アプリを形にしていきます。<br>
-        「こんな診断アプリは作れる？」というご相談だけでも大歓迎です。お気軽にメッセージください。
+        「こんな診断アプリは作れる？」という制作可否の確認や概算見積もりは無料です。<br>
+        まだアイデアがまとまっておらず、企画や質問内容から一緒に整理したい場合は、30分1,500円の個別相談をご利用いただけます。
       </p>
     </div>
   </section>
@@ -1414,7 +1474,7 @@
       <div class="faq-list">
         <details>
           <summary>納期はどれくらいですか？</summary>
-          <p>基本料金の場合、納期の目安は7日です。お急ぎの場合は特急対応（+3,000円）で3日納品も可能です。ご依頼状況により前後する場合がありますので、まずはご相談ください。</p>
+          <p>基本料金の場合、納期の目安は7日です。お急ぎの場合は特急対応（+3,000円）で3日納品も可能です。ご依頼状況により前後する場合がありますので、まずはお問い合わせください。</p>
         </details>
         <details>
           <summary>質問数や結果タイプの数は自由に決められますか？</summary>
@@ -1466,7 +1526,7 @@
         <div>
           <span class="kicker">OFFICIAL LINE</span>
           <h2>公式LINEはこちら</h2>
-          <p>実績サンプルやお得な情報、ご相談はLINEからも受け付けています。</p>
+          <p>実績サンプルのご案内や、無料のお問い合わせ・概算見積もりをLINEでも受け付けています。</p>
         </div>
         <a class="btn btn-line" href="https://line.me/R/ti/p/@884zvtnn">
           <span class="line-icon">LINE</span>友だち追加する
@@ -1478,10 +1538,10 @@
   <section id="contact" class="section cta-final">
     <div class="wrap">
       <span class="kicker">CONTACT</span>
-      <h2>まずはお気軽にご相談ください</h2>
-      <p>ご予算やイメージが固まっていない段階でも大歓迎です。ヒアリングのうえ、最適なプランをご提案します。</p>
+      <h2>まずは無料のお問い合わせから</h2>
+      <p>制作できる内容かどうか、料金はいくらになるかを無料で確認できます。</p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="https://docs.google.com/forms/d/1AIHHO5uOsPTYHvANWx5HTYBVjuUcCbOMwhJrslYFOFo/viewform" target="_blank" rel="noopener">相談する</a>
+        <a class="btn btn-primary" href="https://docs.google.com/forms/d/1AIHHO5uOsPTYHvANWx5HTYBVjuUcCbOMwhJrslYFOFo/viewform" target="_blank" rel="noopener">無料で制作可否・概算見積もりを確認</a>
       </div>
     </div>
   </section>
