@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>オリジナル診断アプリ制作｜こたえ工房</title>
+<title>オリジナル診断アプリ制作</title>
 <style>
   :root {
     color-scheme: light;
@@ -583,6 +583,57 @@
     font-weight: 700;
     text-align: center;
     font-size: 16px;
+  }
+
+  /* Service (こんな方におすすめです) */
+  .service-subhead {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    font-size: 19px;
+    font-weight: 800;
+    color: var(--indigo-deep);
+  }
+
+  .service-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .service-card {
+    padding: 26px 22px;
+    border: 2px solid var(--indigo-soft);
+    border-radius: 18px;
+    background: var(--panel);
+    box-shadow: 0 12px 30px rgba(91, 79, 233, 0.1);
+  }
+
+  .service-card .icon {
+    display: inline-flex;
+    width: 48px;
+    height: 48px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--indigo), var(--indigo-deep));
+    color: #fff;
+    font-weight: 800;
+    font-size: 20px;
+    box-shadow: 0 10px 20px rgba(91, 79, 233, 0.28);
+  }
+
+  .service-card h3 {
+    margin-top: 16px;
+    font-size: 17px;
+    font-weight: 800;
+  }
+
+  .service-card p {
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 14px;
   }
 
   /* Benefits */
@@ -1222,6 +1273,7 @@
       transform: none;
     }
 
+    .service-grid,
     .benefit-grid,
     .works-grid,
     .pricing-grid {
@@ -1311,6 +1363,7 @@
       border-radius: 20px;
     }
 
+    .service-grid,
     .benefit-grid,
     .works-grid,
     .pricing-grid,
@@ -1373,6 +1426,52 @@
         <div class="problem-item"><span class="mark">😩</span><p>外注しても、スマホでの見え方が崩れて使い物にならなかった</p></div>
       </div>
       <p class="problem-lead">そのお悩み、質問設計からシェア機能まで一式おまかせいただけます。</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">SERVICE</span>
+        <h2>オリジナルAI診断アプリを制作します！</h2>
+        <p>
+          集客・SNS・LINE・ホームページで活用できる、オリジナルAI診断アプリを制作いたします。<br>
+          制作可否や概算見積もりは無料でご案内します。詳しい企画整理は30分1,500円の個別相談で承ります。
+        </p>
+      </div>
+      <p class="service-subhead">💡 こんな方におすすめです</p>
+      <div class="service-grid">
+        <div class="service-card">
+          <span class="icon">✓</span>
+          <h3>SNSで反応が取れる診断</h3>
+          <p>SNSで反応が取れる診断コンテンツを作りたい方へ。</p>
+        </div>
+        <div class="service-card">
+          <span class="icon">✓</span>
+          <h3>LINE登録・集客</h3>
+          <p>LINE登録や集客につながる診断を作りたい方へ。</p>
+        </div>
+        <div class="service-card">
+          <span class="icon">✓</span>
+          <h3>商品・サービス紹介</h3>
+          <p>商品・サービス紹介に診断コンテンツを活用したい方へ。</p>
+        </div>
+        <div class="service-card">
+          <span class="icon">✓</span>
+          <h3>他社との差別化</h3>
+          <p>オリジナル診断で他社との差別化をしたい方へ。</p>
+        </div>
+        <div class="service-card">
+          <span class="icon">✓</span>
+          <h3>AI活用</h3>
+          <p>AIを活用したサービスを取り入れたい方へ。</p>
+        </div>
+        <div class="service-card">
+          <span class="icon">✓</span>
+          <h3>アイデアを形に</h3>
+          <p>アイデアはあるけれど、形にする方法が分からない方へ。</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1609,7 +1708,7 @@
 </main>
 
 <footer class="site-footer">
-  <p>© 2026 こたえ工房</p>
+  <p>© 2026</p>
 </footer>
 
 </body>
