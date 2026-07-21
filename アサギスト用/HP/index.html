@@ -698,6 +698,31 @@
     color: var(--muted);
   }
 
+  .price-original {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  .price-original del {
+    margin-left: 5px;
+    color: var(--ink);
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .price-monitor-label {
+    display: inline-flex;
+    align-self: flex-start;
+    margin-top: 10px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 800;
+  }
+
   .price-meta {
     margin-top: 4px;
     color: var(--muted);
@@ -1163,7 +1188,7 @@
           SNSシェア機能まで一式おまかせいただけます。
         </p>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="https://docs.google.com/forms/d/1AIHHO5uOsPTYHvANWx5HTYBVjuUcCbOMwhJrslYFOFo/viewform" target="_blank" rel="noopener">無料で制作可否・概算見積もりを確認</a>
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/1AIHHO5uOsPTYHvANWx5HTYBVjuUcCbOMwhJrslYFOFo/viewform" target="_blank" rel="noopener">お見積もりとご相談はこちら</a>
           <a class="btn btn-secondary" href="#works">実績サンプルを見る</a>
         </div>
         <div class="hero-stats">
@@ -1186,7 +1211,7 @@
         <p>
           集客・SNS・LINE・ホームページで活用できる、オリジナルAI診断アプリを制作いたします。<br>
           「診断コンテンツを作りたいけれど、何から始めればいいか分からない」<br>
-          制作可否や概算見積もりは無料でご案内します。詳しい企画整理は30分1,500円の個別相談で承ります。
+          概算見積もりは無料でご案内します。詳しい企画整理は30分1,500円の個別相談で承ります。
         </p>
       </div>
       <div class="service-grid">
@@ -1229,7 +1254,7 @@
       <div class="section-head">
         <span class="kicker">EXAMPLE</span>
         <h2>制作できる診断例</h2>
-        <p>以下は一例です。上記以外の制作可否についても、無料でお問い合わせいただけます。</p>
+        <p>以下は一例です。上記以外の内容についても、無料でお問い合わせいただけます。</p>
       </div>
       <div class="diagnosis-tags">
         <span class="diagnosis-tag">恋愛タイプ診断</span>
@@ -1311,7 +1336,7 @@
         </div>
         <div class="reason-card">
           <h3>お問い合わせ・概算見積もりは無料</h3>
-          <p>制作可否や料金の目安を無料でご案内します。企画整理などの詳しい個別相談は30分1,500円です。</p>
+          <p>料金の目安を無料でご案内します。企画整理などの詳しい個別相談は30分1,500円です。</p>
         </div>
         <div class="reason-card">
           <h3>修正回数はプランに含む</h3>
@@ -1372,6 +1397,8 @@
       <div class="price-card is-featured" style="max-width: 480px; margin: 0 auto 40px;">
         <span class="badge">BASIC</span>
         <h3>基本料金</h3>
+        <p class="price-original">モニター終了後予定価格 <del>¥30,000</del></p>
+        <span class="price-monitor-label">モニター価格</span>
         <p class="price-value">¥5,000</p>
         <ul class="price-list">
           <li>診断質問：10問まで</li>
@@ -1398,6 +1425,8 @@
         <div>
           <span class="badge">SELF BUILD SUPPORT</span>
           <h3>自分で診断アプリを作りたい方向け<br>1か月伴走プラン</h3>
+          <p class="price-original">モニター終了後予定価格 <del>¥100,000</del></p>
+          <span class="price-monitor-label">モニター価格</span>
           <p class="price-value">¥60,000</p>
           <p class="price-meta">サポート期間：開始日から30日間</p>
         </div>
@@ -1414,7 +1443,7 @@
 
       <h3 style="font-size: 18px; font-weight: 800; margin: 36px 0 16px;">購入にあたってのお願い</h3>
       <ul class="notes-list">
-        <li>ご購入前の簡単なお問い合わせ、制作可否の確認、概算見積もりは無料です。</li>
+        <li>ご購入前の簡単なお問い合わせ・概算見積もりは無料です。</li>
         <li>企画整理や質問内容など、具体的な提案を伴う個別相談は30分1,500円です。</li>
         <li>ご希望の内容によっては、有料オプションをご提案させていただく場合がございます。</li>
         <li>基本料金には「質問10問・診断結果4パターン・修正2回まで」が含まれます。</li>
@@ -1432,7 +1461,7 @@
         <h2>ご購入前に</h2>
       </div>
       <p>
-        「こんな診断アプリは作れる？」という制作可否の確認や概算見積もりは無料です。<br>
+        「こんな診断アプリは作れる？」というご相談や概算見積もりは無料です。<br>
         まだアイデアがまとまっておらず、企画や質問内容から一緒に整理したい場合は、30分1,500円の個別相談をご利用いただけます。
       </p>
     </div>
@@ -1525,11 +1554,11 @@
       <div class="line-panel">
         <div>
           <span class="kicker">OFFICIAL LINE</span>
-          <h2>「さぁやAI」公式LINE</h2>
+          <h2>公式LINE</h2>
           <p>アサギスト向けのAI活用情報、実績サンプルのご案内、無料のお問い合わせ・概算見積もりを受け付けています。</p>
         </div>
         <a class="btn btn-line" href="https://line.me/R/ti/p/@374wafyy">
-          <span class="line-icon">LINE</span>さぁやAIを友だち追加
+          <span class="line-icon">LINE</span>友だち追加
         </a>
       </div>
     </div>
@@ -1541,7 +1570,7 @@
       <h2>まずは無料のお問い合わせから</h2>
       <p>制作できる内容かどうか、料金はいくらになるかを無料で確認できます。</p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="https://docs.google.com/forms/d/1AIHHO5uOsPTYHvANWx5HTYBVjuUcCbOMwhJrslYFOFo/viewform" target="_blank" rel="noopener">無料で制作可否・概算見積もりを確認</a>
+        <a class="btn btn-primary" href="https://docs.google.com/forms/d/1AIHHO5uOsPTYHvANWx5HTYBVjuUcCbOMwhJrslYFOFo/viewform" target="_blank" rel="noopener">お見積もりとご相談はこちら</a>
       </div>
     </div>
   </section>
