@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    width: 2500px;
+    height: 843px;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", "Yu Gothic", "Noto Sans JP", system-ui, sans-serif;
+    overflow: hidden;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 2500px;
+    height: 843px;
+  }
+
+  .cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    color: #fff;
+    text-align: center;
+  }
+
+  .cell.hp { background: #049ea0; }
+  .cell.menu { background: #f9b606; }
+  .cell.contact { background: #fb4142; }
+
+  .icon {
+    width: 176px;
+    height: 176px;
+  }
+
+  .icon svg {
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: #fff;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .label {
+    font-size: 92px;
+    font-weight: 900;
+    letter-spacing: 0.02em;
+    line-height: 1;
+  }
+
+  .rule {
+    width: 340px;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.85);
+  }
+
+  .sub {
+    font-size: 42px;
+    font-weight: 700;
+  }
+</style>
+</head>
+<body>
+  <div class="grid">
+
+    <div class="cell hp">
+      <div class="icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.3"/><path d="M2.7 12h18.6"/><path d="M12 2.7c2.7 2.6 4.2 5.9 4.2 9.3s-1.5 6.7-4.2 9.3c-2.7-2.6-4.2-5.9-4.2-9.3S9.3 5.3 12 2.7z"/></svg>
+      </div>
+      <div class="label">HP</div>
+      <div class="rule"></div>
+      <div class="sub">詳しい情報・実績</div>
+    </div>
+
+    <div class="cell menu">
+      <div class="icon">
+        <svg viewBox="0 0 24 24"><path d="M9 3.6h6a1 1 0 0 1 1 1v.6h.9A1.5 1.5 0 0 1 18.4 6.7v13.8A1.5 1.5 0 0 1 16.9 22H7.1a1.5 1.5 0 0 1-1.5-1.5V6.7A1.5 1.5 0 0 1 7.1 5.2H8v-.6a1 1 0 0 1 1-1z"/><circle cx="12" cy="4.4" r="1.1"/><path d="M8.6 10.2l1.4 1.4 2.6-2.6"/><path d="M13.6 10h3.4"/><path d="M8.6 14.7l1.4 1.4 2.6-2.6"/><path d="M13.6 14.5h3.4"/></svg>
+      </div>
+      <div class="label">メニュー</div>
+      <div class="rule"></div>
+      <div class="sub">サービス・料金</div>
+    </div>
+
+    <div class="cell contact">
+      <div class="icon">
+        <svg viewBox="0 0 24 24"><path d="M4 5.5h13a2 2 0 0 1 2 2v6.3a2 2 0 0 1-2 2H12l-4.2 3.4v-3.4H4a2 2 0 0 1-2-2v-6.3a2 2 0 0 1 2-2z"/><path d="M14.3 3.6h4.8a2 2 0 0 1 2 2v5.4a2 2 0 0 1-2 2h-.4v2.9"/><circle cx="8.4" cy="10.6" r="0.55" fill="#fff" stroke="none"/><circle cx="11.2" cy="10.6" r="0.55" fill="#fff" stroke="none"/><circle cx="14" cy="10.6" r="0.55" fill="#fff" stroke="none"/></svg>
+      </div>
+      <div class="label">ご相談・ご依頼</div>
+      <div class="rule"></div>
+      <div class="sub">お問い合わせはこちら</div>
+    </div>
+
+  </div>
+</body>
+</html>
