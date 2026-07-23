@@ -966,26 +966,38 @@
   /* LINE panel */
   .line-panel {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-    padding: 32px;
-    border-radius: 20px;
+    gap: 16px;
+    padding: 52px 40px;
+    border-radius: 24px;
     background: #eafcf2;
     border: 1px solid rgba(6, 199, 85, 0.25);
+    text-align: center;
   }
 
   .line-panel h2 {
-    margin-top: 10px;
-    font-size: clamp(22px, 3vw, 30px);
-    font-weight: 800;
+    margin-top: 8px;
+    font-size: clamp(26px, 3.6vw, 36px);
+    font-weight: 900;
+    word-break: keep-all;
+    overflow-wrap: normal;
   }
 
   .line-panel p {
-    margin-top: 10px;
+    max-width: 42em;
     color: var(--muted);
-    font-size: 15px;
+    font-size: 16px;
+  }
+
+  .line-panel .line-points {
+    justify-content: center;
+    margin-top: 4px;
+    margin-bottom: 4px;
+  }
+
+  .line-panel .btn-line {
+    margin-top: 8px;
   }
 
   .btn-line {
@@ -1396,7 +1408,7 @@
           </ul>
           <div class="hero-actions">
             <div class="cta-block">
-              <a class="btn btn-primary" href="https://docs.google.com/forms/d/1AIHHO5uOsPTYHvANWx5HTYBVjuUcCbOMwhJrslYFOFo/viewform" target="_blank" rel="noopener">無料でご相談・概算見積もりを確認</a>
+              <a class="btn btn-line" href="https://line.me/R/ti/p/@374wafyy"><span class="line-icon">LINE</span>公式LINEよりお問い合わせください</a>
               <span class="cta-sub">簡単なお問い合わせと概算見積もりは無料です</span>
             </div>
           </div>
@@ -1677,34 +1689,21 @@
   <section id="line" class="section section-alt">
     <div class="wrap">
       <div class="line-panel">
-        <div>
-          <span class="kicker">OFFICIAL LINE</span>
-          <h2>公式LINE</h2>
-          <p>アサギスト向けのAI活用情報、実績サンプルのご案内、無料のお問い合わせ・概算見積もりを受け付けています。</p>
-        </div>
+        <span class="kicker">OFFICIAL LINE</span>
+        <h2>まずは公式LINEでご相談ください</h2>
+        <p>友だち追加するだけで、無料のお問い合わせ・概算見積もりをすぐに受け付けています。アサギスト向けのAI活用情報や実績サンプルのご案内も配信中です。</p>
+        <ul class="hero-points line-points" aria-label="公式LINEでできること">
+          <li>友だち追加はすぐ完了</li>
+          <li>そのままトークで相談OK</li>
+          <li>お見積もりも無料</li>
+        </ul>
         <a class="btn btn-line" href="https://line.me/R/ti/p/@374wafyy">
-          <span class="line-icon">LINE</span>友だち追加
+          <span class="line-icon">LINE</span>友だち追加してお問い合わせ
         </a>
       </div>
     </div>
   </section>
 
-  <section id="contact" class="section cta-final">
-    <div class="wrap">
-      <span class="kicker">ORDER</span>
-      <h2>まずは無料のお問い合わせから</h2>
-      <p>制作できる内容かどうか、料金はいくらになるかを無料で確認できます。</p>
-      <div class="steps-mini">
-        <div>STEP1　LINEまたはフォームから無料問い合わせ</div>
-        <div>STEP2　内容・プランのすり合わせ</div>
-        <div>STEP3　正式にご注文・制作スタート</div>
-      </div>
-      <div class="cta-block">
-        <a class="btn btn-primary" href="https://docs.google.com/forms/d/1AIHHO5uOsPTYHvANWx5HTYBVjuUcCbOMwhJrslYFOFo/viewform" target="_blank" rel="noopener">無料でご相談・概算見積もりを確認</a>
-        <span class="cta-sub">詳しい個別相談（30分）は1,500円です</span>
-      </div>
-    </div>
-  </section>
 </main>
 
 <footer class="site-footer">
